@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{month}} {{year}} Appraisal Sheet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="background:transparent; padding-top: unset; text-align: center; color: rgb(10, 9, 9);">
+    <ion-row>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Perspective</th>
+              <th>Description</th>
+              <th>Weightage</th>
+              <th>Score</th>
+              <th>Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="6">1</td>
+              <td rowspan="6">Work Related Targets</td>
+              <td>Achievement of Sales Targets</td>
+              <td>25</td>
+              <td>{{wrt_1}}</td>
+              <td>{{wrt_1_remark}}</td>
+            </tr>
+            <tr>
+              <td>UPT (Basket Size)</td>
+              <td>4</td>
+              <td>{{wrt_2}}</td>
+              <td>{{wrt_2_remark}}</td>
+            </tr>
+            <tr>
+              <td>ASP</td>
+              <td>4</td>
+              <td>{{wrt_3}}</td>
+              <td>{{wrt_3_remark}}</td>
+            </tr>
+            <tr>
+              <td>ABV</td>
+              <td>4</td>
+              <td>{{wrt_4}}</td>
+              <td>{{wrt_4_remark}}</td>
+            </tr>
+            <tr>
+              <td>r</td>
+              <td>4</td>
+              <td>{{wrt_5}}</td>
+              <td>{{wrt_5_remark}}</td>
+            </tr>
+            <tr>
+              <td>Liquidate Goldn Stock by 10%</td>
+              <td>9</td>
+              <td>{{wrt_6}}</td>
+              <td>{{wrt_6_remark}}</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Follow SOP</td>
+              <td>Follow system and procedure in the functional areas-Sales</td>
+              <td>4</td>
+              <td>{{fsop}}</td>
+              <td>{{fsop_remark}}</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Customer Handling</td>
+              <td>Has customer orientation & good relation with customers</td>
+              <td>10</td>
+              <td>{{ch}}</td>
+              <td>{{ch_remark}}</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Flexibility & Adaptability</td>
+              <td>Flexible in taking additional tasks and adaptable to change/store requirements/new launch etc</td>
+              <td>5</td>
+              <td>{{fa}}</td>
+              <td>{{fa_remark}}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Engagement</td>
+              <td>His/Her involvement in the engagement activities</td>
+              <td>5</td>
+              <td>{{eng}}</td>
+              <td>{{eng_remark}}</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Attendence / Punctuality / Discipline</td>
+              <td>Takes leaves frequently/without information specially in peak/season days</td>
+              <td>5</td>
+              <td>{{apd}}</td>
+              <td>{{apd_remark}}</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Grooming</td>
+              <td>How well FC has been groomed ?</td>
+              <td>5</td>
+              <td>{{gro}}</td>
+              <td>{{gro_remark}}</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Visual Mechandising</td>
+              <td>Follow Layout and diplay as per VM Standards and maintain stock levels as per norms</td>
+              <td>5</td>
+              <td>{{vm}}</td>
+              <td>{{vm_remark}}</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Learning & Development</td>
+              <td>Ready to learn and grasp new things; apply them at work</td>
+              <td>5</td>
+              <td>{{lnd}}</td>
+              <td>{{lnd_remark}}</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Interpersonal Relation</td>
+              <td>Relation with peers (Evaluated by PCH)</td>
+              <td>5</td>
+              <td>{{ir}}</td>
+              <td>{{ir_remark}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,56 @@
+<!--
+  Generated template for the TravelReimbersmentModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    <ion-title>Travel Doc List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+
+        <ion-item text-center *ngIf="travel_docs==[]||travel_docs==''||travel_docs==null ; then show_list">
+            No Record Found...!
+
+        </ion-item>
+        <ion-item *ngFor="let item of travel_docs" #show_list>
+            <ion-grid padding-unset>
+            <ion-row>
+              <ion-col col-6>
+                  <ion-row>
+                      <ion-col>Document - {{item['id']}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Amount - {{item['amount']}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>{{item['description']}}</ion-col>
+                  </ion-row>
+              </ion-col>
+              <ion-col col-6>
+                  <ion-row>
+                      <ion-col><ion-button expand="full"><a href="https://shreeshivam.net/test_hold/{{item['doc_link']}}" style="color: #ffffff;">View</a></ion-button></ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col><ion-button expand="full" color="danger" (click)="delete(item['id'],item['doc_link'])" >Delete</ion-button></ion-col>
+                  </ion-row>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+    <ion-fab bottom right edge>
+        <ion-fab-button size="small" (click)="upload_doc_modal()"><ion-icon name="add"></ion-icon></ion-fab-button>
+        </ion-fab>
+</ion-content>

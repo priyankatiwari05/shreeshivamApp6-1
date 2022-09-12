@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>All Answers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card question_card>
+    <ion-card-header>Question</ion-card-header>
+    <h4 [innerHTML]="question"></h4>
+  </ion-card>
+  <ion-card answer_card>
+    <ion-card-header>Your Answer</ion-card-header>
+    <p>{{emp_answer}}</p>
+  </ion-card>
+  <ion-card *ngFor="let answer of all_answers">
+    <p>{{answer}}</p>
+  </ion-card>
+</ion-content>

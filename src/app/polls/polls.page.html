@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Polls</ion-title>
+  </ion-toolbar>
+  <ion-segment [(ngModel)]="home">
+    <ion-segment-button value="running" class="segmenttitle">
+      <!-- <ion-icon ios="ios-stats" md="md-stats" style="vertical-align: middle; "></ion-icon> -->
+      <span>Running</span>
+    </ion-segment-button>
+
+    <ion-segment-button value="closed" class="segmenttitle">
+      <!-- <ion-icon ios="ios-document" md="md-document" style="vertical-align: middle;"></ion-icon>  -->
+      <span>Closed</span>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [ngSwitch]="home">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid style="background:transparent; padding-top: unset; height: 100%;  text-align: center;
+    color: rgb(10, 9, 9);" *ngSwitchCase="'running'">
+    <ion-row style="background-color: #fff; margin-top:10px" *ngFor="let poll of running_poll; let i = index">
+      <ion-list radio-group [(ngModel)]="poll['emp_answer']" *ngIf="poll['poll_type']=='option'" ngDefaultControl>
+        <ion-list-header>
+          <span [innerHTML]="poll['question']"></span>
+          <!-- {{poll['question']|innerHTML}} -->
+          <ion-button size="xs" pull-right *ngIf="poll['new_answer']==null && poll['emp_answer']!=null"
+            (click)="save_poll(i)">save</ion-button>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>{{poll['option1']}}</ion-label>
+          <ion-label *ngIf="poll['new_answer']!=null">{{poll['option1_percent']}} %</ion-label>
+          <ion-radio value="1" [disabled]="poll['emp_answer']"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{poll['option2']}}</ion-label>
+          <ion-label *ngIf="poll['new_answer']!=null">{{poll['option2_percent']}} %</ion-label>
+          <ion-radio value="2" [disabled]="poll['emp_answer']"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{poll['option3']}}</ion-label>
+          <ion-label *ngIf="poll['new_answer']!=null">{{poll['option3_percent']}} %</ion-label>
+          <ion-radio value="3" [disabled]="poll['emp_answer']"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{poll['option4']}}</ion-label>
+          <ion-label *ngIf="poll['new_answer']!=null">{{poll['option4_percent']}} %</ion-label>
+          <ion-radio value="4" [disabled]="poll['emp_answer']"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <ion-col col-12 *ngIf="poll['poll_type']=='custom'">
+      <ion-row>
+        <ion-col col-12 class="list-header-md"><span [innerHTML]="poll['question']"></span>
+          <ion-button size="xs" pull-right *ngIf="poll['new_answer']==null && poll['emp_answer']!=null"
+            (click)="save_poll(i)">save</ion-button>
+        </ion-col>
+        <ion-col col-12>
+          <textarea enable_copy_paste rows="5" [(ngModel)]="poll['emp_answer']" *ngIf="poll['new_answer']==null" placeholder="Write your answer here" ngDefaultControl></textarea>
+          <p style="text-align: left;" *ngIf="poll['new_answer']!=null">{{poll['new_answer']}}</p>
+          <a pull-right *ngIf="poll['new_answer']!=null" (click)="show_all_answers(i,'running')">All answers</a>
+        </ion-col>
+      </ion-row>
+      </ion-col>
+    </ion-row>
+
+
+    <ng-template #norecord>
+      <ion-row>
+        <ion-col col-12>
+          No Record Found
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+
+  <ion-grid *ngSwitchCase="'closed'">
+    <ion-row style="background-color: #fff; margin-top:10px" *ngFor="let poll of closed_poll; let i = index">
+      <ion-list radio-group [(ngModel)]="poll['emp_answer']" *ngIf="poll['poll_type']=='option'" ngDefaultControl>
+        <ion-list-header [innerHTML]="poll['question'] | sanitizeHtml">
+
+        </ion-list-header>
+        <ion-item>
+          <ion-icon ios="checkmark-outline" md="checkmark-sharp" item-start *ngIf="poll['emp_answer']=='1'; then wrong"
+            style="color: green"></ion-icon>
+          <ng-template #wrong>
+            <ion-icon ios="close-outline" md="close-sharp" item-start style="color: red"></ion-icon>
+          </ng-template>
+
+          {{poll['option1']}}
+          <ion-note item-end>
+            {{poll['option1_percent']}} %
+          </ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="checkmark-outline" md="checkmark-sharp" item-start *ngIf="poll['emp_answer']=='2'; then wrong"
+            style="color: green"></ion-icon>
+          <ng-template #wrong>
+            <ion-icon ios="close-outline" md="close-sharp" item-start style="color: red"></ion-icon>
+          </ng-template>
+          {{poll['option2']}}
+          <ion-note item-end>
+            {{poll['option2_percent']}} %
+          </ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="checkmark-outline" md="checkmark-sharp" item-start *ngIf="poll['emp_answer']=='3'; then wrong"
+            style="color: green"></ion-icon>
+          <ng-template #wrong>
+            <ion-icon ios="close-outline" md="close-sharp" item-start style="color: red"></ion-icon>
+
+
+          </ng-template>
+          {{poll['option3']}}
+          <ion-note item-end>
+            {{poll['option3_percent']}} %
+          </ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="checkmark-outline" md="checkmark-sharp" item-start *ngIf="poll['emp_answer']=='4'; then wrong"
+            style="color: green"></ion-icon>
+          <ng-template #wrong>
+            <ion-icon ios="close-outline" md="close-sharp" item-start style="color: red"></ion-icon>
+
+
+          </ng-template>
+          {{poll['option4']}}
+          <ion-note item-end>
+            {{poll['option4_percent']}} %
+          </ion-note>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-col col-12 *ngIf="poll['poll_type']=='custom'">
+      <ion-row>
+        <ion-col col-12 class="list-header-md"><span [innerHTML]="poll['question']"></span>
+        </ion-col>
+        <ion-col col-12>
+        {{poll['emp_answer']}}
+        <a pull-right (click)="show_all_answers(i,'closed')">All answers</a>
+        </ion-col>
+      </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-card *ngFor="let event of upcoming_event; let i = index"
+      style="background:linear-gradient(135deg, #c1d0e0  0%,#5D6874 100%);">
+      <ion-card-content>
+        <ion-card-title [innerHTML]="poll['question']">
+
+        </ion-card-title>
+      </ion-card-content>
+      <ion-row no-padding>
+        <ion-col text-right col-12>
+          <ion-button fill="outline" icon-start (click)="openModal(event['title'],event['description'],event['photo'])">
+            <ion-icon ios="ios-images" md="md-images" style=" margin-right: unset; color:#fff !important;"></ion-icon>
+            Details
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card> -->
+
+  </ion-grid>
+</ion-content>

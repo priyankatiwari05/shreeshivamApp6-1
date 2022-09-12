@@ -1,0 +1,40 @@
+<!--
+  Generated template for the SalaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Salary Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+  <table>
+    <thead>
+      <th>Sr</th>
+      <th>Month</th>
+      <th>Salary</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of sal121; index as k">
+          <td>
+            {{k+1}}
+          </td>
+          <td>
+            {{item['month']}}
+          </td>
+          <td>
+            {{"₹ "+item['net_payable']}}
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

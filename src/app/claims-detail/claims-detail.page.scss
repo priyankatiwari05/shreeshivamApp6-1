@@ -1,0 +1,66 @@
+.toolbar-title-ios{
+    margin-left: 30px;
+  }
+  .header{
+    top:12%!important;
+  }
+
+  .content{
+    top:12%!important;
+    height: 88%;
+  }
+
+  .my_photo {
+    font-size: 4rem;
+    position: relative;
+    margin: unset;
+
+  }
+  .bar-button-menutoggle-md {
+    margin: 0 6px;
+    padding: 0 0;
+  }
+  [col-6] {
+    padding: 1px;
+  }
+
+  .chart-container {
+    position: relative;
+  }
+
+  chart-legend {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translateY(-50%);
+  }
+
+  .my_design {
+    font-size: 12px;
+    padding-bottom: 8px;
+    font-weight: 100;
+  }
+  .number_inc{
+      font-size:15px;
+  }
+  .my_head {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 0px 1px 0px;
+  }
+
+  .my_contact {
+    font-size: 13px;
+  }
+
+  [ion-content] {
+    font-weight: 400 !important;
+  }
+
+  [ion-title] {
+    font-weight: 400 !important;
+  }
+  [pull-right]
+  {
+      float: right!important;
+  }

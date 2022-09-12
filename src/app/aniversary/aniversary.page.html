@@ -1,0 +1,44 @@
+=<!--
+  Generated template for the AniversaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Anniversary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-item text-center *ngIf="aniversaries==[]||aniversaries==''||aniversaries==null ; else show_list">
+    No Record Found...!
+    </ion-item>
+    <!-- <ion-item *ngFor="let item of aniversaries" #show_list> -->
+      <ion-grid style="background-color: white;">
+        <ion-row *ngFor="let item of aniversaries" #show_list style="border-bottom:1px solid #dedede;">
+          <ion-col col-8 style="font-size: larger;
+          font-weight: 500;
+          color: #212121;">
+            {{item['first_name']||" " +" "+item['middle_name']||" "+" "+item['last_name']||" "}}
+            <br>
+            {{item['designation']}} {{item['branch']}}
+          </ion-col>
+          <ion-col col-4>
+            {{item['anniversary_date']}}
+            <br>
+              <!-- <br> -->
+            <!-- <a style=" border: #a4a4a4 solid 2px;
+            border-radius: 4px;
+            padding: 3px 6px 3px 6px;" href="https://wa.me/91{{item['mobile']}}?text=🙏Jai Shri Krishna🙏 %0A 🎂Happy Anniversary🎂 %0A -Regards {{username}}">
+            Send Wish </a> -->
+            <ion-button (click)="send_wish(item['id'],item['first_name'],item['middle_name'],item['last_name'])" style="height:auto;width:auto; padding:5px">Send Wish</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    <!-- </ion-item> -->
+</ion-content>

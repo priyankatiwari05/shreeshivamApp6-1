@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Leave Requests <ion-icon name="add-sharp" pull-right (click)="openForm()" style="float: right;"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="leaves==null">
+      <ion-col size="12" text-center nodatafound>No Data Found</ion-col>
+    </ion-row>
+    
+    <ion-row class="mycard" *ngFor="let leave of leaves; let i=index;">
+      <ion-col col-4 style="color:rgb(18, 94, 236)">
+        {{leave['type']}}
+      </ion-col>
+      <ion-col col-8 style="color: rgb(18, 94, 236);">
+        {{leave['from'] | date: 'dd/MM/yyyy'}} - {{leave['to'] | date: 'dd/MM/yyyy'}}
+      </ion-col>
+      <ion-col col-3>
+        Status
+      </ion-col>
+      <ion-col col-3>
+        <span *ngIf="leave['status']=='Pending'" style="color: orange;">{{leave['status']|titlecase}}</span>
+        <span *ngIf="leave['status']=='Rejected' || leave['status']=='Cancelled'" style="color: red;">{{leave['status']|titlecase}}</span>
+        <span *ngIf="leave['status']=='Approved'" style="color: green;">{{leave['status']|titlecase}}</span>
+      </ion-col>
+      <ion-col col-6>        
+        <ion-button size="small" leave_cancel pull-right (click)="confirmCancel(leave['id'])" style="margin-top: -5px;"
+         *ngIf="leave['status']!='Rejected' && leave['status']!='Cancelled' && leave['from']>today">CANCEL LEAVE REQUEST</ion-button>
+      </ion-col>
+      <ion-col col-12 *ngIf="leaves[i]['show_detail']==false">
+        <ion-button size="small" show_hide_detail (click)="leaves[i]['show_detail']=true" >Detail</ion-button>
+      </ion-col>
+      <ion-col col-12 *ngIf="leaves[i]['show_detail']==true">
+        <ion-row *ngFor="let leave_date of leave['leave_dates']; let j=index">
+          <ion-col col-3 nopadding>
+            {{leave_date['leave_date']| date: 'dd/MM/yy'}}
+          </ion-col>
+          <ion-col col-3 nopadding>
+            {{leave_date['grant_type']}}
+          </ion-col>
+          <ion-col col-3 nopadding>
+            <span *ngIf="leave_date['status']=='Approved'" style="color: green;">{{leave_date['status']}}</span>
+            <span *ngIf="leave_date['status']=='Rejected'" style="color: red;">{{leave_date['status']}}</span>
+            <span *ngIf="leave_date['status']=='Cancelled' || leave_date['status']=='Pending'" style="color: orangered;">{{leave_date['status']}}</span>
+          </ion-col>
+          <ion-col col-3 nopadding>
+            <ion-button size="small" leave_cancel_date (click)="confirm_cancel_leave(leave_date['leave_date'])" style="margin-top: -5px;"
+         *ngIf="leave_date['status']!='Rejected' && leave_date['status']!='Cancelled' && leave_date['leave_date']>today && leave['leave_dates'].length>1">CANCEL</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 *ngIf="leaves[i]['show_detail']==true">
+        <ion-button size="small" show_hide_detail (click)="leaves[i]['show_detail']=false" >Hide</ion-button>
+      </ion-col>
+      <ion-col col-4 *ngIf="leave['first_name']!='' && leave['first_name']!=null">
+        {{leave['status']}} By
+      </ion-col>
+      <ion-col col-8 *ngIf="leave['first_name']!='' && leave['first_name']!=null">
+        {{leave['first_name']||''}} {{leave['middle_name']||''}} {{leave['last_name']||''}}
+      </ion-col>
+      <ion-col col-4 *ngIf="leave['remark']!='' && leave['remark']!=null">
+        Remark
+      </ion-col>
+      <ion-col col-8 *ngIf="leave['remark']!='' && leave['remark']!=null" class="leaveremark">
+        {{leave['remark']}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

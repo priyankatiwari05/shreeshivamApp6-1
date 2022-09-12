@@ -1,0 +1,38 @@
+
+
+.header{
+    top:12%;
+    }
+    
+    .content{
+    top:12%;
+    }
+    
+    [chapters]
+    {
+        margin: 10px;
+        background-color: grey;
+        color:white;
+        border-radius: 50%;
+        width: 20px;
+    }
+    
+    [chapter_count]
+    {
+        margin:auto;
+    }
+    
+    // ion-row
+    // {
+    //     margin:2px 0px;
+    //     padding:2px 0px;
+    //     border-bottom: 1px solid #d9d9d9;;
+    // }
+    
+    .card-md
+    {
+        margin: 5px 0px;
+        width: 100%;
+        padding: 5px 3px;
+        border-radius: 5px;
+    }

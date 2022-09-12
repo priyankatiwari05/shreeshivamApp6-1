@@ -1,0 +1,227 @@
+<!--
+  Generated template for the TravelRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Travel Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row radio-group [(ngModel)]="travel_type_snd" ngDefaultControl>
+          <ion-col col-6>
+            <ion-radio id="domestic_radio_id" checked value="domestic">Domestic</ion-radio>
+            <ion-label for="domestic_radio_id" class="radio_label">Domestic</ion-label>
+          </ion-col>
+          <ion-col col-6>
+            <ion-radio id="international_radio_id" value="international"></ion-radio>
+            <ion-label for="international_radio_id" class="radio_label">International</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Trip Type
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+            <ion-select multiple="false" placeholder="Please Select"  [(ngModel)]="trip_type_snd" ngDefaultControl>
+                <ion-select-option  [value] = "" selected>Select Trip Type</ion-select-option>
+              <ion-select-option  *ngFor="let item of trip_type;" [value] = "item['id']">{{item['trip_type']}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Start Date
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+            <ion-datetime [(ngModel)]="start_date_snd" ngDefaultControl min="{{today}}" max="{{next_year}}" displayFormat="YYYY-MM-DD" placeholder="Select Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              End Date
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+            <ion-datetime [(ngModel)]="end_date" ngDefaultControl min="{{today}}" max="{{next_year}}" displayFormat="YYYY-MM-DD" placeholder="Select Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Origin
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+              <ionic-selectable selectableStyle
+                placeholder="Select Origin"
+                item-content
+                [(ngModel)]="origin_snd"
+                [items]="travel_place"
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true" ngDefaultControl>
+              </ionic-selectable>
+            <!-- <ion-select multiple="false" placeholder="Please Select" [(ngModel)]="origin_snd" >
+                <ion-select-option  [value] = "" >Select Origin</ion-select-option>
+              <ion-select-option *ngFor="let item2 of travel_origin;" [value] = "item2['id']">{{item2['origin']}}</ion-select-option>
+            </ion-select> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Destination
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+              <ionic-selectable selectableStyle
+                placeholder="Select Designation"
+                item-content
+                [(ngModel)]="destination_snd"
+                [items]="travel_place"
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true" ngDefaultControl>
+              </ionic-selectable>
+            <!-- <ion-select multiple="false" placeholder="Please Select" [(ngModel)]="destination_snd" >
+                <ion-select-option  [value] = "" >Select Designation</ion-select-option>
+              <ion-select-option *ngFor="let item3 of travel_destination;" [value] = "item3['id']">{{item3['destination']}}</ion-select-option>
+            </ion-select> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Booking For
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+              <ion-input type="text" [(ngModel)]="booking_for" placeholder="Please Enter" ngDefaultControl></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+             Mode
+            </ion-label>
+          </ion-col>
+          <ion-col col-8 radio-group [(ngModel)]="mode_snd" ngDefaultControl>
+              <ion-col col-4>
+                  <ion-radio id="road_radio_id" checked value="road" margin-top></ion-radio>
+                  <ion-label for="road_radio_id" class="radio_label">Road</ion-label>
+                </ion-col>
+                <ion-col col-4>
+                  <ion-radio id="train_radio_id"  value="train" margin-top></ion-radio>
+                  <ion-label for="train_radio_id" class="radio_label">Train</ion-label>
+                </ion-col>
+                <ion-col col-4>
+                  <ion-radio id="air_radio_id"  value="air" margin-top></ion-radio>
+                  <ion-label for="air_radio_id" class="radio_label">Air</ion-label>
+                </ion-col>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Express Booking
+            </ion-label>
+          </ion-col>
+          <ion-col col-2>
+              <ion-checkbox [(ngModel)]="express_booking" margin-top ngDefaultControl></ion-checkbox>
+          </ion-col>
+
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Hotel Planning
+            </ion-label>
+          </ion-col>
+          <ion-col col-2>
+              <ion-checkbox [(ngModel)]="hotel_planning" margin-top ngDefaultControl></ion-checkbox>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Hotel Planning
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+              <ion-checkbox [(ngModel)]="hotel_planning"></ion-checkbox>
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row *ngIf="hotel_planning==true">
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Hotel Preferred
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+              <ion-input [(ngModel)]="hotel_preferred" placeholder="Hotel Preferred" ngDefaultControl></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hotel_planning==true">
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Occupancy
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+            <ion-select multiple="false" placeholder="Please Select" [(ngModel)]="occupancy" ngDefaultControl>
+              <ion-select-option value="Single" selected="true">Single</ion-select-option>
+              <ion-select-option value="Double">Double</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-4>
+            <ion-label class="dis_label">
+              Prefer Time
+            </ion-label>
+          </ion-col>
+          <ion-col col-8>
+            <ion-datetime [(ngModel)]="prefer_time_snd" ngDefaultControl displayFormat="HH:mm" placeholder="Select Time" pickerFormat="HH:mm"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-4>
+              <ion-label class="dis_label">
+                Reason
+              </ion-label>
+            </ion-col>
+            <ion-col col-8>
+                <ion-textarea placeholder="Enter a description" [(ngModel)]="reason_snd" ngDefaultControl></ion-textarea>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-8 >
+              <ion-button (click)="raise_travel_request()"
+              [disabled]="trip_type_snd==[]||start_date_snd==''||origin_snd==null
+              ||reason_snd==[]||reason_snd==''||reason_snd==null
+              ||prefer_time_snd==[]||prefer_time_snd==''||prefer_time_snd==null
+              ||booking_for==[]||booking_for==''||booking_for==null
+              ||trip_type_snd==''||trip_type_snd==null||origin_snd==[]||origin_snd==''
+              ||start_date_snd==[]||end_date==''||end_date==null||start_date_snd==null
+              ||destination_snd==[]||destination_snd==''||destination_snd==null"
+              >Submit</ion-button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

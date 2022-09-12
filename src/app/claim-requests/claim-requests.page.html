@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="page_type=='emp'">My Claims</ion-title>
+    <ion-title *ngIf="page_type=='approver'">Claims Approval</ion-title>
+  </ion-toolbar>
+  
+  <ion-segment *ngIf="page_type=='approver' && role=='accountant'" [(ngModel)]="home">
+    <ion-segment-button value="reimbursement">
+      <span>Reimbursement Approvals</span>
+    </ion-segment-button>
+    <ion-segment-button value="claim">
+      <span>Request Approvals</span>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid [ngSwitch]="home" text-left>
+    <ion-list *ngIf="home==''">
+      <ion-item text-center *ngIf="claims==[]||claims==''||claims==null ; else show_list">
+        No Record Found...!
+
+      </ion-item>
+      <ion-card outer-card *ngFor="let item of claims; let i=index;" #show_list>
+        <ion-row (click)="show(i,'claim')">
+          <ion-col col-12 class="head_item" *ngIf="item['emp_first_name']!='' && item['emp_first_name']!=null && page_type=='approver'">{{item['emp_first_name']}} {{item['emp_last_name']}}</ion-col>
+          <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='travel_entitlement'">Travel Entitlement</ion-col>
+          <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='business_entitlement'">Business Entitlement</ion-col>
+          <ion-col col-4 class="head_item" createdAt>
+            <span createdAt>
+              {{item["created_at"].substring(0,10)}}
+            </span>
+          </ion-col>
+          <ion-col col-4 class="foot_item" >
+            <!-- Rs. {{item["fare"]["total_amount"]+item["accomodation"]["total_amount"]+item["food_allowances"]["total_amount"]+item["conveyance_charges"]["total_amount"]+item["stationary"]["total_amount"]+item["incidental_expenses"]["total_amount"]||"NILL"}} -->
+            Rs. {{item["total_amount"]||"NILL"}}
+          </ion-col>
+          <ion-col col-4 text-right class="head_right_item">
+            <div color-red *ngIf='item["claim_status"]=="pending"||item["claim_status"]=="raised" ; else present'>
+              {{item["claim_status"]|titlecase}}
+            </div>
+            <ng-template #present>
+              <div claim_status>
+                {{item["claim_status"]|titlecase}}
+              </div>
+            </ng-template>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 text-right class="head_right_item" *ngIf="page_type=='approver'">
+            <ion-button pull-right statusApprove (click)="submitstatus(item['id'],'approved','claim_status')" *ngIf='item["claim_status"]=="pending"'>
+              Approve
+            </ion-button>
+            <ion-button statusReject (click)="submitstatus(item['id'],'rejected','claim_status')" *ngIf='item["claim_status"]=="pending"'>
+              Reject
+            </ion-button>
+            <!-- <ng-template #present>
+              <div claim_status>
+                {{item["claim_status"]|titlecase}}
+              </div>
+            </ng-template> -->
+          </ion-col>
+        </ion-row>
+        
+        <ng-template #raised_btn>
+
+        </ng-template>
+      </ion-card>
+    </ion-list>
+
+    <ion-list *ngIf="home=='claim'">
+      <ion-item text-center *ngIf="claims==[]||claims==''||claims==null ; else show_list">
+        No Record Found...!
+      </ion-item>
+      <ion-card outer-card *ngFor="let item of claims; let i=index;" #show_list>
+        
+          <ion-row (click)="show(i,'claim')">
+            <ion-col col-12 class="head_item" *ngIf="item['emp_first_name']!='' && item['emp_first_name']!=null && page_type=='approver'">{{item['emp_first_name']}} {{item['emp_last_name']}}</ion-col>
+            <!-- <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='travel_entitlement'">Travel Entitlement</ion-col> -->
+            <!-- <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='business_entitlement'">Business Entitlement</ion-col> -->
+            <ion-col col-12 class="head_item">{{item['claim_type'].replace('_',' ')|titlecase}}</ion-col>
+            <ion-col col-4 class="head_item">
+              <span createdAt>
+                {{item["created_at"].substring(0,10)}}
+              </span>
+            </ion-col>
+            <ion-col col-4 class="foot_item" >
+              <!-- Rs. {{item["fare"]["total_amount"]+item["accomodation"]["total_amount"]+item["food_allowances"]["total_amount"]+item["conveyance_charges"]["total_amount"]+item["stationary"]["total_amount"]+item["incidental_expenses"]["total_amount"]||"NILL"}} -->
+              Rs. {{item["total_amount"]||"NILL"}}
+            </ion-col>
+            <ion-col col-4 text-right class="head_right_item">
+              <div color-red *ngIf='item["claim_status"]=="pending"||item["claim_status"]=="raised" ; else present'>
+                {{item["claim_status"]|titlecase}}
+              </div>
+              <ng-template #present>
+                <div claim_status>
+                  {{item["claim_status"]|titlecase}}
+                </div>
+              </ng-template>
+            </ion-col>
+            
+          </ion-row>
+          <ion-row>
+            <ion-col col-12 text-right class="head_right_item">
+              <ion-button pull-right (click)="submitstatus(item['id'],'approved','claim_status')" statusApprove *ngIf='item["claim_status"]=="pending"'>
+                Approve
+              </ion-button>
+              <ion-button (click)="submitstatus(item['id'],'rejected','claim_status')" statusReject *ngIf='item["claim_status"]=="pending"'>
+                Reject
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        <ng-template #raised_btn>
+
+        </ng-template>
+      </ion-card>
+    </ion-list>
+
+    <ion-list *ngIf="home=='reimbursement'">
+      <ion-item text-center *ngIf="claims_accountant==[]||claims_accountant==''||claims_accountant==null ; else show_list">
+        No Record Found...!
+      </ion-item>
+      <ion-card outer-card *ngFor="let item of claims_accountant; let i=index;" #show_list>
+          <ion-row (click)="show(i,'claims_accountant')">
+            <ion-col col-12 class="head_item" *ngIf="item['emp_first_name']!='' && item['emp_first_name']!=null && page_type=='approver'">{{item['emp_first_name']}} {{item['emp_last_name']}}</ion-col>
+            <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='travel_entitlement'">Travel Entitlement</ion-col>
+            <ion-col col-12 class="head_item" *ngIf="item['claim_type']=='business_entitlement'">Business Entitlement</ion-col>
+            <ion-col col-4 class="head_item">
+              <span  createdAt>
+                {{item["created_at"].substring(0,10)}}
+              </span>
+            </ion-col>
+            <ion-col col-4 class="foot_item" >
+              <!-- Rs. {{item["fare"]["total_amount"]+item["accomodation"]["total_amount"]+item["food_allowances"]["total_amount"]+item["conveyance_charges"]["total_amount"]+item["stationary"]["total_amount"]+item["incidental_expenses"]["total_amount"]||"NILL"}} -->
+              Rs. {{item["total_amount"]||"NILL"}}
+            </ion-col>
+            <ion-col col-4 text-right class="head_right_item">
+              <div color-red *ngIf='item["claim_status"]=="pending"||item["claim_status"]=="raised" ; else present'>
+                {{item["claim_status"]|titlecase}}
+              </div>
+              <ng-template #present>
+                <div claim_status>
+                  {{item["claim_status"]|titlecase}}
+                </div>
+              </ng-template>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12 text-right class="head_right_item">
+              <ion-button pull-right (click)="presentalert(item['id'],'approved','reimbursement_status','Approve')" statusApprove *ngIf='item["reimbursement_status"]=="pending"'>
+                Reimburse & Close
+              </ion-button>
+              <ion-button (click)="presentalert(item['id'],'rejected','reimbursement_status','Reject')" statusReject *ngIf='item["reimbursement_status"]=="pending"'>
+                Reject
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        <ng-template #raised_btn>
+
+        </ng-template>
+
+      </ion-card>
+    </ion-list>
+  </ion-grid>
+</ion-content>

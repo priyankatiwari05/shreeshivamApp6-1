@@ -1,0 +1,262 @@
+<!--
+  Generated template for the InfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Informations</ion-title>
+  </ion-toolbar>
+  <ion-segment [(ngModel)]="home">
+    <ion-segment-button value="notice">
+      <ion-icon ios="person-outline" md="person-sharp"></ion-icon><span>Personal</span>
+    </ion-segment-button>
+
+    <ion-segment-button value="visitors">
+      <ion-icon ios="document-text-center" md="document-sharp"></ion-icon> Documents
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+<ion-content>
+  <div [ngSwitch]="home">
+    <ion-list noticeHead *ngSwitchCase="'notice'">
+      <ion-item class="my_item" text-center>
+
+        <ion-icon text-center class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon><br>
+        <span class="my_head" text-center>{{username}}</span> <br>
+        <span class="my_contact" text-center>+91 {{mobile}}</span><br>
+        <span class="my_design" text-center>{{email}}</span>
+
+
+        <!-- <ion-icon class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon>
+
+            <span>Mr. GAURAV GAYALI</span>
+            <span>+91 8521002476</span>
+            <span>himaoya.wfeg@gmail.com</span> -->
+
+
+      </ion-item>
+      <div bank_details>
+        <div class="my_div_hover">
+          <ion-row class="my_row">
+            <ion-col class="my_col_type" col-4>
+              {{bank_name||"Not Available"}}<br>
+              Bank
+            </ion-col>
+            <ion-col acc_details class="my_col_type" col-4>
+              {{acc_no||"Not Available"}}<br>
+              A/C Number
+
+            </ion-col>
+            <ion-col class="my_col_type" col-4>
+              {{ifsc||"Not Available"}}<br>
+              IFSC Code
+
+            </ion-col>
+          </ion-row>
+          <!-- <ion-icon class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon>
+
+              <span>Mr. GAURAV GAYALI</span>
+              <span>+91 8521002476</span>
+              <span>himaoya.wfeg@gmail.com</span> -->
+
+        </div>
+      </div>
+      <!-- <ion-item>  -->
+
+      <!-- <ion-row class="my_row">
+                  <ion-col >
+                     Family Details <br>
+                    Father : KRISHNA PRASAD VAISHNAV <br>
+                    Mother : SAVITRI BAI VAISHNAV <br>
+                    Spouse : NINI VAISHNAV
+                    </ion-col>
+
+              </ion-row> -->
+      <!-- </ion-item> -->
+      <br>
+      <ion-card father_card text-left>
+        <ion-card-header father_card_header>
+          Family Details
+        </ion-card-header>
+        <ion-card-content father_card_content>
+          <ion-row>
+            <ion-col col-3 no_pad>
+              Father
+            </ion-col>
+            <ion-col col-1 no_pad>
+              :
+            </ion-col>
+            <ion-col col-8 no_pad>
+              {{father_name||"Not Available"}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3 no_pad>
+              Mother
+            </ion-col>
+            <ion-col col-1 no_pad>
+              :
+            </ion-col>
+            <ion-col col-8 no_pad>
+              {{mother_name||"Not Available"}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3 no_pad>
+              Spouse
+            </ion-col>
+            <ion-col col-1 no_pad>
+              :
+            </ion-col>
+            <ion-col col-8 no_pad>
+              {{spouse_name||"Not Available"}}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let child of children">
+            <ion-col col-3 no_pad>
+              Child
+            </ion-col>
+            <ion-col col-1 no_pad>
+              :
+            </ion-col>
+            <ion-col col-8 no_pad>
+              {{child||"Not Available"}}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-item class="my_item">
+        <ion-row class="my_row2">
+          <ion-col text-center class="my_col_type2" size="12">
+            <span > Date Of Birth</span><br>
+            <span >{{dob||"Not Available"}}</span>
+          </ion-col>
+ 
+          <ion-col text-center class="my_col_type2" size="6">
+            <span >ESIC no. </span><br>
+            <span > {{esic_number||"Not Available"}} </span>
+          </ion-col>
+
+          <ion-col class="my_col_type2" text-center size="6">
+            <span > UAN No.</span><br>
+            <span >{{uan_number||"Not Available"}}</span>
+          </ion-col>
+
+          <ion-col class="my_col_type2" text-center size="6">
+            <span > EPF no.</span><br>
+            <span > {{epf||"Not Available"}}</span>
+          </ion-col>
+
+          <ion-col class="my_col_type2" text-center size="6">
+            <span >Ledger Id. </span><br>
+            <span >{{genesis_ledger_id||"Not Available"}}</span>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-icon class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon><br>
+        <span class="my_head">{{username}}</span> <br>
+        <span class="my_contact">+91 {{mobile}}</span><br>
+        <span class="my_email">{{email}}</span> -->
+
+        <!-- <ion-icon class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon>
+            <span>Mr. GAURAV GAYALI</span>
+            <span>+91 8521002476</span>
+            <span>himaoya.wfeg@gmail.com</span> -->
+
+      </ion-item>
+      <ion-card password_card>
+        <ion-card-header>
+          <div changePass>Change Password 
+            <ion-button size="small" pull-right (click)="show_me()">
+              <ion-icon passIcon name="{{pass_icon}}"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-header>
+        <ion-card-content *ngIf="!hideme">
+          <ion-row>
+            <ion-col size="12" no_pad>
+              Password
+            </ion-col>
+            <ion-col size="12" no_pad>
+                <ion-input type="password" [(ngModel)]="new_password" placeholder="Enter new password"></ion-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="12" no_pad>
+              Confirm Password
+            </ion-col>
+            <ion-col size="12" no_pad>
+                <ion-input type="password" [(ngModel)]="new_confirm_password" placeholder="Enter new password again"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" >
+              <ion-button size="small" pull-right (click)="change_password_confirm()">Change</ion-button>
+            </ion-col>
+
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <ion-list docList *ngSwitchCase="'visitors'">
+      <ion-item *ngIf="doc1!=[]||doc1!=null||doc1!=''||doc1.length>=1; then elseBlock">
+        <ion-row *ngFor="let item of doc1">
+          <ion-col col-2>
+            <ion-icon docIcon ios="paper-outline" md="paper-sharp"></ion-icon>
+          </ion-col>
+          <ion-col col-8>
+            <p docName>
+              {{item['document_name']||"Unknown"}}</p>
+          </ion-col>
+          <ion-col col-2>
+            <ion-button viewBtn *ngIf="item['path']!=''||item['path']!=null" class="bg-blue">
+              <a (click)="openfile(item['path'])">View</a>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ng-template #elseBlock>
+        <ion-item notextfound text-center> 
+          No Documents Available
+        </ion-item>
+      </ng-template>
+
+      <!-- <ion-grid>
+           <ion-row>
+              <ion-col size="6"  *ngFor="let item of doc1">
+                  <ion-card style="font-weight: 400;" >
+
+                      <ion-card-content style=" color: #5a5a5a;">
+                        <ion-row>
+                          <ion-col size="12"  >
+                            {{item['document_name']||"Undefined Name"}}
+                          </ion-col>
+                          <ion-col size="12">
+                            <ion-button *ngIf="item['path']!=''||item['path']!=null" class="bg-blue">
+                              <a style="color:white;" (click)="openfile(item['path'])">View</a>
+                            </ion-button>
+                          </ion-col>
+                        </ion-row>
+
+
+                      </ion-card-content>
+                    </ion-card>
+              </ion-col>
+           </ion-row>
+        </ion-grid> -->
+
+    </ion-list>
+  </div>
+</ion-content>

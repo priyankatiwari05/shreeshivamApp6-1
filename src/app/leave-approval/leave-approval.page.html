@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Leave Approvals</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="leave-approval-card" *ngFor="let leave of leaves; let i=index">
+      
+      <ion-col col-12 *ngIf="leave['first_name']!='' && leave['first_name']!=null" big-text>
+        {{leave['first_name']||''}} {{leave['middle_name']||''}} {{leave['last_name']||''}}
+      </ion-col>
+      <ion-col col-4 blue-text>
+        {{leave['type']}}
+      </ion-col>
+      <ion-col col-8>
+        {{leave['from'] | date: 'dd/MM/yy'}} - {{leave['to'] | date: 'dd/MM/yy'}}
+      </ion-col>
+      <ion-col col-12 *ngFor="let leave_date of leave['leave_dates']; let j=index">
+        <ion-row>
+          <ion-col col-4 style="padding-top: 15px;">
+            {{leave_date['leave_date']| date: 'dd/MM/yy'}}
+          </ion-col>
+          <ion-col col-8>
+            <ion-row radio-group [(ngModel)]="leaves[i]['leave_dates'][j]['grant_type']">
+              <ion-item col-6>
+                <ion-label> Paid </ion-label><ion-radio value="paid"></ion-radio>
+              </ion-item>
+              <ion-item col-6>
+                <ion-label> Unpaid </ion-label><ion-radio value="unpaid"></ion-radio>
+              </ion-item>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6>        
+        <ion-button expand="full" lg-btn-green (click)="confirmUpdate(i,'approve')">Approve</ion-button>
+      </ion-col>
+      <ion-col col-6>        
+        <ion-button expand="full" lg-btn-red (click)="confirmUpdate(i,'reject')">Reject</ion-button>
+      </ion-col>      
+    </ion-row>
+
+    <ion-row class="leave-approval-card" *ngFor="let leave of old_leaves; let i=index">
+      <ion-col col-12 *ngIf="leave['for_fname']!='' && leave['for_fname']!=null" big-text>
+        {{leave['for_fname']||''}} {{leave['for_mname']||''}} {{leave['for_lname']||''}}
+      </ion-col>
+      <ion-col col-4 blue-text>
+        {{leave['type']}}
+      </ion-col>
+      <ion-col col-8>
+        {{leave['from'] | date: 'dd/MM/yy'}} - {{leave['to'] | date: 'dd/MM/yy'}}
+      </ion-col>
+      
+      <ion-col col-12 *ngFor="let leave_date of leave['leave_dates']; let j=index">
+        <ion-row>
+          <ion-col col-4>
+            {{leave_date['leave_date']| date: 'dd/MM/yy'}}
+          </ion-col>
+          <ion-col col-8>
+            {{leave_date['grant_type']}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-4>
+        Status
+      </ion-col>
+      <ion-col col-8>
+        <span *ngIf="leave['status']=='Pending'" style="color: orange;">{{leave['status']|titlecase}}</span>
+        <span *ngIf="leave['status']=='Rejected' || leave['status']=='Cancelled'" style="color: red;">{{leave['status']|titlecase}}</span>
+        <span *ngIf="leave['status']=='Approved'" style="color: green;">{{leave['status']|titlecase}}</span>
+      </ion-col>
+
+      <ion-col col-4 *ngIf="leave['by_fname']!='' && leave['by_fname']!=null">
+        {{leave['status']}} By
+      </ion-col>
+      <ion-col col-8 *ngIf="leave['by_fname']!='' && leave['by_fname']!=null">
+        {{leave['by_fname']||''}} {{leave['by_mname']||''}} {{leave['by_lname']||''}} 
+      </ion-col>
+      <ion-col col-4 *ngIf="leave['remark']!='' && leave['remark']!=null">
+        Remark
+      </ion-col>
+      <ion-col col-8 *ngIf="leave['remark']!='' && leave['remark']!=null" class="leaveremark">
+        {{leave['remark']}}
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="leaves==null && leaves==[] && leaves==null && old_leaves==null && old_leaves==[] && old_leaves==null">
+      <ion-col col-12>
+        No Records Found
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
