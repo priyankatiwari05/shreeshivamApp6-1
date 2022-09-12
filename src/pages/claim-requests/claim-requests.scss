@@ -1,0 +1,34 @@
+page-claim-requests {
+  .head_item {
+    color: #fff;
+  }
+
+  .head_right_item {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .foot_item {
+    font-size: 12px;
+    font-weight: 600;
+    color: #909090;
+    text-transform: capitalize;
+  }
+  .item-ios{
+    color: #2f323a !important;
+        background-color: #fff !important;
+  }
+  .header{
+    top:12%;
+
+  }
+  .content{
+    top:12%;
+    height: 88%;
+  }
+  ion-segment-button
+  {
+    color:white;
+    background: #ffffff6b!important;
+  }
+}

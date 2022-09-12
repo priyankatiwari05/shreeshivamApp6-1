@@ -1,0 +1,7 @@
+{
+  "name": "ShreeShivamHRMS",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

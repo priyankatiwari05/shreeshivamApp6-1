@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>L & D Designations</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list style="margin-bottom: 80px;">
+      <ion-item *ngIf="l_n_d==[]||l_n_d==''||l_n_d==null">
+        No Documents Available
+      </ion-item>
+  
+     <!-- <ng-template #show_list> -->
+         <!-- <ion-item style="border-bottom: solid 1px #dadada; color: #2f323a !important;
+        background-color: #fff !important;    height: 100% !important;
+      margin-bottom: 5px;" > -->
+  
+  
+  
+        <ion-item *ngFor="let item of l_n_d"style="border-bottom: solid 1px #dadada; color: #2f323a !important;
+        background-color: #fafafa !important;    height: 100% !important;" (click)="openlndpage(item['l_n_d'])">
+            {{item['designation']||"Unknown"}}
+          <!-- <ion-col col-2>
+            <ion-icon style="font-size: 2em; color: #717171;" ios="ios-paper" md="md-paper"></ion-icon>
+          </ion-col>
+          <ion-col col-8>
+            <p style="    word-wrap: break-word;
+                    width: 100%;
+                    white-space: normal;">
+              {{item['designation']||"Unknown"}}</p>
+          </ion-col>
+          <ion-col col-2>
+  
+              <a  class="bg-blue"
+               style="
+              font-size: 18px;
+                    background-color: #488aff;
+                      padding: 6px;
+                      border-radius: 4px;
+                      float: right;
+              color:white; "
+              (click)="openlndpage(item['l_n_d'])"
+              >View</a>
+  
+          </ion-col> -->
+        </ion-item>
+      <!-- </ion-item> -->
+     <!-- </ng-template> -->
+  
+  
+    </ion-list>
+  
+  </ion-content>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "541191064265",
+    "firebase_url": "https://shreeshivam-feeb2.firebaseio.com",
+    "project_id": "shreeshivam-feeb2",
+    "storage_bucket": "shreeshivam-feeb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541191064265:android:45236c9500e41410",
+        "android_client_info": {
+          "package_name": "app.softomatic.shreeshivam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541191064265-jvta3d10k6g6prd3n0d4a0pfl8pe2k8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYtJIatcAl9PszJRtDJq7hbyd247gLaVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541191064265-7vkqncu9krrja9rs49vf8rv3dqahi40m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "541191064265-45o15qo9qrqjm4fofnnb7ktqr5u2oprd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.softomatic.shreeshivam"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

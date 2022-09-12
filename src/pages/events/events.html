@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+      <ion-title>Events  <ion-icon name="add" pull-right (click)="create_event()"></ion-icon>
+        <!-- <ion-icon name="add" pull-right (click)="openAddPage()" *ngIf="role=='admin' || role=='hr' || role=='hr admin' || role=='pch' || role=='manager'"></ion-icon> -->
+        </ion-title>
+  
+  </ion-navbar>
+  <ion-segment [(ngModel)]="home">
+      <ion-segment-button value="upcoming" class="segmenttitle">
+        <!-- <ion-icon ios="ios-stats" md="md-stats" style="vertical-align: middle; "></ion-icon> -->
+        <span>Upcomings</span>
+      </ion-segment-button>
+
+      <ion-segment-button value="closed"  class="segmenttitle">
+        <!-- <ion-icon ios="ios-document" md="md-document" style="vertical-align: middle;"></ion-icon>  -->
+        <span>Events</span>
+      </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<ion-content [ngSwitch]="home">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid style="background:transparent; padding-top: unset; text-align: center;
+    color: rgb(10, 9, 9);" *ngSwitchCase="'upcoming'">
+
+        <ion-card *ngFor="let event of upcoming_event; let i = index"
+       style="background:linear-gradient(135deg, #c1d0e0  0%,#5D6874 100%);">
+          <ion-card-content style="text-align: left;">
+            <ion-card-title style="font-size: 16px;">
+              {{event['title']}} <br>
+              <ion-row>
+                  <ion-col col-6 class="from_to">
+                      FROM : {{event['from_date']}}
+                  </ion-col>
+                  <ion-col col-6 class="from_to" style="text-align: right;">
+                      TO : {{event['to_date']}}
+                  </ion-col>
+                </ion-row>
+            </ion-card-title>
+            <p [innerHTML]="event['description']">
+            </p>
+          </ion-card-content>
+          <ion-row no-padding>
+            <ion-col text-right col-12>
+              <button ion-button outline  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
+                  <ion-icon ios="ios-images" md="md-images"style=" margin-right: unset; color:#fff !important;"></ion-icon>
+                Details
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+    <ng-template #norecord>
+      <ion-row>
+        <ion-col col-12>
+          No Record Found
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+
+  <ion-grid  *ngSwitchCase="'closed'">
+      <ion-card *ngFor="let event of closed_event; let i = index"
+       style="background:linear-gradient(135deg, #c1d0e0  0%,#5D6874 100%);">
+          <ion-card-content style="text-align: left;">
+            <ion-card-title style="font-size: 16px;">
+              {{event['title']}} <br>
+              <ion-row>
+                  <ion-col col-6 class="from_to">
+                      FROM : {{event['from_date']}}
+                  </ion-col>
+                  <ion-col col-6 class="from_to" style="text-align: right;">
+                      TO : {{event['to_date']}}
+                  </ion-col>
+                </ion-row>
+            </ion-card-title>
+            <p [innerHTML]="event['description']">
+            </p>
+          </ion-card-content>
+          <ion-row no-padding>
+            <ion-col text-right col-6>
+              <button ion-button outline  icon-start  (click)="upload_pic(event['id'])">
+                  <ion-icon ios="ios-images" md="md-images"style=" margin-right: unset; color:#fff !important;"></ion-icon>
+                Upload Pics
+              </button>
+            </ion-col>
+            <ion-col text-right col-6>
+              <button ion-button outline  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
+                  <ion-icon ios="ios-images" md="md-images"style=" margin-right: unset; color:#fff !important;"></ion-icon>
+                Details
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+  <ng-template #norecord>
+    <ion-row>
+      <ion-col col-12>
+        No Record Found
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  </ion-grid>
+</ion-content>

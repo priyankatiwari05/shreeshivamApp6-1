@@ -1,0 +1,23 @@
+<ion-menu [content]="content" id="main-menu">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <ion-header class="myheader">
+    <ion-toolbar>
+      <img src="../../assets/imgs/dashboard4.jpg" style="max-width: 103%;
+      border: 0;
+      margin: -4px 0px -8px -4px;">
+    </ion-toolbar>
+  </ion-header>
+  <ion-content mycontent>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}"></ion-icon>
+        {{p.title}}
+      </button>
+      <button ion-item (click)="logout_confirm()">
+        <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+        Logout
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

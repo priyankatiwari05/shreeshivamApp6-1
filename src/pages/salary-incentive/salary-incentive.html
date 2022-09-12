@@ -1,0 +1,292 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Salary And Incentives</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="home">
+    <ion-segment-button value="incentive_tab" class="segmenttitle">
+      <ion-icon ios="ios-stats" md="md-stats" style="vertical-align: middle; "></ion-icon><span>Incentives</span>
+    </ion-segment-button>
+
+    <ion-segment-button value="salary_tab" class="segmenttitle">
+      <ion-icon ios="ios-document" md="md-document" style="vertical-align: middle;"></ion-icon> Salary
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [ngSwitch]="home">
+  <ion-grid style="background:transparent; padding-top: unset;      height: 100%;  text-align: center;
+    color: rgb(10, 9, 9);" *ngSwitchCase="'incentive_tab'">
+    <ion-row style="    height: 60%;" *ngIf="department==3; else norecord">
+      <ion-col>
+      <br>
+      <ion-slides pager autoplay="800" speed="2000" style="margin-top: -13px;"
+      [ngStyle]="{ 'height': slidesMoving ? 'auto' : (slidesHeight + 'px') }" autoplayDisableOnInteraction = "false" loop="false">
+      <ion-slide>
+         <ion-col col-12 style="    padding: 8px 0px 8px 12px;" *ngIf="lineChartData!=null && lineChartData!='' && lineChartData!=[]">
+            <div style="float: left !important;padding-left:8px;color: rgb(97, 97, 97); font-size: 100%;">Daily Incentive
+            </div>
+              <br>
+             <div style="display: block;">
+              <canvas baseChart width="300" height="400"
+                          [datasets]="lineChartData1"
+                          [labels]="lineChartLabels1"
+                          [options]="lineChartOptions"
+                          [colors]="lineChartColors"
+                          [legend]="lineChartLegend"
+                          [chartType]="lineChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+              </div>
+              <br>
+
+             </ion-col>
+          <ion-col col-12 style="top: 142px;" *ngIf="lineChartData==null || lineChartData=='' || lineChartData==[]">
+          <span>No data found for this month</span>
+          </ion-col>
+   
+    <br>
+    <br>
+    <br>
+    <div *ngIf="department==3; else norecord" style=" margin-top: 70%;  border-top: 1px solid #616161; ">
+    <ion-row style="background-color: #fff; border-bottom: 1px solid #616161;
+    padding-bottom: 20px;" *ngFor="let item of total_sales_incentive_array">
+      <ion-col col-12 style="padding: 8px 0px 0px 12px;">
+        <div style="float: left !important;color: #000;text-transform: uppercase;">{{item["incentive_type"]||NaN}}</div>
+      </ion-col>
+      <ion-col col-12>
+        <ion-row  *ngFor="let data of item['data']">
+          <ion-col col-12 style="padding: 8px 0px 0px 12px;">
+            <div style="float: left !important;color: rgb(97, 97, 97);text-transform: uppercase;">{{data["name"]||NaN}}</div>
+          </ion-col>
+          <ion-col col-6>
+            <div center class="mybox2">
+              <span class="number_inc">₹ <span [countUp]="data['effective_sale']" [options]="myOpts">000000</span></span>
+              <br>
+              <span style="   font-size: 84%;"> Effective Sales</span>
+            </div>
+          </ion-col>
+          <ion-col col-6>
+            <div center class="mybox2">
+              <span class="number_inc">₹ <span [countUp]="data['incentive_generated']" [options]="myOpts">000000</span></span>
+              <br>
+              <span style="  font-size: 84%;">Generated Incentive</span>
+            </div>
+          </ion-col>
+          
+        </ion-row>
+      </ion-col>
+      
+
+    </ion-row>
+  </div>
+  <ion-row style="background-color: #fff; height: 100px;" *ngIf="department==3; else norecord">
+    <!-- <ion-row style="background-color: #fff;   margin-top:-35px; height: 100px; " *ngIf="department==3; else norecord"> -->
+      <ion-col col-12 style="    padding: 8px 0px 0px 12px;">
+        <div style="float: left !important;color: rgb(97, 97, 97);    font-size: 18px;
+        font-weight: 500;">TOTAL</div>
+      </ion-col>
+      <ion-col col-6>
+        <div center class="mybox2">
+          <span class="number_inc">₹ <span [countUp]="total_sales" [options]="myOpts">000000</span></span> <br>
+          <span style="  font-size: 84%;"> Total Sales</span>
+        </div>
+      </ion-col>
+
+      <ion-col col-6>
+        <div center class="mybox2">
+          <span class="number_inc">₹ <span [countUp]="total_incentives" [options]="myOpts">000000</span></span>
+          <br>
+          <span style="   font-size: 84%;"> Total Incentives</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ng-template #norecord>
+      <ion-row>
+        <ion-col col-12>
+          No Record Found
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-slide>
+  <ion-slide>
+    <ion-col col-12 style="padding: 8px 0px 8px 12px;" *ngIf="lineChartData1!=null && lineChartData1!='' && lineChartData1!=[]">
+      <div style="float: left !important;padding-left:8px;color: rgb(97, 97, 97); font-size: 100%;">Monthly Incentive
+      </div>
+        <br>
+       <div style="display: block;">
+        <canvas baseChart width="300" height="400"
+                    [datasets]="lineChartData1"
+                    [labels]="lineChartLabels1"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+        </div>
+        <br>
+
+      </ion-col>
+      <ion-col col-12 style="top: 142px;" *ngIf="lineChartData1==null || lineChartData1=='' || lineChartData1==[]">
+      <span>No data found for this month</span>
+      </ion-col>
+      <br>
+      <br>
+      <br>
+      <div style=" margin-top:30px;  border-top: 1px solid #616161; ">
+        <ion-grid>
+          <table>
+          <tr justify-content-start>
+            <th>
+             Sr No.
+            </th>
+            <th>
+              Date
+             </th>
+            <th>
+             Target
+            </th>
+            <th>
+              Achieved
+            </th>
+            <th>
+              Status
+            </th>
+          </tr>
+          <tr justify-content-start *ngFor="let row of target_array;let i=index;">
+            <td>
+              {{i+1}}
+            </td>
+            <td>
+              {{row['date']}}
+            </td>
+            <td>
+              {{row['target']}}
+            </td>
+            <td>
+              {{row['target_array']}}
+            </td>
+            <td>
+              {{row['status']}}
+            </td>
+          </tr>
+        </table>
+        </ion-grid>
+     
+        </div>
+</ion-slide>
+<ion-slide>
+  <ion-col col-12 *ngIf="lineChartData2!=null && lineChartData2!='' && lineChartData2!=[]">
+    <div style="float: left !important;padding-left:8px;color: rgb(97, 97, 97); font-size: 100%;">Weekly Incentive
+    </div>
+      <br>
+     <div style="display: block;">
+      <canvas baseChart width="300" height="400"
+                  [datasets]="lineChartData2"
+                  [labels]="lineChartLabels2"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <br>
+
+    </ion-col>
+    <ion-col col-12  style="top: 142px;" *ngIf="lineChartData2==null || lineChartData2=='' || lineChartData2==[]">
+    <span>No data found for this month</span>
+    </ion-col>
+ 
+    <div style=" margin-top:30px;  border-top: 1px solid #616161; ">
+      <ion-grid>
+        <table>
+        <tr justify-content-start>
+          <th>
+           Sr No.
+          </th>
+          <th>
+            From Date
+           </th>
+           <th>
+            To Date
+           </th>
+          <th>
+           Target
+          </th>
+          <th>
+            Achieved
+          </th>
+          <th>
+            Status
+          </th>
+        </tr>
+        <tr justify-content-start *ngFor="let row of id_array;let j=index;">
+          <td>
+            {{master_array[0]['id'][j]}}
+          </td>
+          <td> 
+            {{master_array[0]['from_date'][j]}}
+          </td>
+          <td>{{master_array[0]['to_date'][j]}}</td>
+          <td> 
+            {{master_array[0]['weekly_target'][j]}}
+          </td>
+          <td>
+            {{master_array[0]['weekly_sales'][j]}}
+          </td>
+          <td *ngIf="master_array[0]['weekly_target'][j]<master_array[0]['weekly_sales'][j] && master_array[0]['weekly_target'][j]!=0">
+            {{'Achieved'}} 
+          </td>
+          <td *ngIf="master_array[0]['weekly_target'][j]>master_array[0]['weekly_sales'][j] && master_array[0]['weekly_target'][j]!=0">
+            {{'NotAchieved'}} 
+          </td>
+        </tr>
+      </table>
+      </ion-grid>
+   
+      </div>
+</ion-slide>
+</ion-slides>
+</ion-col> 
+  </ion-row>
+  </ion-grid>
+  <ion-grid *ngSwitchCase="'salary_tab'">
+    <ion-row>
+    
+      <ion-col style="padding: unset;">
+        <table>
+          <thead>
+            <th>Sr</th>
+            <th>Month</th>
+            <th>Incentive</th>
+            <th>Salary</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of sal121; index as k">
+              <td>
+                {{k+1}}
+              </td>
+              <td>
+                {{item['month']}}
+              </td>
+              <td>
+                {{item['incentive']}}
+              </td>
+              <td>
+                {{"₹ "+item['net_payable']}}
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

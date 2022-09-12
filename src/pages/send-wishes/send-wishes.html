@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="page_type=='send_wish'">Send {{wish_type|titlecase}} Wishes</ion-title>
+    <ion-title *ngIf="page_type=='wishes'">Wishes</ion-title>
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="home"  *ngIf="page_type=='wishes' && allwishes==null">
+    <ion-segment-button value="mywishes" class="segmenttitle">
+      <span>My Wishes</span>
+    </ion-segment-button>
+    <ion-segment-button value="sentwishes" class="segmenttitle">
+      <span>Sent Wishes</span>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-segment [(ngModel)]="home"  *ngIf="page_type=='wishes' && allwishes!=null">
+    <ion-segment-button value="mywishes" class="segmenttitle">
+      <span>My Wishes</span>
+    </ion-segment-button>
+    <ion-segment-button value="sentwishes" class="segmenttitle">
+      <span>Sent Wishes</span>
+    </ion-segment-button>
+    <ion-segment-button value="allwishes" class="segmenttitle">
+      <span>All Wishes</span>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="background-color: white; margin-top:12%;" *ngIf="page_type=='send_wish'">
+    <ion-row style="background:transparent; padding-top: unset; 
+    color: rgb(10, 9, 9);">
+      <ion-col col-12>
+          <ion-label>To {{emp_name}}</ion-label>
+      </ion-col>
+      <ion-col col-12>
+          <ion-textarea [(ngModel)]="wish" placeholder="Write your wish here" rows="3" style="width:100%; max-height: 100%!important;"></ion-textarea>
+      </ion-col>
+      
+      <ion-col col-12>
+          <button ion-button pull-right style="float: right!important" [disabled]="wish==null||wish==''" (click)="submit_wish()">send wish</button>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="page_type=='wishes'" [ngSwitch]="home" style="margin-top:12%;">
+
+    <span *ngSwitchCase="'mywishes'">
+    <ion-row *ngFor="let item of mywishes" style="background:white; padding-top: unset; color: rgb(10, 9, 9); border: 1px solid #dedede; border-radius: 5px; margin:5px;">
+     <ion-col col-12 style="font-size: larger; font-weight: 500; color: #212121;">
+        {{item['wish_type']|titlecase}} wishes from {{item['first_name']||"" +" "+item['middle_name']||""+" "+item['last_name']||" "}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['message']}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['created_at']}}
+     </ion-col>     
+    </ion-row>
+    </span>
+
+    <span *ngSwitchCase="'sentwishes'">
+    <ion-row *ngFor="let item of sentwishes" style="background:white; padding-top: unset; color: rgb(10, 9, 9); border: 1px solid #dedede; border-radius: 5px; margin:5px;">
+     <ion-col col-12 style="font-size: larger; font-weight: 500; color: #212121;">
+        {{item['wish_type']}} wishes to {{item['first_name']||"" +" "+item['middle_name']||""+" "+item['last_name']||" "}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['message']}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['created_at']}}
+     </ion-col>      
+    </ion-row>
+    </span>
+    
+    <span *ngSwitchCase="'allwishes'">
+    <ion-row *ngFor="let item of allwishes" style="background:white; padding-top: unset; color: rgb(10, 9, 9); border: 1px solid #dedede; border-radius: 5px; margin:5px;">
+     <ion-col col-12 style="font-size: larger; font-weight: 500; color: #212121;">
+        {{item['from_first']||"" +" "+item['from_middle']||""+" "+item['from_last']||""}} sent {{item['wish_type']}} wishes to {{item['to_first']||"" +" "+item['to_middle']||""+" "+item['to_last']||""}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['message']}}
+     </ion-col>
+     <ion-col col-12>
+        {{item['created_at']}}
+     </ion-col>
+    </ion-row>
+    </span>
+
+  </ion-grid>
+</ion-content>

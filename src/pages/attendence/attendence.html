@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Attendance Details</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngIf="attendence_report==[]||attendence_report==''||attendence_report==null ; else show_list">
+      No Record Found...!
+    </ion-item>
+    <ion-item *ngFor="let item of attendence_report" #show_list [class.my-class]="item['day_string']=='Sunday'">
+      <ion-grid style=" padding: 5px 0px 5px 0px;">
+        <ion-row style="    margin-bottom: 7px;">
+          <ion-col col-3 class="head_item">
+            <span class="date_span">
+              {{item["day_string"]}}, {{item["date"]}}
+            </span>
+          </ion-col>
+          <ion-col col-9 style="text-align:right;" class="head_right_item" *ngIf="today!=item['database_date']">
+            <div style="color:darkred;" *ngIf='item["day"]=="0" || item["day"]=="" || item["day"]=="null"; else present'>
+              ABSENT
+            </div>
+            <ng-template #present>
+              <div style="color:darkgoldenrod;" *ngIf='item["day"]=="0.5" ; else present1'>
+                HALF DAY
+              </div>
+            </ng-template>
+            <ng-template #present1>
+              <div style="color:darkgreen;"  *ngIf='item["day"]=="1"'>
+                FULL DAY
+              </div>
+            </ng-template>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="item['table_remark']==''">
+          <ion-col col-4 class="foot_item" style="text-align: left;">
+            IN : {{item["initial_in"]||"NILL"}}
+          </ion-col>
+          <ion-col col-4 class="foot_item" style="text-align: center;">
+            OUT : {{item["final_out"]||"NILL"}}
+          </ion-col>
+          <!-- <ion-col col-4 class="foot_item" style="text-align: right;">
+            OT : {{item["overtime_hours"]||"00:00"}}
+          </ion-col> -->
+          <ion-col col-4 pull-right style="text-align: right;"
+            *ngIf='((item["day"]=="0" || item["day"]=="" || item["day"]==null || item["day"]=="0.5" || (item["updated_at"]!=null && item["updated_at"]!="")) && today!=item["database_date"]); '>
+            <span class="raise_btn" *ngIf='item["updated_at"]==null || item["updated_at"]=="" ; else raised_btn'
+              (click)="raise_attendence(item['initial_in'],item['final_out'],item['database_date'],item['shift'])">RAISE
+              <ion-icon name="arrow-forward" class="raise_icon"></ion-icon>
+            </span>
+            <ng-template #raised_btn>
+              <span *ngIf="item['approval_status']=='Pending'" style="color: orange;">REQ PENDING</span>
+              <span *ngIf="item['approval_status']=='Raised'" style="color: rgb(0, 132, 255);">REQ RAISED</span>
+              <span *ngIf="item['approval_status']=='Rejected'" style="color: red;">REQ REJECTED</span>
+              <span *ngIf="item['approval_status']=='Approved'" style="color: green;">REQ APPROVED</span>
+            </ng-template>
+          </ion-col>
+          <ion-col col-12 *ngIf="item['leave_type']!='' && item['leave_type']!=null && item['leave_status']=='Approved'">
+            <span style="color: #2ec95c;">On {{item['leave_type']}}</span>
+            <button ion-button leave_cancel *ngIf="item['initial_in']!='00:00:00' || item['final_out']!='00:00:00'" (click)="cancel_leave(item['database_date'])">Cancel Leave</button>
+          </ion-col>
+         
+          <!-- <ion-col col-8 class="foot_item" style="text-align: left;font-size: 16px;">
+            DURATION : {{item["total_working_hour"]||"00"}}
+          </ion-col> -->
+
+          <!-- <ion-col col-4 style="text-align: right;"
+            *ngIf='((item["day"]=="0" || item["day"]=="" || item["day"]==null || item["day"]=="0.5") && today!=item["database_date"]); '>
+            <span class="raise_btn" *ngIf='item["updated_at"]==null || item["updated_at"]=="" ; else raised_btn'
+              (click)="raise_attendence(item['initial_in'],item['final_out'],item['database_date'],item['shift'])">RAISE
+              <ion-icon name="arrow-forward" class="raise_icon"></ion-icon>
+            </span>
+            <ng-template #raised_btn>
+              <span *ngIf="item['approval_status']=='Pending'" style="color: orange;">PENDING</span>
+              <span *ngIf="item['approval_status']=='Raised'" style="color: rgb(0, 132, 255);">RAISED</span>
+              <span *ngIf="item['approval_status']=='Rejected'" style="color: red;">REJECTED</span>
+              <span *ngIf="item['approval_status']=='Approved'" style="color: green;">APPROVED</span>
+            </ng-template>
+          </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="item['table_remark']!=''">
+          <ion-col col-8 class="head_right_item" style="white-space: normal;">
+            {{item['table_remark']}}
+          </ion-col>
+          <ion-col col-4 style="text-align: right;"
+            *ngIf='((item["day"]=="0" || item["day"]=="" || item["day"]==null || item["day"]=="0.5") && today!=item["database_date"]); '>
+            <span class="raise_btn" *ngIf='item["updated_at"]==null || item["updated_at"]=="" ;'
+              (click)="raise_attendence(item['initial_in'],item['final_out'],item['database_date'],item['shift'])">RAISE
+              <ion-icon name="arrow-forward" class="raise_icon"></ion-icon>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

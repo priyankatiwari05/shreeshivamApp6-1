@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Travel Desk</ion-title>
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="home">
+    <ion-segment-button value="pending" style="color: white; padding: 0px!important;">
+      <span>Pending</span>
+    </ion-segment-button>
+    <ion-segment-button value="booked" style="color: white; padding: 0px!important;">
+      <span>Booked</span>
+    </ion-segment-button>
+    <ion-segment-button value="closed" style="color: white; padding: 0px!important;">
+      <span>Closed</span>
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-header>
+  
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);" [ngSwitch]="home">
+  <ion-row *ngSwitchCase="'pending'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="pending.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <th>Employee</th>
+          <!-- <th>origin</th>
+          <th>Destination</th> -->
+          <th>From Date</th>
+          <th>To Date</th>
+          <th>Express Booking</th>
+          <!-- <th>Travel Mode</th>
+          <th>Book Hotel</th>           -->
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pending" (click)="openModal(item,'pending')">
+            <td>
+                <span *ngIf='item["first_name"]!=null'>{{item["first_name"]}}</span> <span *ngIf='item["middle_name"]!=null'>{{item["middle_name"]}}</span> <span *ngIf='item["last_name"]!=null'>{{item["last_name"]}}</span>
+            </td>
+            <!-- <td>
+              {{item['origin_city']}} {{item['origin_state']}}
+            </td>
+            <td>
+              {{item['destination_city']}} {{item['destination_state']}}
+            </td> -->
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['end_date']}}
+            </td>
+            <td>
+              <span *ngIf='item["express_booking"]==1'>Yes</span>
+              <span *ngIf='item["express_booking"]==0'>No</span>
+            </td>
+            <!-- <td>
+              {{item['mode']|titlecase}}
+            </td>
+            <td>
+              <span *ngIf='item["hotel_planning"]==1'>Yes</span>
+              <span *ngIf='item["hotel_planning"]==0'>No</span>
+            </td> -->
+          </tr>          
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'booked'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="booked.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <th>Employee</th>
+          <!-- <th>origin</th>
+          <th>Destination</th> -->
+          <th>From Date</th>
+          <th>To Date</th>
+          <th>Express Booking</th>
+          <!-- <th>Travel Mode</th>
+          <th>Book Hotel</th> -->
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of booked" (click)="openModal(item,'booked')">
+            <td>
+              <span *ngIf='item["first_name"]!=null'>{{item["first_name"]}}</span> <span *ngIf='item["middle_name"]!=null'>{{item["middle_name"]}}</span> <span *ngIf='item["last_name"]!=null'>{{item["last_name"]}}</span>
+            </td>
+            <!-- <td>
+              {{item['origin_city']}} {{item['origin_state']}}
+            </td>
+            <td>
+              {{item['destination_city']}} {{item['destination_state']}}
+            </td> -->
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['end_date']}}
+            </td>
+            <td>
+              <span *ngIf='item["express_booking"]==1'>Yes</span>
+              <span *ngIf='item["express_booking"]==0'>No</span>
+            </td>
+            <!-- <td>
+              {{item['mode']|titlecase}}
+            </td>
+            <td>
+              <span *ngIf='item["hotel_planning"]==1'>Yes</span>
+              <span *ngIf='item["hotel_planning"]==0'>No</span>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+  <ion-row *ngSwitchCase="'closed'">
+      <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+      <ion-col style="padding: unset;" *ngIf="closed.length>0">
+        <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+          <thead>
+            <th>Employee</th>
+            <!-- <th>origin</th>
+            <th>Destination</th> -->
+            <th class="nowrap">From Date</th>
+            <th class="nowrap">To Date</th>
+            <th>Express Booking</th>
+            <!-- <th>Travel Mode</th> -->
+            <!-- <th>Book Hotel</th> -->
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of closed" (click)="openModal(item,'closed')">
+              <td>
+                {{item['employee']}}
+              </td>
+              <!-- <td>
+                {{item['origin_city']}} {{item['origin_state']}}
+              </td>
+              <td>
+                {{item['destination_city']}} {{item['destination_state']}}
+              </td> -->
+              <td class="nowrap">
+                {{item['start_date']}}
+              </td>
+              <td class="nowrap">
+                {{item['end_date']}}
+              </td>
+              <td>
+                <span *ngIf='item["express_booking"]==1'>Yes</span>
+                <span *ngIf='item["express_booking"]==0'>No</span>
+              </td>
+              <!-- <td>
+                {{item['mode']|titlecase}}
+              </td> -->
+              <!-- <td>
+                <span *ngIf='item["hotel_planning"]==1'>Yes</span>
+                <span *ngIf='item["hotel_planning"]==0'>No</span>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+      </span>
+    </ion-row>
+
+  <ion-list *ngIf="dataload==false">
+    <ion-item>
+      No Record Found!
+    </ion-item>
+  </ion-list>
+  </ion-grid>
+</ion-content>
+  

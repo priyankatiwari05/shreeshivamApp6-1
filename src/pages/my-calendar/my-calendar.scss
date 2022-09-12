@@ -1,0 +1,49 @@
+page-my-calendar {
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .toolbar-title-ios{
+    margin-left: 30px;
+    }
+    .ion-page{
+    background:url('../../assets/imgs/bg_new1.png') !important;
+    background-position: center top !important;
+    background-size: cover !important;
+    }
+    .header{
+    top:12%;
+
+    }
+    .content{
+    top:12%;
+    }
+
+    ion-row
+    {
+        background:white;
+        padding-top: unset;
+        text-align: center;
+        color: rgb(10, 9, 9);
+    }
+
+    tr:nth-of-type(odd),tr:nth-of-type(even){
+        background-color: white;
+        padding: 5px;
+        color: black;
+    }
+
+    th
+    {
+        background: lightgrey;
+        color: black;
+    }
+
+    th,td
+    {
+        height: 6vh;
+        width: 6vh;
+        padding: auto;
+    }
+}

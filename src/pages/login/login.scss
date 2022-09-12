@@ -1,0 +1,60 @@
+page-login {
+    
+    
+    .scroll-content
+    {
+        background:url("../assets/imgs/login3BgA1.jpg")!important;
+        background-position: center top !important;
+        background-size: cover !important;
+    }
+   
+    ion-img
+    {
+        background:transparent;
+    }
+    ion-item
+    {
+        background: transparent!important;
+    }
+    ion-title{
+        margin-top:5vh;
+        margin-bottom:5vh;       
+    }
+    .toolbar-title-md {
+        color: #60d158!important;
+        font-size: 28px;
+    }
+    [red] {
+      
+        background-color: #e50214 !important;
+        font-size: 28px;
+    }
+    ion-img{
+        width : 100px!important;
+        height : 100px!important;
+        margin-left : 30%;
+    }
+    .noborder > .item-inner
+    {
+        border-bottom: 0px!important;
+    }
+  
+    .myloginbox
+    {
+       
+        border-radius: 5px;
+        background:url("../assets/imgs/card2.png")!important;
+        background-position: center top !important;
+    }
+    .myheading
+    {
+   
+        border-radius: 5px 5px 0px 0px;
+    }
+    [white]
+    {
+        color:white !important;
+    }
+  
+  }
+  
