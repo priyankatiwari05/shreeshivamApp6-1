@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Leave</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);">
+
+
+    <ion-row style="border-radius: 1rem; background:transparent;">
+
+
+      <!-- <ion-col col-6 (click)="open_root(my_leave)">
+        <div center class="mybox2">
+            <img src="../../assets/imgs/my_leaves.png" style="padding: 9px 6px 6px 6px; border: 4px solid #f6ff23;    ">
+            <br>
+
+          <span style=" font-size: 100%;">My Leaves</span>
+          <button ion-button round small class="notification_btn">0</button>
+        </div>
+      </ion-col> -->
+      <ion-col col-6 (click)="open_root(leave_form)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/apply_leave.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Apply for leaves</span>
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(mycalendar)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/cancel_leave.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">My Calendar</span>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 (click)="open_root(my_request)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/my_request.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">My Leave Request</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

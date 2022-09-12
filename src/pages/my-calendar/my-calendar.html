@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Calendar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>Holiday : <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon></ion-col>
+      <ion-col col-4>Leave : <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row navigate-row>
+      <ion-col col-3 pull-left><ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle" navigate-row (click)="changeCalender(-1)"></ion-icon></ion-col>
+      <ion-col col-6>{{month_arr[month]}} {{year}}</ion-col>
+      <ion-col col-3 pull-right><ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle" (click)="changeCalender(1)"></ion-icon></ion-col>
+    </ion-row>
+    <!-- <ion-row> -->
+      <table>
+        <thead>
+          <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thur</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let arr of array_size; let i=index;">
+            <td><span calendar_date>{{calendar['Sun'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+1]['time_in']!=''">{{shifts[i+1]['time_in']}} <br> {{shifts[i+1]['time_out']}}<br></span>
+              <span *ngIf="calendar['Sun'][i]['color_leave']==true && shifts[i+1]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Sun'][i]['color_holiday']==true && shifts[i+1]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Mon'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+2]['time_in']!=''">{{shifts[i+2]['time_in']}} <br> {{shifts[i+2]['time_out']}}<br></span>
+              <span *ngIf="calendar['Mon'][i]['color_leave']==true && shifts[i+2]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Mon'][i]['color_holiday']==true && shifts[i+2]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Tue'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+3]['time_in']!=''">{{shifts[i+3]['time_in']}} <br> {{shifts[i+3]['time_out']}}<br></span>
+              <span *ngIf="calendar['Tue'][i]['color_leave']==true && shifts[i+3]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Tue'][i]['color_holiday']==true && shifts[i+3]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Wed'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+4]['time_in']!=''">{{shifts[i+4]['time_in']}} <br> {{shifts[i+4]['time_out']}}<br></span>
+              <span *ngIf="calendar['Wed'][i]['color_leave']==true && shifts[i+4]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Wed'][i]['color_holiday']==true && shifts[i+4]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Thu'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+5]['time_in']!=''">{{shifts[i+5]['time_in']}} <br> {{shifts[i+5]['time_out']}}<br></span>
+              <span *ngIf="calendar['Thu'][i]['color_leave']==true && shifts[i+5]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Thu'][i]['color_holiday']==true && shifts[i+5]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Fri'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+6]['time_in']!=''">{{shifts[i+6]['time_in']}} <br> {{shifts[i+6]['time_out']}}<br></span>
+              <span *ngIf="calendar['Fri'][i]['color_leave']==true && shifts[i+6]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Fri'][i]['color_holiday']==true && shifts[i+6]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+            <td><span calendar_date>{{calendar['Sat'][i]['val']}}</span><br>
+              <span *ngIf="shifts[i+7]['time_in']!=''">{{shifts[i+7]['time_in']}} <br> {{shifts[i+7]['time_out']}}<br></span>
+              <span *ngIf="calendar['Sat'][i]['color_leave']==true && shifts[i+7]['time_in']!=''">
+                <ion-icon calendar_star bg-orange ios="ios-star" md="md-star"></ion-icon>
+              </span>
+              <span *ngIf="calendar['Sat'][i]['color_holiday']==true && shifts[i+7]['time_in']!=''">
+                <ion-icon calendar_star bg-green ios="ios-star" md="md-star"></ion-icon>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <!-- </ion-row> -->
+  </ion-grid>
+</ion-content>

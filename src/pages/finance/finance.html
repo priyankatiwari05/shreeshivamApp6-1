@@ -1,0 +1,68 @@
+<!--
+  Generated template for the FinancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Claims / Reimbursment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);">
+
+
+    <ion-row style="border-radius: 1rem; background:transparent;">
+
+
+      <ion-col col-6 (click)="open_root(travel_entitlement)">
+        <div center class="mybox2">
+            <img src="../../assets/imgs/travel_entitlement.png" style="border: 4px solid #2ec95c; padding: 9px 6px 6px 6px;">
+            <br>
+            <span style="  font-size: 100%">Travel Entitlement</span>
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(business)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/bussiness.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #ff2323;">
+          <br>
+          <span style="  font-size: 100%">Business</span>
+          <!-- <button ion-button round small class="notification_btn">45</button> -->
+        </div>
+      </ion-col>
+
+      <ion-col col-6 (click)="open_root(blank)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/relocation.png"  style="padding: 9px 6px 6px 6px; border: 4px solid #1a6af7;">
+          <br>
+          <span style="   font-size: 100%"> Relocation </span>
+        </div>
+      </ion-col>
+
+      
+      <ion-col col-6 (click)="open_root(blank)">
+        <div center class="mybox2">
+          <!-- <ion-icon ios="ios-book" md="md-book" style="    border: 4px solid #ff23f3;"></ion-icon><br> -->
+          <img src="../../assets/imgs/ctc.png" style="padding: 9px 6px 6px 6px; border: 4px solid #ff23f3;"><br>
+          <span style="   font-size: 100%"> CTC Reimbursment </span>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 (click)="open_root(myclaims)">
+        <div center class="mybox2">
+            <img src="../../assets/imgs/my_request.png" style="padding: 9px 6px 6px 6px; border: 4px solid #ff7b14;"><br>
+          <span style="   font-size: 100%"> My Claims </span>
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+
+  </ion-grid>
+</ion-content>

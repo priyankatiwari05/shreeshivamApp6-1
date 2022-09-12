@@ -1,0 +1,90 @@
+<!--
+  Generated template for the HrAdminPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>HR & Admin</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);">
+
+
+    <ion-row style="border-radius: 1rem; background:transparent;">
+      <ion-col col-6 (click)="open_root(attendence)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/attendence.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Attendance</span>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 (click)="open_root(travel_n_stay)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/travel_n_stay.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Travel & Stay</span>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 (click)="open_root(leave)">
+        <div center class="mybox2">
+            <img src="../../assets/imgs/leave.png" style="padding: 9px 6px 6px 6px; border: 4px solid #f6ff23;    ">
+            <br>
+
+          <span style=" font-size: 100%;">Leave</span>
+          <!-- <button ion-button round small class="notification_btn">0</button> -->
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(warning)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/warning.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">PIL</span>
+          <!-- <button ion-button round small class="notification_btn">0</button> -->
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(appreciation)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/appreciation.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Appreciation</span>
+          <!-- <button ion-button round small class="notification_btn">0</button> -->
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(appraisal)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/appriasal1.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Appraisal</span>
+          <!-- <button ion-button round small class="notification_btn">0</button> -->
+        </div>
+      </ion-col>
+      <ion-col col-12 (click)="open_root(raised_request)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/my_request.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">My Request</span>
+          <!-- <button ion-button round small class="notification_btn" style="left: 56%;">0</button> -->
+        </div>
+      </ion-col>
+
+
+
+
+
+
+
+    </ion-row>
+
+
+  </ion-grid>
+</ion-content>

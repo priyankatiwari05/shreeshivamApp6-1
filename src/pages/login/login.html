@@ -1,0 +1,58 @@
+<ion-content padding>
+
+  <!-- <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer" width="100%" height="200px">
+    <source src="" type="video/mp4" />
+   </video> -->
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+   <p style=" text-align: center; border-bottom: unset !important;">
+
+v{{appversion}}
+      </p>
+<!--
+  <div style="text-align:center;">
+    <img style="max-width: 28%;" src="../../assets/imgs/logo.png">
+  </div> -->
+  <ion-list class="myloginbox">
+
+   
+      <br> <br>
+    <ion-item>
+      <ion-label floating>
+        <ion-icon ios="ios-mail" md="md-mail"></ion-icon> Email ID
+      </ion-label>
+      <ion-input type="text"  [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon ios="ios-lock" md="md-lock"></ion-icon> Password
+      </ion-label>
+      <ion-input type="{{type}}"  [(ngModel)]="password"></ion-input>
+      <button *ngIf="!showPass" ion-button clear  type="button" item-right (click)="showPassword()">  <ion-icon ios="ios-eye-off"  style="    font-size: 3rem;    color: red !important;" md="md-eye-off"></ion-icon></button>
+      <button *ngIf="showPass" ion-button clear  type="button" item-right (click)="showPassword()"> <ion-icon ios="ios-eye" md="md-eye"  style="    font-size: 3rem;    color: red !important;"></ion-icon></button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        Remember Me
+      </ion-label>
+      <ion-checkbox color="danger" [(ngModel)]="rememberme"></ion-checkbox>
+    </ion-item>
+
+    <ion-item class="noborder">
+      <button ion-button full block padding red (click)="login()" style="    border-radius: 3px;
+      padding: 26px 16px;">Sign In</button>
+    </ion-item>
+  </ion-list>
+
+  <!-- <div *ngIf="advertise" style="height:100px!important; width:auto; margin: auto; background: black; color:white; position: fixed; bottom:60px; left:5px; right:5px;">
+  <ion-row>
+    <ion-col col-11><p>this is advertisement block this is advertisement block this is advertisement block this is advertisement block this is advertisement block</p></ion-col>
+    <ion-col col-1><ion-icon ios="ios-close-circle" md="md-close-circle" (click)="closead()" style="font-size:22px;"></ion-icon></ion-col>
+  </ion-row>
+</div> -->
+<p white center style="text-align: center;"><a href="#" style="text-align:center;color: #ffffff;font-weight: 100;"  >Forgot Password</a></p>
+</ion-content>

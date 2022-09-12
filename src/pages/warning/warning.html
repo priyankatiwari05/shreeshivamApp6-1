@@ -1,0 +1,214 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="font-size: 16px!important;">Performance Improvement Letter </ion-title>
+  </ion-navbar>
+  <ion-segment *ngIf="home!=''" [(ngModel)]="home">
+    <ion-segment-button value="warnings" style="color: white; padding: 0px!important;">
+      <span>My PIL</span>
+    </ion-segment-button>
+    <ion-segment-button value="issued" style="color: white; padding: 0px!important;">
+      <span>Issued</span>
+    </ion-segment-button>
+    <ion-segment-button value="create" style="color: white; padding: 0px!important;">
+      <span>Create New</span>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid style="background:transparent; padding-top: unset; text-align: left; margin-top:12%;
+  color: rgb(10, 9, 9); background: white;" [ngSwitch]="home">
+
+<ion-row *ngIf="home==''">
+  <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
+  <ion-col col-12 *ngIf="warning==[]||warning==''||warning==null ; else show_list">
+      You have no PIL.
+    </ion-col>
+    <ion-col col-12 *ngFor="let item of warning" #show_list style="border-bottom: 1px solid #ddd;">
+        <ion-row>
+
+          <ion-col col-4 class="head_item">
+              <span style="
+                border-radius: 4px;
+                color: #fff;
+                background-color:  #2b93df;
+                padding: 3px 6px 3px 6px;">
+                {{item['date']||"Nill"}}
+              </span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="foot_item">
+            <ion-col col-12>
+              <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
+              <br>
+              <span style="font-size: 12px; color: grey;">Issued By {{item["first_name"]}} {{item["last_name"]}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="foot_item" *ngIf="item['photo']">
+            <ion-col col-4>
+            Attached File -
+            </ion-col>
+            <ion-col col-8>
+              <a (click)="open_img(item['photo'])" > Click here</a>
+
+            </ion-col>
+        </ion-row>
+    </ion-col>
+  <!-- </span> -->
+</ion-row>
+
+  <ion-row *ngSwitchCase="'warnings'">
+    <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
+      <ion-col col-12 *ngIf="warning==[]||warning==''||warning==null ; else show_list">
+        You have no PIL.
+      </ion-col>
+      <ion-col col-12 *ngFor="let item of warning" #show_list style="border-bottom: 1px solid #ddd;">
+          <ion-row>
+
+            <ion-col col-4 class="head_item">
+                <span style="
+                  border-radius: 4px;
+                  color: #fff;
+                  background-color:  #2b93df;
+                  padding: 3px 6px 3px 6px;">
+                  {{item['date']||"Nill"}}
+                </span>
+              </ion-col>
+          </ion-row>
+          <ion-row class="foot_item">
+              <ion-col col-12>
+                <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
+                <br>
+                <span style="font-size: 12px; color: grey;">Issued By {{item["first_name"]}} {{item["last_name"]}}</span>
+              </ion-col>
+          </ion-row>
+          <!-- <ion-row *ngIf="warning==[]||warning==''||warning==null">
+            You have no warnings.
+          </ion-row> -->
+          <ion-row class="foot_item" *ngIf="item['photo']">
+              <ion-col col-4>
+              Attached File -
+              </ion-col>
+              <ion-col col-8>
+                <a (click)="open_img(item['photo'])" > Click here</a>
+
+              </ion-col>
+          </ion-row>
+      </ion-col>
+    <!-- </span> -->
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'issued'">
+    <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
+      <ion-col co-12 *ngIf="issued==[]||issued==''||issued==null ; else show_list2">
+        No PIL.
+      </ion-col>
+      <ion-col col-12 *ngFor="let item of issued" #show_list2 style="border-bottom: 1px solid #ddd;">
+          <ion-row>
+            <ion-col col-4 class="head_item">
+              <span style="
+                border-radius: 4px;
+                color: #fff;
+                background-color:  #2b93df;
+                padding: 3px 6px 3px 6px;">
+                {{item['date']||"Nill"}}
+              </span>
+            </ion-col>
+            <ion-col col-12>
+                
+                Issued for {{item["to_first"]}} {{item["to_last"]}}
+                
+            </ion-col>
+          </ion-row>
+          <ion-row class="foot_item">
+              <ion-col col-12>
+              <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
+              <br>
+              <span style="font-size: 12px; color: grey;">Issued By {{item["from_first"]}} {{item["from_last"]}}</span>
+              </ion-col>
+          </ion-row>
+          <ion-row class="foot_item" *ngIf="item['photo']">
+              <ion-col col-4>
+              Attached File -
+              </ion-col>
+              <ion-col col-8>
+                <a (click)="open_img(item['photo'])" > Click here</a>
+  
+            </ion-col>
+        </ion-row>
+    </ion-col>
+    <!-- </span> -->
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'create'">
+    <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
+      <ion-col col-3><ion-label class="dis_label">Employee</ion-label></ion-col>
+      <ion-col col-9>
+        <ionic-selectable style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; width: 100%; padding: 0px 5px"
+          item-content="employee"
+          [items]="emp_list"
+          [(ngModel)]="warning_for"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true"
+          placeholder="Select Employee"
+          (ngModelChange)="show(warning_for)">
+        </ionic-selectable>
+      </ion-col>
+    
+      <ion-col col-12 radio-group [(ngModel)]="warning_type">
+        <ion-row>
+          <ion-col col-1>
+            <ion-radio id="write_radio" checked value="write"></ion-radio>
+          </ion-col>
+          <ion-col col-5>
+            <ion-label for="write_radio" class="radio_label">Write warning</ion-label>
+          </ion-col>
+          <ion-col col-1>
+            <ion-radio id="pic_radio" value="pic"></ion-radio>
+          </ion-col>
+          <ion-col col-5>
+            <ion-label for="pic_radio" class="radio_label">Upload Picture</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 *ngIf="warning_type=='write'">
+        <ion-row>
+          <ion-col col-12>
+            <ion-textarea [(ngModel)]="warning_content" placeholder="Write your warning here"></ion-textarea>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 *ngIf="warning_type=='pic'">
+        <ion-row>
+          <ion-col col-4>
+            <input type="file" (change)="changeListener($event)" id="file-input" style="opacity: 0" #fileInp accept="image/*" />
+            <p style="width : 100% ; height : auto; background: rgb(25, 72, 141);margin-top: -20px;
+            color: white;
+            border-radius: 5px;
+            padding: 5px;">
+              Choose Image</p>
+          </ion-col>
+          <ion-col col-8><span pull-right>{{filename}}</span></ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12>
+        <button ion-button style="background: green;" pull-right (click)="submitdata()">Submit</button>
+      </ion-col>
+    <!-- </span> -->
+  </ion-row>
+
+  <!-- <ion-list *ngIf="dataload==false">
+    <ion-item>
+      No Record Found!
+    </ion-item>
+  </ion-list> -->
+  </ion-grid>
+</ion-content>
+

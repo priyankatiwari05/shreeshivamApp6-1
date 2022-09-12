@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>541191064265-45o15qo9qrqjm4fofnnb7ktqr5u2oprd.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.541191064265-45o15qo9qrqjm4fofnnb7ktqr5u2oprd</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCusxI08shCB8Ydq35an2C1VuocUAUiNYo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>541191064265</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.softomatic.shreeshivam</string>
+	<key>PROJECT_ID</key>
+	<string>shreeshivam-feeb2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shreeshivam-feeb2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:541191064265:ios:4eb2d4c52316de05b05b18</string>
+	<key>DATABASE_URL</key>
+	<string>https://shreeshivam-feeb2.firebaseio.com</string>
+</dict>
+</plist>

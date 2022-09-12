@@ -1,0 +1,35 @@
+page-miss-punch-approval {
+  .header{
+    top:12%;
+
+  }
+  .content{
+    top:12%;
+    height: 88%;
+  }
+  .label-md {
+    margin: 0px 4px 0px 0px;
+  }
+  .item-md {
+    padding-left: 2px;
+  }
+  .foot_item {
+    font-size: 16px;
+    font-weight: 400;
+    color: #909090;
+    text-transform: capitalize;
+    // line-height: 10px;
+    white-space: normal;
+  }
+  .head_item {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: capitalize;
+    line-height: 26px;
+  }
+  .foot_item>ion-col
+  {
+    white-space: normal;
+  }
+}

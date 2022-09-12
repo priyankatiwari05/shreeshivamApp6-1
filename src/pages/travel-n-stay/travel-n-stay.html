@@ -1,0 +1,79 @@
+<!--
+  Generated template for the TravelNStayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Travel And Stay</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);">
+
+
+    <ion-row style="border-radius: 1rem; background:transparent;">
+
+
+      <ion-col col-6 (click)="open_root(travel_request)">
+        <div center class="mybox2">
+            <img src="../../assets/imgs/travel_request.png" style="padding: 9px 6px 6px 6px; border: 4px solid #f6ff23;    ">
+            <br>
+
+          <span style=" font-size: 100%;">Travel Request</span>
+        </div>
+      </ion-col>
+      <!-- <ion-col col-6 (click)="open_root(express_booking)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/express_booking.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Express Booking</span>
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(hotel_planning)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/hotel_planning.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Hotel Planning</span>
+        </div>
+      </ion-col> -->
+      <ion-col col-6 (click)="open_root(advanced_request)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/advanced_request.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Advanced Request</span>
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="open_root(guest_house)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/guest_house.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Guest House</span>
+        </div>
+      </ion-col>
+      <ion-col col-6 >
+        <div center class="mybox2">
+          <img src="../../assets/imgs/vehicle_request.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">Vehicle Request</span>
+        </div>
+      </ion-col>
+      <ion-col col-12 (click)="open_root(show_travel_request)">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/my_request.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #f6ff23;">
+          <br>
+          <span style="  font-size: 100%">My Request</span>
+          <!-- <button ion-button round small class="notification_btn" style="left: 56%;">0</button> -->
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
