@@ -9,7 +9,6 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./travel-approval.page.scss'],
 })
 export class TravelApprovalPage implements OnInit {
-  responseData:any;
   role:any;
   travel_approval:any;
   constructor(
@@ -62,8 +61,7 @@ export class TravelApprovalPage implements OnInit {
       branch_location_id: branch_location_id
     });
     console.log(data);
-    this.authService.postData(data, "travel_request").then(async result => {
-        let data = result;
+    this.authService.postData(data, "travel_request").then(async data => {
         console.log(data);
         
         if (data["status"] == "success") {
@@ -149,9 +147,7 @@ export class TravelApprovalPage implements OnInit {
       status:"rejected"
     });
 
-    this.authService.postData(data, "update_travel_request").then(
-      async result => {
-        let data = result;
+    this.authService.postData(data, "update_travel_request").then( async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -208,9 +204,7 @@ export class TravelApprovalPage implements OnInit {
       status:"approved"
     });
 
-    this.authService.postData(data, "update_travel_request").then(
-      async result => {
-        let data = result;
+    this.authService.postData(data, "update_travel_request").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

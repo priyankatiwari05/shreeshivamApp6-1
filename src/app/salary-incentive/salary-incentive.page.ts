@@ -127,8 +127,7 @@ export class SalaryIncentivePage implements OnInit {
         emp_id: emp
       });
 
-      this.authService.postData(data, "fetch_all_incentives_new").then(async result => {
-          let data = result;
+      this.authService.postData(data, "fetch_all_incentives_new").then(async data => {
           console.log(data);
 
           if (data["status"] == "success") {

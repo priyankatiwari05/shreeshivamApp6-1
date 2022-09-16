@@ -14,7 +14,6 @@ export class TravelRequestPage implements OnInit {
   trip_type: any;
   travel_origin: any;
   travel_destination: any;
-  responseData: any;
   hotel_planning:any;
   hotel_preferred:any;
   occupancy:any;
@@ -70,8 +69,7 @@ export class TravelRequestPage implements OnInit {
 
   get_cities()
   {
-    this.authService.getData("get_cities").then(result => {
-      let data = result;
+    this.authService.getData("get_cities").then(data => {
       console.log(data);
 
         if (data["status"] == "success") {
@@ -205,8 +203,9 @@ export class TravelRequestPage implements OnInit {
           });
           (await loader).present();
 
-          this.authService.postData(data, "travel_request/submit").then(async result => {
-            let data = result;
+          console.log(data);
+
+          this.authService.postData(data, "travel_request/submit").then(async data => {
             console.log(data);
             
               if (data["status"] == "success") {

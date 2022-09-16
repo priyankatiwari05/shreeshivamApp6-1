@@ -233,8 +233,7 @@ export class MyCalendarPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    await this.authService.postData(JSON.stringify({emp_id:this.emp_id,year:year,month:month+1}),'fetch_calendar_detail').then(async result => {
-        let data = result;
+    await this.authService.postData(JSON.stringify({emp_id:this.emp_id,year:year,month:month+1}),'fetch_calendar_detail').then(async data => {
         console.log(data);
         
         if (data["status"] == "success") {

@@ -50,8 +50,7 @@ export class EventsPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.getData("get_events").then(async result => {
-        let data = result;
+    this.authService.getData("get_events").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -115,7 +114,7 @@ export class EventsPage implements OnInit {
     //   console.log("I'm about to dismiss");
     // });
     console.log({ event_id: event_id, page_type:'add_pics' })
-    this.navCtrl.navigateForward([CreateEventPage,{ event_id: event_id, page_type:'add_pics' }])
+    this.navCtrl.navigateForward(['/create-event',{ event_id: event_id, page_type:'add_pics' }])
 
   }
 

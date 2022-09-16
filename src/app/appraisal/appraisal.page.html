@@ -23,8 +23,8 @@
           Details <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </ion-col>
     </ion-row>
-    <ion-row class="mycard" *ngIf="appraisals==[] || appraisals=='' || appraisals==null">
-      <ion-col col-12>No records found</ion-col>
+    <ion-row *ngIf="appraisals==[] || appraisals=='' || appraisals==null">
+      <ion-col col-12 text-center nodatafound>No records found</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -181,9 +181,7 @@ export class HomePage {
   {
     this.storage.get('emp_id').then((val)=>{
       val = 2; //temporary emp_id  in case storage id is null
-      this.authService.postData(JSON.stringify({emp_id:val}),'getapphomedata').then((result)=>{
-        // let data = JSON.parse(result["_body"]);
-        let data = result;
+      this.authService.postData(JSON.stringify({emp_id:val}),'getapphomedata').then((data)=>{
         console.log('Post Data', data);
         this.task_count=data['task_count'];
         this.event_count=data['event_count'];
@@ -252,9 +250,7 @@ export class HomePage {
         registration_id: registration_id,
         emp_id: this.emp_id
       });
-      this.authService.postData(credential, 'update_registration_id').then((result) => {
-        let responseData = result;
-        let data = JSON.parse(responseData['_body']);
+      this.authService.postData(credential, 'update_registration_id').then((data) => {
         console.log(data["msg"]);
       }, async (err) => {
         const alert =await this.alertCtrl.create({

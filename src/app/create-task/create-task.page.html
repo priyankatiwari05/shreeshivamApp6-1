@@ -17,51 +17,51 @@
 <ion-content>
   <ion-grid style="background-color: white !important;">
     <ion-row *ngIf="task_type==true">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Task Name
         </ion-label>
       </ion-col>
-      <ion-col col-9>
-          <ion-input type="text" [(ngModel)]="task_name" placeholder="Enter Name"></ion-input>
+      <ion-col size="9">
+          <ion-input ngDefaultControl type="text" [(ngModel)]="task_name" placeholder="Enter Name"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="task_type==true">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Description
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
           <ion-textarea placeholder="Enter a description"  [(ngModel)]="description"></ion-textarea>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="task_type==true">
-      <ion-col col-12 >
+      <ion-col size="12" >
         <ion-button pull-right (click)="save_task_type()" >save</ion-button>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="task_type==false">
-      <ion-col co-12>
+      <ion-col size="12">
         <h4>Task - {{task_name}}</h4>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="task_type==false">
-      <ion-col col-1>
+      <ion-col size="1">
         <ion-checkbox [(ngModel)]="check_frequency" (click)="toggle_frequency()"></ion-checkbox>
       </ion-col>
-      <ion-col col-5>
+      <ion-col size="5" text-left>
         <ion-label>
           Frequency
         </ion-label>
       </ion-col>
       
-      <!-- <ion-col col-1>
+      <!-- <ion-col size="1">
         <ion-checkbox [(ngModel)]="check_subtask" (click)="toggle_subtask()"></ion-checkbox>
       </ion-col>
-      <ion-col col-5 pull-left>
+      <ion-col size="5" pull-left>
         <ion-label>
           Subtask
         </ion-label>
@@ -69,26 +69,26 @@
     </ion-row>
 
     <ion-row *ngIf="check_subtask==true && task_type==false">
-      <ion-col col-6>
-        <ion-input [(ngModel)]="subtask_name" placeholder="Subtask Name"></ion-input>
+      <ion-col size="6">
+        <ion-input ngDefaultControl [(ngModel)]="subtask_name" placeholder="Subtask Name"></ion-input>
       </ion-col>
-      <ion-col col-4>
+      <ion-col size="4">
         <ion-datetime [(ngModel)]="subtask_end_date" displayFormat="YY-MM-DD" placeholder="End Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
       </ion-col>
-      <ion-col col-2>
+      <ion-col size="2">
         <ion-icon ios="ios-add-circle" md="md-add-circle" (click)="add_subtask()" style="font-size: 44px; color: blue;"></ion-icon>
       </ion-col>
     </ion-row>
 
     <div *ngIf="check_subtask==true && task_type==false">
       <ion-row *ngFor="let subtask of subtask_array; let i=index;">
-        <ion-col col-7>
+        <ion-col size="7">
           <ion-label>{{subtask['name']}}</ion-label>
         </ion-col>
-        <ion-col col-4>
+        <ion-col size="4">
           <ion-label>{{subtask['end_date']}}</ion-label>
         </ion-col>
-        <ion-col col-1>
+        <ion-col size="1">
             <ion-icon ios="ios-close" md="md-close" (click)="remove_subtask(i)" style="font-size: 25x; color: red;"></ion-icon>
           </ion-col>
       </ion-row>
@@ -96,12 +96,12 @@
 
 
     <ion-row *ngIf="check_frequency==true && task_type==false">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Frequency
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
         <ion-select multiple="false" placeholder="Select Frequency" [(ngModel)]="frequency">
             <ion-select-option  value = "" selected>Select Frequency</ion-select-option>
             <ion-select-option value = "daily">Daily</ion-select-option>
@@ -112,23 +112,23 @@
     </ion-row>
 
     <ion-row *ngIf="frequency=='daily' && task_type==false && check_frequency==true">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Time
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
         <ion-datetime [(ngModel)]="repeat" displayFormat="HH:mm" placeholder="Select Time" pickerFormat="HH:mm"></ion-datetime>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="frequency=='weekly' && task_type==false && check_frequency==true">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Day
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
         <ion-select multiple="false" placeholder="Select Day"  [(ngModel)]="repeat">
             <ion-select-option  [value] = "" selected>Select Day</ion-select-option>
             <ion-select-option [value] = "7">Sunday</ion-select-option>
@@ -143,12 +143,12 @@
     </ion-row>
 
     <ion-row *ngIf="frequency=='monthly' && task_type==false && check_frequency==true">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Month Date
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
         <ion-select multiple="false" placeholder="Select Date"  [(ngModel)]="repeat">
             <ion-select-option  [value] = "" selected>Select Date</ion-select-option>
             <ion-select-option [value] = "1">1</ion-select-option>
@@ -183,42 +183,42 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf="check_frequency==true && task_type==false">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           Start Date
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9">
         <ion-datetime [(ngModel)]="start_date" displayFormat="YYYY-MM-DD" placeholder="Select Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="check_subtask!=true && task_type==false">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
           End Date
         </ion-label>
       </ion-col>
-      <ion-col col-9>
+      <ion-col size="9" text-center>
         <ion-datetime [(ngModel)]="end_date" displayFormat="YYYY-MM-DD" placeholder="Select Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="task_type==false">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
         Priority
         </ion-label>
       </ion-col>
-      <ion-col col-9 radio-group [(ngModel)]="priority">
-        <ion-col col-4>
+      <ion-col size="9" radio-group [(ngModel)]="priority" text-left>
+        <ion-col size="3">
           <ion-radio id="low_radio_id" checked value="low"></ion-radio>
           <ion-label for="low_radio_id" class="radio_label">Low</ion-label>
         </ion-col>
-        <ion-col col-4>
+        <ion-col size="3">
           <ion-radio id="medium_radio_id"  value="medium"></ion-radio>
           <ion-label for="medium_radio_id" class="radio_label">Medium</ion-label>
         </ion-col>
-        <ion-col col-4>
+        <ion-col size="3">
             <ion-radio id="high_radio_id"  value="high"></ion-radio>
             <ion-label for="high_radio_id" class="radio_label">High</ion-label>
           </ion-col>
@@ -227,17 +227,17 @@
 
     <br><br>
     <ion-row *ngIf="task_type==false">
-      <ion-col col-3>
+      <ion-col size="3">
         <ion-label>
         Assign To
         </ion-label>
       </ion-col>
-      <ion-col col-9 radio-group [(ngModel)]="assign_to_type">
-        <ion-col col-6>
+      <ion-col size="9" radio-group [(ngModel)]="assign_to_type">
+        <ion-col size="6">
           <ion-radio id="group_radio_id" checked value="grps_val"></ion-radio>
           <ion-label for="group_radio_id" class="radio_label">Group</ion-label>
         </ion-col>
-        <ion-col col-6>
+        <ion-col size="6">
           <ion-radio id="emp_radio_id"  value="indi_val"></ion-radio>
           <ion-label for="emp_radio_id" class="radio_label">Employee</ion-label>
         </ion-col>
@@ -245,12 +245,12 @@
     </ion-row>
 
     <ion-row *ngIf="assign_to_type=='grps_val' && task_type==false">
-        <ion-col col-4>
+        <ion-col size="4">
           <ion-label>
             Select Group
           </ion-label>
         </ion-col>
-        <ion-col col-8>
+        <ion-col size="8">
           <ionic-selectable style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; width: 100%; padding: 0px 5px"
           item-content
           [isMultiple]="true"
@@ -266,12 +266,12 @@
     </ion-row>
 
     <ion-row *ngIf="assign_to_type=='indi_val' && task_type==false">
-      <ion-col col-4>
+      <ion-col size="4">
         <ion-label>
           Select Employee
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8">
         <ionic-selectable style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; width: 100%; padding: 0px 5px"
           item-content
           [items]="emp_list"
@@ -286,23 +286,23 @@
       </ion-col>
     </ion-row>
   <ion-row *ngIf="task_type==false">
-    <ion-col col-4>
+    <ion-col size="4">
       <ion-label>
         Attach File
       </ion-label>
     </ion-col>
  
-    <ion-col col-8>
-      <span style="width : 30% ; background-color: white; color: rgb(0, 89, 255); font-size: 12px;position:absolute; font-weight:500; white-space: normal;">
-        <ion-icon ios="ios-document" md="md-document"></ion-icon> Attach<br>Document</span>
+    <ion-col size="8">
+      <span docStyle>
+        <ion-icon name="document" color="primary"></ion-icon> Attach<br>Document</span>
       <span pull-right>{{filename}}</span>
     <input type="file" (change)="changeListener($event)" id="file-input" style="opacity: 0" #fileInp accept="image/xlsx/xls/pdf/*" />
    
     </ion-col>
       </ion-row>
     <ion-row *ngIf="task_type==false">
-        <ion-col col-12 >
-          <ion-button pull-right color="secondary" (click)="save_task_master()" >Submit</ion-button>
+        <ion-col size="12" >
+          <ion-button pull-right color="success" (click)="save_task_master()" >Submit</ion-button>
         </ion-col>
     </ion-row>
   </ion-grid>

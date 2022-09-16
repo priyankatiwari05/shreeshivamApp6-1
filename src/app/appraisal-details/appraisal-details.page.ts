@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, ToastController} from '@ionic/angular';
+import { NavController, AlertController, LoadingController, ToastController} from '@ionic/angular';
 import { AuthService } from '../services/auth/auth.service'; 
 import { Storage } from '@ionic/storage-angular'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appraisal-details',
@@ -45,7 +46,7 @@ export class AppraisalDetailsPage implements OnInit {
   month:any;
   year:any;
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public storage:Storage,
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -59,7 +60,7 @@ export class AppraisalDetailsPage implements OnInit {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter AppraisalDetailsPage');
-    this.appraisal = this.navParams.get('appraisal');
+    this.appraisal=this.route.snapshot.paramMap.get('appraisal');
     this.wrt_1=this.appraisal['wrt_1'];
     this.wrt_2=this.appraisal['wrt_2'];
     this.wrt_3=this.appraisal['wrt_3'];

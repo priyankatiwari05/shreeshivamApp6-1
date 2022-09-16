@@ -12,11 +12,14 @@
   }
   .btn-mine{
     background-color: transparent;
-    white-space: unset;
+    // white-space: unset;
   }
   .label-md {
     margin: 13px 0px 0px 0;
   }
   .item-md {
     padding-left: 0px;
+  }
+  ion-item{
+    margin-top: 0px;
   }

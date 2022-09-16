@@ -32,7 +32,6 @@ export class BusinessPage implements OnInit {
   stationary:any;
   incidental_expenses:any;
   claim_id:any;
-  responseData: any;
   file_input:any;
   emp_id_snd: any;
   useremail_snd: any;
@@ -81,8 +80,7 @@ export class BusinessPage implements OnInit {
   }
 
   get_cities() {
-    this.authService.getData("get_cities").then(result => {
-        let data = result;
+    this.authService.getData("get_cities").then(data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -290,8 +288,7 @@ export class BusinessPage implements OnInit {
     });
     (await loader).present();
     
-    this.authService.postData(data, "raise_claim_business/submit").then(async result => {
-        let data = result;
+    this.authService.postData(data, "raise_claim_business/submit").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

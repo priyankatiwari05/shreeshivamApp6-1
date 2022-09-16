@@ -54,10 +54,7 @@ export class CreateTaskPage implements OnInit {
   getEmpGroupList()
   {
     console.log('Inside getEmpGroupList()');
-    this.authService.postData(JSON.stringify({emp_id:this.emp_id}),"get_emp_and_group_list").then(
-      async result => {
-        console.log(result);
-        let data = result;
+    this.authService.postData(JSON.stringify({emp_id:this.emp_id}),"get_emp_and_group_list").then(async data => {
         if (data["status"] == "success") {
           this.emp_list=data['emp_list'];
           this.group_list=data['group_emp_list'];
@@ -123,10 +120,7 @@ export class CreateTaskPage implements OnInit {
       task_description: this.description
     });
 
-    this.authService.postData(data, "add_task_type").then(
-      async result => {
-        console.log(result);
-        let data = result;
+    this.authService.postData(data, "add_task_type").then( async data => {
         if (data["status"] == "success") {
           this.task_type_id=data['id'];
           console.log(this.task_type_id);
@@ -337,10 +331,7 @@ export class CreateTaskPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(data, "create_task").then(
-      async result => {
-        console.log(result);
-        let data = result;
+    this.authService.postData(data, "create_task").then(async data => {
         if (data["status"] == "success") {   
           // const alert = this.alertCtrl.create({
           //   title: "Success",

@@ -47,13 +47,13 @@
   <ion-grid [ngSwitch]="home">
     <ion-row *ngSwitchCase="'myappreciation'">
       <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
-      <ion-col col-12 *ngIf="myappreciation==[]||myappreciation==''||myappreciation==null ; else show_list">
+      <ion-col size="12" text-center nodatafound *ngIf="myappreciation==[]||myappreciation==''||myappreciation==null ; else show_list">
         You have no appreciation.
       </ion-col>
-      <ion-col col-12 *ngFor="let item of myappreciation" #show_list style="border-bottom: 1px solid #ddd;">
+      <ion-col size="12" *ngFor="let item of myappreciation" #show_list style="border-bottom: 1px solid #ddd;">
         <ion-row>
 
-          <ion-col col-4 class="head_item">
+          <ion-col size="4" class="head_item">
               <span style="
                 border-radius: 4px;
                 color: #fff;
@@ -64,7 +64,7 @@
             </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-            <ion-col col-12>
+            <ion-col size="12">
               <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
               <br>
               <span style="font-size: 12px; color: grey;">Issued By {{item["first_name"]}} {{item["last_name"]}}</span>
@@ -74,10 +74,10 @@
           You have no appreciations.
         </ion-row> -->
         <ion-row class="foot_item" *ngIf="item['photo']">
-            <ion-col col-4>
+            <ion-col size="4">
             Attached File -
             </ion-col>
-            <ion-col col-8>
+            <ion-col size="8">
               <a (click)="open_img(item['photo'])" > Click here</a>
 
             </ion-col>
@@ -91,9 +91,9 @@
       <ion-col co-12 *ngIf="sentappreciation==[]||sentappreciation==''||sentappreciation==null ; else show_list2">
         No appreciation.
       </ion-col>
-      <ion-col col-12 *ngFor="let item of sentappreciation" #show_list2 style="border-bottom: 1px solid #ddd;">
+      <ion-col size="12" *ngFor="let item of sentappreciation" #show_list2 style="border-bottom: 1px solid #ddd;">
           <ion-row>
-            <ion-col col-4 class="head_item">
+            <ion-col size="4" class="head_item">
               <span style="
                 border-radius: 4px;
                 color: #fff;
@@ -102,22 +102,22 @@
                 {{item['date']||"Nill"}}
               </span>
             </ion-col>
-            <ion-col col-12>
+            <ion-col size="12">
                 
                 Issued for {{item["first_name"]}} {{item["last_name"]}}
                 
             </ion-col>
           </ion-row>
           <ion-row class="foot_item">
-              <ion-col col-12>
+              <ion-col size="12">
               <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
               </ion-col>
           </ion-row>
           <ion-row class="foot_item" *ngIf="item['photo']">
-              <ion-col col-4>
+              <ion-col size="4">
               Attached File -
               </ion-col>
-              <ion-col col-8>
+              <ion-col size="8">
                 <a (click)="open_img(item['photo'])" > Click here</a>
   
             </ion-col>
@@ -130,9 +130,9 @@
       <ion-col co-12 *ngIf="allappreciation==[]||allappreciation==''||allappreciation==null ; else show_list2">
         No appreciation.
       </ion-col>
-      <ion-col col-12 *ngFor="let item of allappreciation" #show_list2 style="border-bottom: 1px solid #ddd;">
+      <ion-col size="12" *ngFor="let item of allappreciation" #show_list2 style="border-bottom: 1px solid #ddd;">
           <ion-row>
-            <ion-col col-4 class="head_item">
+            <ion-col size="4" class="head_item">
               <span style="
                 border-radius: 4px;
                 color: #fff;
@@ -141,24 +141,24 @@
                 {{item['date']||"Nill"}}
               </span>
             </ion-col>
-            <ion-col col-12>
+            <ion-col size="12">
                 
                 Issued for {{item["to_first"]}} {{item["to_last"]}}
                 
             </ion-col>
           </ion-row>
           <ion-row class="foot_item">
-              <ion-col col-12>
+              <ion-col size="12">
               <span *ngIf="item['message']!=null && item['message']!=''">{{item["message"]}}</span>
               <br>
               <span style="font-size: 12px; color: grey;">Issued By {{item["from_first"]}} {{item["from_last"]}}</span>
               </ion-col>
           </ion-row>
           <ion-row class="foot_item" *ngIf="item['photo']">
-              <ion-col col-4>
+              <ion-col size="4">
               Attached File -
               </ion-col>
-              <ion-col col-8>
+              <ion-col size="8">
                 <a (click)="open_img(item['photo'])" > Click here</a>
   
             </ion-col>
@@ -169,8 +169,8 @@
       
     <ion-row *ngSwitchCase="'create'">
       <!-- <span style="width: 100%; margin: 0px; padding: 0px;"> -->
-        <ion-col col-3><ion-label class="dis_label">Employee</ion-label></ion-col>
-        <ion-col col-9>
+        <ion-col size="3"><ion-label class="dis_label">Employee</ion-label></ion-col>
+        <ion-col size="9">
           <ionic-selectable style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; width: 100%; padding: 0px 5px"
             item-content="employee"
             [items]="emp_list"
@@ -183,32 +183,32 @@
           </ionic-selectable>
         </ion-col>
       
-        <ion-col col-12 radio-group [(ngModel)]="appreciation_type">
+        <ion-col size="12" radio-group [(ngModel)]="appreciation_type">
           <ion-row>
-            <ion-col col-1>
+            <ion-col size="1">
               <ion-radio id="write_radio" checked value="write"></ion-radio>
             </ion-col>
-            <ion-col col-5>
+            <ion-col size="5">
               <ion-label for="write_radio" class="radio_label">Write appreciation</ion-label>
             </ion-col>
-            <ion-col col-1>
+            <ion-col size="1">
               <ion-radio id="pic_radio" value="pic"></ion-radio>
             </ion-col>
-            <ion-col col-5>
+            <ion-col size="5">
               <ion-label for="pic_radio" class="radio_label">Upload Picture</ion-label>
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col col-12 *ngIf="appreciation_type=='write'">
+        <ion-col size="12" *ngIf="appreciation_type=='write'">
           <ion-row>
-            <ion-col col-12>
+            <ion-col size="12">
               <ion-textarea [(ngModel)]="appreciation_content" placeholder="Write your appreciation here"></ion-textarea>
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col col-12 *ngIf="appreciation_type=='pic'">
+        <ion-col size="12" *ngIf="appreciation_type=='pic'">
           <ion-row>
-            <ion-col col-4>
+            <ion-col size="4">
               <input type="file" (change)="changeListener($event)" id="file-input" style="opacity: 0" #fileInp accept="image/*" />
               <p style="width : 100% ; height : auto; background: rgb(25, 72, 141);margin-top: -20px;
               color: white;
@@ -216,10 +216,10 @@
               padding: 5px;">
                 Choose Image</p>
             </ion-col>
-            <ion-col col-8><span pull-right>{{filename}}</span></ion-col>
+            <ion-col size="8"><span pull-right>{{filename}}</span></ion-col>
           </ion-row>
         </ion-col>
-        <ion-col col-12>
+        <ion-col size="12">
           <ion-button style="background: green;" pull-right (click)="submitdata()">Submit</ion-button>
         </ion-col>
       <!-- </span> -->

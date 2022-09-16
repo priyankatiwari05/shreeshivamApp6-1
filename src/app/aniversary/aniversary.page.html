@@ -14,11 +14,12 @@
 </ion-header>
 
 <ion-content >
-  <ion-item text-center *ngIf="aniversaries==[]||aniversaries==''||aniversaries==null ; else show_list">
+  <div text-center nodatafound *ngIf="aniversaries==[]||aniversaries==''||aniversaries==null ; else show_list">
     No Record Found...!
-    </ion-item>
+  </div>
+
     <!-- <ion-item *ngFor="let item of aniversaries" #show_list> -->
-      <ion-grid style="background-color: white;">
+      <ion-grid>
         <ion-row *ngFor="let item of aniversaries" #show_list style="border-bottom:1px solid #dedede;">
           <ion-col col-8 style="font-size: larger;
           font-weight: 500;

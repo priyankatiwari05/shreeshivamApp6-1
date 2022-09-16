@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ModalController } from '@ionic/angular'; 
+import { NavController, LoadingController, AlertController, ModalController } from '@ionic/angular'; 
 import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 import { Storage } from '@ionic/storage-angular';
 import { AskHrFormPage } from '../ask-hr-form/ask-hr-form.page';
 import { GlobalVarsService } from '../services/global-vars/global-vars.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-claims-detail',
@@ -72,7 +73,7 @@ export class ClaimsDetailPage implements OnInit {
   reimbursement_status:any;
   
   constructor(public navCtrl: NavController,  private photoViewer: PhotoViewer,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
      public storage:Storage,
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -83,20 +84,20 @@ export class ClaimsDetailPage implements OnInit {
 
   ionViewWillEnter(){
     console.log('ionViewWillEnter ClaimsDetailPage');
-    this.page_type=this.navParams.get('page_type');
+    this.page_type=this.route.snapshot.paramMap.get('page_type');
     if(this.page_type=='showdetail' || this.page_type=='showjson')
     {
-      this.variablename=this.navParams.get('variablename');
+      this.variablename=this.route.snapshot.paramMap.get('variablename');
       // if(this.page_type=='main')
       // {
-        if(this.navParams.get('mainvalue')!=null && this.navParams.get('mainvalue')!='')
-          this.mainvalue=JSON.parse(this.navParams.get('mainvalue'));
+        if(this.route.snapshot.paramMap.get('mainvalue')!=null && this.route.snapshot.paramMap.get('mainvalue')!='')
+          this.mainvalue=JSON.parse(this.route.snapshot.paramMap.get('mainvalue'));
       // }
       else
       {
-        if(this.navParams.get('jsonvalue')!='' && this.navParams.get('jsonvalue')!=null)
+        if(this.route.snapshot.paramMap.get('jsonvalue')!='' && this.route.snapshot.paramMap.get('jsonvalue')!=null)
         {
-          this.jsonvalue=JSON.parse(this.navParams.get('jsonvalue'));
+          this.jsonvalue=JSON.parse(this.route.snapshot.paramMap.get('jsonvalue'));
         
           console.log('inside if condition')
           this.date=this.jsonvalue.date;
@@ -115,9 +116,9 @@ export class ClaimsDetailPage implements OnInit {
         }
       }
     }
-    if(this.navParams.get('claim'))
+    if(this.route.snapshot.paramMap.get('claim'))
     {
-      let claim=this.navParams.get('claim');
+      let claim=this.route.snapshot.paramMap.get('claim');
       console.log(claim);
       this.business_place=claim['business_place'];
       this.year=claim['year'];
@@ -235,11 +236,7 @@ export class ClaimsDetailPage implements OnInit {
   fetchDataList() {
     let data = JSON.stringify({claim_id:this.claim_id})
     this.authService.postData(data,"fetch_travel_entitlement_docs").then(
-      result => {
-        let responseData = result;
-        //console.log(this.responseData);
-        let data = JSON.parse(responseData["_body"]);
-
+      data => {
         console.log(data);
         if (data["status"] == "success") {
           this.doc_list = data["docs"];

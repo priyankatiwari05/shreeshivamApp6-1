@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RaiseAttendencePageRoutingModule } from './raise-attendence-routing.module';
 
 import { RaiseAttendencePage } from './raise-attendence.page';
+import { NavParams } from '@ionic/angular';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { RaiseAttendencePage } from './raise-attendence.page';
     IonicModule,
     RaiseAttendencePageRoutingModule
   ],
-  declarations: [RaiseAttendencePage]
+  declarations: [RaiseAttendencePage],
+  providers: [NavParams]
 })
 export class RaiseAttendencePageModule {}

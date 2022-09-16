@@ -39,9 +39,7 @@ export class LearningPage implements OnInit {
     (await loader).present();
     let data = JSON.stringify({emp_id:this.emp_id});
     this.authService.postData(data,"get_emp_training").then(
-      async result => {
-      let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           this.courses=data['assessment'];
           this.history=data['history'];

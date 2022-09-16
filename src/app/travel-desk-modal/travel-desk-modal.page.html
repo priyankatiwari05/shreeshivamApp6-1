@@ -70,8 +70,8 @@
               </tr>
             </tbody>
           </table>
-      <!-- <ion-col col-6 (click)="openfile(docs['doc_link'])">{{docs['doc_link'].split("/")[1]}}</ion-col>
-      <ion-col col-6 (click)="openfile(docs['doc_link'])">{{docs['description']}}</ion-col> -->
+      <!-- <ion-col size="6" (click)="openfile(docs['doc_link'])">{{docs['doc_link'].split("/")[1]}}</ion-col>
+      <ion-col size="6" (click)="openfile(docs['doc_link'])">{{docs['description']}}</ion-col> -->
     </ion-row>
     <br *ngIf="type=='emp_page'"><br *ngIf="type=='emp_page'">
     <ion-row *ngIf="status=='pending' && type=='emp_page'">
@@ -201,7 +201,7 @@
               <ion-col><B>Reimbursement Docs</B></ion-col>
             </ion-row>
             <ion-row>
-              <ion-col col-6 (click)="downloadopenfile(item['doc_link'])">
+              <ion-col size="6" (click)="downloadopenfile(item['doc_link'])">
                   <ion-row>
                       <ion-col>Document - {{item['id']}}</ion-col>
                   </ion-row>
@@ -212,7 +212,7 @@
                       <ion-col>{{item['description']}}</ion-col>
                   </ion-row>
               </ion-col>
-              <ion-col col-6>
+              <ion-col size="6">
                   <ion-row>
                       <ion-col><ion-button ion-button full ><a href="{{base_path}}{{item['doc_link']}}" style="color: #ffffff;">View</a></ion-button></ion-col>
                   </ion-row>

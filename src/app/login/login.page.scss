@@ -1,6 +1,5 @@
-.scroll-content
-{
-    --background:url("../../assets/imgs/login3BgA1.jpg")!important;
+ion-content{
+    background:url("../../assets/imgs/login3BgA1.jpg")!important;
     background-position: center top !important;
     background-size: cover !important;
 }
@@ -49,7 +48,7 @@ ion-item ion-label{
 
 .myloginbox
 {
-   
+    margin: 12% 10px 0px 10px;
     border-radius: 5px;
     background:url("../../assets/imgs/card2.png")!important;
     background-position: center top !important;
@@ -62,4 +61,14 @@ ion-item ion-label{
 [white]
 {
     color:white !important;
+}
+[eye]{
+    color: red !important;
+    font-size: 1.5em;
+}
+[rowStyle]{
+    width: 100%; padding: 0px;
+}
+ion-checkbox{
+    margin-right: 5px;
 }

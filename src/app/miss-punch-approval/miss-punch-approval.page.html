@@ -12,13 +12,13 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item notextfound *ngIf="data_recieved==[]||data_recieved==''||data_recieved==null ; else show_list">
+    <div nodatafound  text-center *ngIf="data_recieved==[]||data_recieved==''||data_recieved==null ; else show_list">
       No Approval Request Found...!
-    </ion-item>
+    </div>
     <ion-item *ngFor="let item of newly_raised_ids" #show_list>
       <ion-grid>
         <ion-row>
-          <ion-col col-12 class="head_item">
+          <ion-col size="12" class="head_item">
             <span style="
               border-radius: 4px;
               color: #fff;
@@ -33,47 +33,47 @@
           </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             For Person
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             <span *ngIf='item["first_name"]!=null'>{{item["first_name"]}}</span> <span *ngIf='item["middle_name"]!=null'>{{item["middle_name"]}}</span> <span *ngIf='item["last_name"]!=null'>{{item["last_name"]}}</span>
           </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             Out Date
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             {{item['request_details']['out_date']||"NILL"}}
           </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             Status
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             Pending
           </ion-col>
-          <ion-col col-4>System recorded time</ion-col><ion-col col-1>:</ion-col>
-          <ion-col col-7>{{item['initial_in']}} - {{item['final_out']}}</ion-col>
+          <ion-col size="4" text-left>System recorded time</ion-col><ion-col size="1">:</ion-col>
+          <ion-col size="7" text-right>{{item['initial_in']}} - {{item['final_out']}}</ion-col>
         </ion-row>
         <ion-row >
-          <ion-col col-6>
-            <ion-button expand="full" size="small" color="secondary"
+          <ion-col size="6">
+            <ion-button expand="full" size="medium" color="secondary"
               (click)="request_confirm(item['id'],'approve',item['date'])">Approve</ion-button>
           </ion-col>
-          <ion-col col-6>
-            <ion-button expand="full" size="small" color="danger"
+          <ion-col size="6">
+            <ion-button expand="full" size="medium" color="danger"
             (click)="request_confirm(item['id'],'reject',item['date'])">Reject</ion-button>
           </ion-col>
         </ion-row>
@@ -83,7 +83,7 @@
     <ion-item *ngFor="let item of raised_data" #show_list>
       <ion-grid>
         <ion-row>
-          <ion-col col-12 class="head_item">
+          <ion-col size="12" class="head_item">
             <span style="
               border-radius: 4px;
               color: #fff;
@@ -99,57 +99,57 @@
           
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             For Person
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             <span *ngIf='item["first_name"]!=null'>{{item["first_name"]}}</span> <span *ngIf='item["middle_name"]!=null'>{{item["middle_name"]}}</span> <span *ngIf='item["last_name"]!=null'>{{item["last_name"]}}</span>
           </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             Out Date
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-center>
             {{item['request_details']['out_date']||"NILL"}}
           </ion-col>
         </ion-row>
         <ion-row class="foot_item">
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             Status
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             Pending
           </ion-col>
-          <ion-col col-4>
+          <ion-col size="4" text-left>
             Remark
           </ion-col>
-          <ion-col col-1>
+          <ion-col size="1" text-center>
             :
           </ion-col>
-          <ion-col col-7>
+          <ion-col size="7" text-right>
             {{item['request_details']['remark']}}
           </ion-col>
-          <ion-col col-4>System recorded time</ion-col><ion-col col-1>:</ion-col>
-          <ion-col col-7>{{item['initial_in']}} - {{item['final_out']}}</ion-col>
+          <ion-col size="4" text-left>System recorded time</ion-col><ion-col size="1">:</ion-col>
+          <ion-col size="7" text-right>{{item['initial_in']}} - {{item['final_out']}}</ion-col>
         </ion-row>
         
         <ion-row >
-          <ion-col col-6>
-            <ion-button expand="full" size="small" color="secondary"
+          <ion-col size="6">
+            <ion-button expand="full" size="medium" color="secondary"
               (click)="request_confirm(item['id'],'approve',item['date'])">Approve</ion-button>
           </ion-col>
-          <ion-col col-6>
-            <ion-button expand="full" size="small" color="danger"
+          <ion-col size="6">
+            <ion-button expand="full" size="medium" color="danger"
             (click)="request_confirm(item['id'],'reject',item['date'])">Reject</ion-button>
           </ion-col>
         </ion-row>

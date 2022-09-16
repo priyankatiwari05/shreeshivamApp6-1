@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController, Platform, ModalController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, ToastController, Platform, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import { DocumentViewer, DocumentViewerOptions } from '@awesome-cordova-plugins/document-viewer/ngx';
@@ -11,6 +11,7 @@ import { TravelDocModalPage } from '../travel-doc-modal/travel-doc-modal.page';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { GlobalVarsService } from '../services/global-vars/global-vars.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 let base_path = GlobalVarsService.base_path;
 
@@ -58,7 +59,7 @@ export class TravelDeskModalPage implements OnInit {
   travel_docs: any;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,  
+    public route: ActivatedRoute,  
     public storage:Storage, 
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -96,8 +97,8 @@ export class TravelDeskModalPage implements OnInit {
       });
     }
 
-    this.travel_detail=this.navParams.get('travel_detail');
-    this.type=this.navParams.get('type');
+    this.travel_detail=this.route.snapshot.paramMap.get('travel_detail');
+    this.type=this.route.snapshot.paramMap.get('type');
     console.log(this.type);
     this.first_name=this.travel_detail.first_name;
     this.middle_name=this.travel_detail.middle_name;
@@ -151,8 +152,7 @@ export class TravelDeskModalPage implements OnInit {
   get_travel_doc()
   {
     let data = JSON.stringify({tr_id:this.tr_id});
-    this.authService.postData(data,'get_travel_doc').then(async result=>{
-      let data = JSON.parse(result['_body']);
+    this.authService.postData(data,'get_travel_doc').then(async data=>{
       console.log(data['status']);
       if(data['status']=='success')
       {
@@ -184,8 +184,7 @@ export class TravelDeskModalPage implements OnInit {
     (await loader).present();
     console.log(this.data_list);
     let data = JSON.stringify({data_list:this.data_list,status:status,tr_id:this.tr_id,emp_id:this.emp_id});
-    this.authService.postData(data,'submit_travel_booking').then(async result=>{
-      let data = JSON.parse(result['_body']);
+    this.authService.postData(data,'submit_travel_booking').then(async data=>{
       console.log(data['status']);
       if(data['status']=='success')
       {
@@ -223,8 +222,7 @@ export class TravelDeskModalPage implements OnInit {
     (await loader).present();
     console.log(this.data_list);
     let data = JSON.stringify({remark:this.empremark,status:status,tr_id:this.tr_id,travel_booking_id:this.travel_booking_id});
-    this.authService.postData(data,'updatestatus_travel_booking').then(async result=>{
-      let data = JSON.parse(result['_body']);
+    this.authService.postData(data,'updatestatus_travel_booking').then(async data=>{
       console.log(data['status']);
       if(data['status']=='success')
       {
@@ -342,10 +340,7 @@ export class TravelDeskModalPage implements OnInit {
     console.log(data);
 
     this.authService.postData(data, "upload_reimbursement_docs").then(
-      async result => {
-        let responseData = result;
-        let data = JSON.parse(responseData["_body"]);
-        /// console.log(responseData);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           this.travel_docs = data["msg"];
@@ -384,12 +379,7 @@ export class TravelDeskModalPage implements OnInit {
     });
     (await loader).present();
     this.authService.postData(data, "delete_reimbursement_doc").then(
-      async result => {
-        let responseData = result;
-        console.log(responseData);
-        let data = JSON.parse(responseData["_body"]);
-
-
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           const alert = this.alertCtrl.create({

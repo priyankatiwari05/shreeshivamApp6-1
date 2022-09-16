@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { WarningPageRoutingModule } from './warning-routing.module';
 
@@ -13,7 +14,8 @@ import { WarningPage } from './warning.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    WarningPageRoutingModule
+    WarningPageRoutingModule,
+    IonicSelectableModule
   ],
   declarations: [WarningPage]
 })

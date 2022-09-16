@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, LoadingController} from '@ionic/angular';
+import { AlertController, LoadingController} from '@ionic/angular';
 import { AuthService } from '../services/auth/auth.service';
 import { Storage } from '@ionic/storage-angular';
 import { AppraisalDetailsPage } from '../appraisal-details/appraisal-details.page'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appraisal',
@@ -13,7 +14,7 @@ export class AppraisalPage implements OnInit {
   emp_id:any;
   appraisals=[];
   month_arr=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  constructor(public navCtrl: NavController,
+  constructor(public router: Router,
     public storage:Storage,
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -37,8 +38,7 @@ export class AppraisalPage implements OnInit {
     });
     (await loader).present();
 
-    this.authService.postData(data, "fetch_appraisals").then(async (result) => {
-      let data = result;
+    this.authService.postData(data, "fetch_appraisals").then(async (data) => {
       console.log(data);
       
         if (data["status"] == "success") {
@@ -77,7 +77,7 @@ export class AppraisalPage implements OnInit {
   {
     let appr = this.appraisals[index];
 
-    this.navCtrl.navigateRoot([AppraisalDetailsPage,{appraisal:appr}]);
+    this.router.navigate([AppraisalDetailsPage,{appraisal:appr}]);
     
   }
   ngOnInit() {

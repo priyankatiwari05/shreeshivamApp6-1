@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NavController, NavParams, AlertController, LoadingController, ModalOptions, ModalController} from "@ionic/angular";
+import { ActivatedRoute } from '@angular/router';
+import {NavController, AlertController, LoadingController, ModalOptions, ModalController} from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { AuthService } from '../services/auth/auth.service';
 import { TravelEntitlementModalPage } from '../travel-entitlement-modal/travel-entitlement-modal.page';
@@ -26,7 +27,6 @@ export class TravelEntitlementPage implements OnInit {
   incidental_expenses:any;
   claim_id:any;
   // travel_destination: any;
-  responseData: any;
   file_input:any;
   // travel_type_snd: any = "domestic";
   // trip_type_snd: any;
@@ -56,7 +56,7 @@ export class TravelEntitlementPage implements OnInit {
     public navCtrl: NavController,
     public storage: Storage,
     public alertCtrl: AlertController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public loadingCtrl: LoadingController,
     public authService: AuthService,
     private modal: ModalController
@@ -70,19 +70,21 @@ export class TravelEntitlementPage implements OnInit {
     });
     this.storage.get("travel_approver_id").then(approver_id => {
       this.approver_id = approver_id;
+      this.approver_id = 14;
     });
     this.storage.get("email").then(val => {
       this.useremail_snd = val;
     });
+    console.log(this.approver_id);
   }
 
   ionViewWillEnter()
   {
     console.log("ionViewWillEnter TravelEntitlementPage");
-    console.log(this.navParams.get('claim'));
-    // if(this.navParams.get('claim'))
+    console.log(this.route.snapshot.paramMap.get('claim'));
+    // if(this.route.snapshot.paramMap.get('claim'))
     // {
-    //   let claim=this.navParams.get('claim');
+    //   let claim=this.route.snapshot.paramMap.get('claim');
     //   this.business_place=claim['business_place'];
     //   this.gst_no=claim['gst_no'];
     //   this.claim_id=claim['id'];
@@ -101,9 +103,9 @@ export class TravelEntitlementPage implements OnInit {
   }
 
   get_cities() {
-    this.authService.getData("get_cities").then(result => {
-        let data = result;
-        console.log(data);
+    console.log('get_cities');
+    this.authService.getData("get_cities").then(data => {
+        console.log('get_cities : ',data);
 
         if (data["status"] == "success") {
           //this.travel_place = data["cities"];
@@ -211,30 +213,28 @@ export class TravelEntitlementPage implements OnInit {
     (await myModal).present();
 
     myModal.onDidDismiss().then((type) => {
-      console.log('inside onDidDismiss')
-      console.log(type.data);
       console.log(myvariable);
-      if(myvariable=='fare' && type=="submit")
+      if(myvariable=='fare' && type.role=="submit")
       {
         this.fare=type.data;
       }
-      if(myvariable=='accomodation' && type=="submit")
+      if(myvariable=='accomodation' && type.role=="submit")
       {
         this.accomodation=type.data;
       }
-      if(myvariable=='food_allowances' && type=="submit")
+      if(myvariable=='food_allowances' && type.role=="submit")
       {
         this.food_allowances=type.data;
       }
-      if(myvariable=='conveyance_charges' && type=="submit")
+      if(myvariable=='conveyance_charges' && type.role=="submit")
       {
         this.conveyance_charges=type.data;
       }
-      if(myvariable=='stationary' && type=="submit")
+      if(myvariable=='stationary' && type.role=="submit")
       {
         this.stationary=type.data;
       }
-      if(myvariable=='incidental_expenses' && type=="submit")
+      if(myvariable=='incidental_expenses' && type.role=="submit")
       {
         this.incidental_expenses=type.data;
       }
@@ -289,6 +289,7 @@ export class TravelEntitlementPage implements OnInit {
 
     // }
     //console.log(this.origin_snd["id"]);
+    console.log('approver_id : ',this.approver_id);
     let data=JSON.stringify({
       claim_type:'travel_enheaderment',
       business_place:this.business_place.id,      
@@ -314,14 +315,13 @@ export class TravelEntitlementPage implements OnInit {
       useremail:this.useremail_snd
     });
 
-    console.log(data);
+    console.log('raise_claim/submit :',data);
     const loader = this.loadingCtrl.create({
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(data, "raise_claim/submit").then(async result => {
-        let data = result;
-        console.log(data);
+    this.authService.postData(data, "raise_claim/submit").then(async data=> {
+        console.log('data : ',data);
 
         if (data["status"] == "success") {
           const alert = this.alertCtrl.create({

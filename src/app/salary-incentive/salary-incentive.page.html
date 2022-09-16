@@ -18,8 +18,7 @@
 </ion-header>
 
 <ion-content [ngSwitch]="home">
-  <ion-grid style="background:transparent; padding-top: unset;  height: 100%;  text-align: center;
-    color: rgb(10, 9, 9);" *ngSwitchCase="'incentive_tab'">
+  <ion-grid *ngSwitchCase="'incentive_tab'">
     <ion-row style="    height: 60%;" *ngIf="department==3; else norecord">
       <ion-col>
       <br>
@@ -62,14 +61,14 @@
           <ion-col col-12 style="padding: 8px 0px 0px 12px;">
             <div style="float: left !important;color: rgb(97, 97, 97);text-transform: uppercase;">{{data["name"]||NaN}}</div>
           </ion-col>
-          <ion-col col-6>
+          <ion-col size="6">
             <div center class="mybox2">
               <span class="number_inc">₹ <span [countUp]="data['effective_sale']" [options]="myOpts">000000</span></span>
               <br>
               <span style="   font-size: 84%;"> Effective Sales</span>
             </div>
           </ion-col>
-          <ion-col col-6>
+          <ion-col size="6">
             <div center class="mybox2">
               <span class="number_inc">₹ <span [countUp]="data['incentive_generated']" [options]="myOpts">000000</span></span>
               <br>
@@ -89,14 +88,14 @@
         <div style="float: left !important;color: rgb(97, 97, 97);    font-size: 18px;
         font-weight: 500;">TOTAL</div>
       </ion-col>
-      <ion-col col-6>
+      <ion-col size="6">
         <div center class="mybox2">
           <span class="number_inc">₹ <span [countUp]="total_sales" [options]="myOpts">000000</span></span> <br>
           <span style="  font-size: 84%;"> Total Sales</span>
         </div>
       </ion-col>
 
-      <ion-col col-6>
+      <ion-col size="6">
         <div center class="mybox2">
           <span class="number_inc">₹ <span [countUp]="total_incentives" [options]="myOpts">000000</span></span>
           <br>

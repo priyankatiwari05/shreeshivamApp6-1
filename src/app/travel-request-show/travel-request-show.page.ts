@@ -84,8 +84,7 @@ export class TravelRequestShowPage implements OnInit {
       designation: designation
     });
     console.log(data);
-    this.authService.postData(data, "travel_request").then(async result => {
-        let data = result;
+    this.authService.postData(data, "travel_request").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

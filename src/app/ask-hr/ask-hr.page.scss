@@ -47,6 +47,10 @@
     padding: 10px 0px 1px 0px;
   }
 
+  ion-row{
+    padding: 0px;
+  }
+
   .my_contact {
     font-size: 13px;
   }
@@ -353,10 +357,6 @@
     left: 60%;
   }
 
-  tr:nth-of-type(even) {
-    background: #d8d8d8;
-    color: #000;
-  }
   ion-segment-button{
     color:white;
     background: #ffffff6b!important;
@@ -370,3 +370,20 @@
   [tableStyle]{
     max-height: 32rem; overflow-y: scroll;
   }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+}
+/* Zebra striping */
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+}
+td, th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 12px;
+}

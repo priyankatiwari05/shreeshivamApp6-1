@@ -33,8 +33,7 @@ export class RaisedRequestPage implements OnInit {
         });
         (await loader).present();
 
-        this.authService.postData(data, "get_raised_request").then(async result => {
-            let data = result;
+        this.authService.postData(data, "get_raised_request").then(async data => {
             console.log(data);
 
             if (data["status"] == "success") {

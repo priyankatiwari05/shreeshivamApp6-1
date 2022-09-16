@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ModalOptions, ModalController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, ModalOptions, ModalController } from '@ionic/angular';
 import { Storage } from "@ionic/storage";
 import {DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chapter-detail',
@@ -22,7 +23,7 @@ export class ChapterDetailPage implements OnInit {
   exam_status: string;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public loadingCtrl: LoadingController,
     public storage: Storage,
     public alertCtrl: AlertController,
@@ -35,12 +36,12 @@ export class ChapterDetailPage implements OnInit {
       });
 
     this.start_exam=false;
-    this.assessment_id=this.navParams.get('assessment_id');
-    this.chapter_id=this.navParams.get('chapter_id');
-    this.course_id=this.navParams.get('course_id');
-    this.assign_id=this.navParams.get('assign_id');
-    this.chapter_name=this.navParams.get('chapter_name');
-    this.youtubevideolink=this.navParams.get('youtubevideolink');
+    this.assessment_id=this.route.snapshot.paramMap.get('assessment_id');
+    this.chapter_id=this.route.snapshot.paramMap.get('chapter_id');
+    this.course_id=this.route.snapshot.paramMap.get('course_id');
+    this.assign_id=this.route.snapshot.paramMap.get('assign_id');
+    this.chapter_name=this.route.snapshot.paramMap.get('chapter_name');
+    this.youtubevideolink=this.route.snapshot.paramMap.get('youtubevideolink');
     console.log('this.youtubevideolink');
     console.log(this.youtubevideolink);
     this.fetchChapterQuestions();
@@ -56,9 +57,7 @@ export class ChapterDetailPage implements OnInit {
     let data = JSON.stringify({emp_id:2,course_id:this.course_id,assign_id:this.assign_id,chapter_id:this.chapter_id,assessment_id:this.assessment_id});
     console.log(data)
     this.authService.postData(data,"fetchChapterQuestions").then(
-      async result => {
-      let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           this.questionlist=data['questions'];
@@ -158,9 +157,7 @@ export class ChapterDetailPage implements OnInit {
     let data = JSON.stringify({emp_id:this.emp_id,course_id:this.course_id,assign_id:this.assign_id,chapter_id:this.chapter_id,assessment_id:this.assessment_id,questionlist:this.questionlist,exam_status:this.exam_status});
     console.log(data)
     this.authService.postData(data,"submitExamResult").then(
-      async result => {
-      let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           this.questionlist=data['questions'];

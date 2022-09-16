@@ -36,8 +36,7 @@ export class MyLeavesPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(JSON.stringify({emp_id:this.emp_id}),'fetch_leaverequest').then(async result => {
-        let data = result;
+    this.authService.postData(JSON.stringify({emp_id:this.emp_id}),'fetch_leaverequest').then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -101,9 +100,8 @@ export class MyLeavesPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(JSON.stringify({leave_id:id,emp_id:this.emp_id,status:'Cancelled'}),'update_leave_status').then(async result => {
+    this.authService.postData(JSON.stringify({leave_id:id,emp_id:this.emp_id,status:'Cancelled'}),'update_leave_status').then(async data => {
         (await loader).dismiss();
-        let data = result;
         console.log(data);
 
         if (data["status"] == "success") {
@@ -170,8 +168,7 @@ export class MyLeavesPage implements OnInit {
       leave_date: leave_date,
       emp_id:this.emp_id
     });
-    this.authService.postData(data, "cancel_leave_date").then(async result => {
-        let data = result;
+    this.authService.postData(data, "cancel_leave_date").then(async data => {
         console.log(data);
        
         if (data["status"] == "success") {

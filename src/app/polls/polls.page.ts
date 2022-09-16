@@ -62,8 +62,7 @@ export class PollsPage implements OnInit {
     });
     (await loader).present();
 
-    this.authService.postData(data, "fetch_polls").then(async result => {
-        let data = result;
+    this.authService.postData(data, "fetch_polls").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -113,8 +112,7 @@ export class PollsPage implements OnInit {
         answer:this.running_poll[i]['emp_answer']
       };
 
-    this.authService.postData(data, "save_poll").then(async result => {
-      let data = result;
+    this.authService.postData(data, "save_poll").then(async data => {
       console.log(data);
 
         if (data["status"] == "success") {
@@ -162,8 +160,7 @@ export class PollsPage implements OnInit {
       question_id:question_id,
       emp_id:this.emp_id
     };
-    this.authService.postData(data, "fetch_all_answers").then(async result => {
-       let data = result;
+    this.authService.postData(data, "fetch_all_answers").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

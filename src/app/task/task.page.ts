@@ -58,10 +58,8 @@ export class TaskPage implements OnInit {
     });
 
     this.authService.postData(data, "get_tasks").then(
-      async result => {
+      async data => {
         this.dataload=true;
-        // let data = JSON.parse(result["_body"]);
-        let data = result;
         if (data["status"] == "success") {
           console.log(data);
           this.todaytasks=data['todaytasks']['individual'];

@@ -44,8 +44,7 @@
           No Documents Available
         </ion-item>
 
-        <ion-item *ngFor="let item of l_n_d" style="border-bottom: solid 1px #dadada; color: #2f323a !important;
-        background-color: #fafafa !important; height: 100% !important;" (click)="openfile(item['upload_file'])">
+        <ion-item *ngFor="let item of l_n_d" (click)="openfile(item['upload_file'])">
             {{item['file_name']||"Unknown"}}
         </ion-item>
    <!-- <ng-template #show_list> -->
@@ -82,8 +81,6 @@
       </ion-row>
     </ion-item> -->
    <!-- </ng-template> -->
-
-
   </ion-list>
 
 </ion-content>

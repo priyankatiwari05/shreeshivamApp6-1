@@ -38,8 +38,7 @@ export class GalleryPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.getData("get_gallery").then(async result => {
-        let data = result;
+    this.authService.getData("get_gallery").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

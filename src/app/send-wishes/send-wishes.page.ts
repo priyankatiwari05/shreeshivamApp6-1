@@ -98,8 +98,7 @@ export class SendWishesPage implements OnInit {
       wish_type:this.wish_type,
       to_name:this.emp_name,
     });
-    this.authService.postData(data, "send_wish").then( async result => {
-        let data = result;
+    this.authService.postData(data, "send_wish").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -145,7 +144,6 @@ export class SendWishesPage implements OnInit {
       designation: this.designation
     });
     this.authService.postData(data, "fetch_wishes").then(async result => {
-      let data = result;
       console.log(data);
       
         if (data["status"] == "success") {

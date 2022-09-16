@@ -45,8 +45,7 @@ export class AskHRPage implements OnInit {
      });
      (await loader).present();
  
-     this.authService.postData(data, "ask_hr_request").then(async result => {
-          let data = result;
+     this.authService.postData(data, "ask_hr_request").then(async data => {
           console.log(data);
        
          if (data["status"] == "success") {

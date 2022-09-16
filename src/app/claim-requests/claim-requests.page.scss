@@ -1,64 +1,71 @@
 .head_item {
-    color: #000;
-  }
+  color: #000;
+  text-align: left;
+  font-size: 16px;
+}
 
-  .head_right_item {
-    font-size: 14px;
-    font-weight: 600;
-  }
+.head_right_item {
+  font-size: 14px;
+  font-weight: 600;
+}
 
-  .foot_item {
-    font-size: 12px;
-    font-weight: 600;
-    color: #909090;
-    text-transform: capitalize;
-  }
-  .item-ios{
-    color: #2f323a !important;
-        background-color: #fff !important;
-  }
-  .header{
-    top:12%;
+.foot_item {
+  font-size: 14px;
+  font-weight: 600;
+  color: #909090;
+  text-transform: capitalize;
+  padding-left: 10%;
+}
+.item-ios{
+  color: #2f323a !important;
+  background-color: #fff !important;
+}
+.header{
+  top:12%;
 
-  }
-  .content{
-    top:12%;
-    height: 88%;
-  }
-  ion-segment-button{
-    color:white;
-    padding: 0px!important;
-  }
-  ion-grid{
-    --background:transparent; 
-    padding-top: unset; 
-    margin-top: 12%; 
-    color: rgb(10, 9, 9);
-  }
-  [outer-card]{
-    margin: 10px 0px 0px 0px; 
-    width: 100%;
+}
+ion-header{
+  border-bottom: 1px solid #ffffff;
+}
+ion-list{
+  background: transparent;
+  margin-top: 20px;
+}
+.content{
+  top:12%;
+  height: 88%;
+}
+ion-segment-button{
+  color:white;
+  padding: 0px!important;
+}
+[outer-card]{
+  margin: 10px 0px 0px 0px; 
+  width: 100%;
 
-    [createdAt]{
-      border-radius: 4px;
-      color: #fff;
-      background-color:  #2b93df;
-      padding: 3px 6px 3px 6px;
-    }
+  [createdAt]{
+    border-radius: 4px;
+    color: #fff;
+    background-color:  #2b93df;
+    padding: 3px 6px 3px 6px;
   }
-  
-  [color-red]{
-    color:red;
-  }
-  [color-green]{
-    color: rgb(0, 128, 0)
-  }
-  [claim_status]{
-    color:green; text-transform: uppercase;
-  }
-  [statusApprove]{
-    background:green; color: white; padding: 5px; height: 25px;
-  }
-  [statusReject]{
-    background:red; color: white; padding: 5px; height: 25px;
-  }
+}
+
+[color-red]{
+  color:red;
+}
+[color-green]{
+  color: rgb(0, 128, 0)
+}
+[claim_status]{
+  color:green; text-transform: uppercase;
+}
+[statusApprove]{
+  background:green; color: white; padding: 5px; height: 25px;
+}
+[statusReject]{
+  background:red; color: white; padding: 5px; height: 25px;
+}
+ion-row{
+  padding: 3px 8px;
+}

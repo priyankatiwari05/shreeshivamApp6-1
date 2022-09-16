@@ -17,21 +17,16 @@
 </ion-header>
 
 <ion-content >
-  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
-  color: rgb(10, 9, 9);">
-
-
-    <ion-row style="border-radius: 1rem; background:transparent;">
-
-
-      <ion-col col-6 (click)="open_root('travel-entitlement')">
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col size="6" (click)="open_root('travel-entitlement')">
         <div center class="mybox2">
             <img src="../../assets/imgs/travel_entitlement.png" style="border: 4px solid #2ec95c; padding: 9px 6px 6px 6px;">
             <br>
             <span style="  font-size: 100%">Travel Entitlement</span>
         </div>
       </ion-col>
-      <ion-col col-6 (click)="open_root('business')">
+      <ion-col size="6" (click)="open_root('business')">
         <div center class="mybox2">
           <img src="../../assets/imgs/bussiness.png"  style=" padding: 9px 6px 6px 6px;    border: 4px solid #ff2323;">
           <br>
@@ -40,7 +35,7 @@
         </div>
       </ion-col>
 
-      <ion-col col-6 (click)="open_root('blank')">
+      <ion-col size="6" (click)="open_root('blank')">
         <div center class="mybox2">
           <img src="../../assets/imgs/relocation.png"  style="padding: 9px 6px 6px 6px; border: 4px solid #1a6af7;">
           <br>
@@ -49,7 +44,7 @@
       </ion-col>
 
       
-      <ion-col col-6 (click)="open_root('blank')">
+      <ion-col size="6" (click)="open_root('blank')">
         <div center class="mybox2">
           <!-- <ion-icon ios="ios-book" md="md-book" style="    border: 4px solid #ff23f3;"></ion-icon><br> -->
           <img src="../../assets/imgs/ctc.png" style="padding: 9px 6px 6px 6px; border: 4px solid #ff23f3;"><br>
@@ -57,7 +52,7 @@
         </div>
       </ion-col>
 
-      <ion-col col-6 (click)="open_root('claim-requests')">
+      <ion-col size="6" (click)="open_root('claim-requests')">
         <div center class="mybox2">
             <img src="../../assets/imgs/my_request.png" style="padding: 9px 6px 6px 6px; border: 4px solid #ff7b14;"><br>
           <span style="   font-size: 100%"> My Claims </span>

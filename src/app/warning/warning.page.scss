@@ -52,9 +52,7 @@
     //     font-size: 13px;
     //   }
     
-    //   [ion-content] {
-    //     font-weight: 400 !important;
-    //   }
+
     
     //   [ion-title] {
     //     font-weight: 400 !important;
@@ -594,6 +592,12 @@
           box-shadow: 3px 3px 6px -4px #888888;
       
         }
+
+        ion-content {
+          font-weight: 500 !important;
+          background: #fff;
+          color: #000;
+        }
       
         ion-slides {
           height: auto;
@@ -821,7 +825,7 @@
         }
 
         [issueData]{
-          font-size: 12px; color: grey;
+          font-size: 13px; color: grey;
         }
         [dateBorder]{
           border-bottom: 1px solid #ddd;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { NavController, NavParams, LoadingController, AlertController, ModalController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service'; 
 
@@ -19,10 +20,11 @@ export class AddEventPage implements OnInit {
   to_time:any;
   description: string;
   photo: any;
+  page_type: string;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams, 
+    public route: ActivatedRoute, 
     public storage:Storage, 
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -34,13 +36,9 @@ export class AddEventPage implements OnInit {
           this.emp_id=val;
         });
       }
-      this.page_type=this.navParams.get('page_type');
+      this.page_type=this.route.snapshot.paramMap.get('page_type');
       console.log(this.page_type);
     }
-
-  page_type(page_type: any) {
-    throw new Error("Method not implemented.");
-  }
   
   async add_new_request()
   {
@@ -76,9 +74,7 @@ export class AddEventPage implements OnInit {
       header:this.header,
       description:this.description
     });
-    this.authService.postData(data, "add_events").then(async (result) => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+    this.authService.postData(data, "add_events").then(async (data) => {
         if (data["status"] == "success") {
           const alert = this.alertCtrl.create({
             header: "Query Saved",

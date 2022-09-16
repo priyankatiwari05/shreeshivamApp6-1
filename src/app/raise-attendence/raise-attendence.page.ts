@@ -10,7 +10,6 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./raise-attendence.page.scss'],
 })
 export class RaiseAttendencePage implements OnInit {
-  responseData: any;
   in_time: any;
   out_time: any;
   date: any;
@@ -135,10 +134,7 @@ export class RaiseAttendencePage implements OnInit {
       });
       console.log(data);
       this.authService.postData(data, "raise_attendence").then(
-        async result => {
-          this.responseData = result;
-          console.log(this.responseData);
-          let data = JSON.parse(this.responseData["_body"]);
+        async data => {
           console.log(data);
           if (data["status"] == "success") {
             const alert = this.alertCtrl.create({
@@ -184,11 +180,7 @@ export class RaiseAttendencePage implements OnInit {
       shift_id: this.shift_id
     });
     this.authService.postData(data, "get_shift_details").then(
-      async result => {
-        this.responseData = result;
-        console.log(this.responseData);
-        let data = JSON.parse(this.responseData["_body"]);
-
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           // let my_data=JSON.parse(data["msg"]);

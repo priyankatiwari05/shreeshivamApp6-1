@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title><span *ngIf="page_type=='showclaim'">{{claim_type.replace('_',' ')|titlecase}}</span>
       <span *ngIf="page_type=='showdetail' || page_type=='showjson'">{{variablename}} </span>
-      <ion-icon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+      <ion-icon name="close" addIcon pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -102,13 +102,13 @@
       <!-- </ion-row> -->
       <!-- <ion-col col-12>
         <ion-row *ngIf="page_type=='events'">
-          <ion-col col-6 *ngFor="let item of photo">
+          <ion-col size="6" *ngFor="let item of photo">
             <img src="{{base_path}}{{item}}" (click)="open_img(base_path+item)"
               style="border: 1px solid orange;  width: 145px; height: 145px;">
           </ion-col>
         </ion-row>
         <ion-row *ngIf="page_type=='show_gallery'">
-          <ion-col col-6 *ngFor="let item of gallerypics">
+          <ion-col size="6" *ngFor="let item of gallerypics">
             <img src="{{base_path}}{{item['image_link']}}" (click)="open_img_1(base_path+item['image_link'],item['image_link'])"
               style="border: 1px solid orange; border-radius:5px; width: 145px; height: 145px;">
               <ion-label style="font-size: 12px; margin:unset;">{{item['created_at']}}</ion-label>
@@ -116,7 +116,7 @@
         </ion-row>
       </ion-col> -->
 
-      <ion-col col-6 *ngFor="let item of doc_list">
+      <ion-col size="6" *ngFor="let item of doc_list">
         <img src="{{base_path}}{{item['doc_link']}}" click="open_img(item['doc_link'])" style="width: 100px; height: auto;"/>
         <br>
         <p>{{item['remark']}}</p>

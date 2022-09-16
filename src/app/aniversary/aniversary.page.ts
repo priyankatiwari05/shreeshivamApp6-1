@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular'; 
 import { SendWishesPage } from '../send-wishes/send-wishes.page'; 
 
@@ -11,7 +11,7 @@ import { SendWishesPage } from '../send-wishes/send-wishes.page';
 export class AniversaryPage implements OnInit {
   aniversaries:any;
   username:any;
-  constructor(public navCtrl: NavController,
+  constructor(public router: Router,
     public storage:Storage) {
     this.storage.get('aniversaries').then( val =>{
       this.aniversaries=val;
@@ -24,7 +24,7 @@ export class AniversaryPage implements OnInit {
 
   send_wish(emp_id,fname,mname,lname)
   {
-    this.navCtrl.navigateRoot([SendWishesPage,{emp_id:emp_id,fname:fname,mname:mname,lname:lname,wish_type:'anniversary',page_type:'send_wish'}]);
+    this.router.navigate(['/send-wishes',{emp_id:emp_id,fname:fname,mname:mname,lname:lname,wish_type:'anniversary',page_type:'send_wish'}]);
   }
   ngOnInit() {
   }

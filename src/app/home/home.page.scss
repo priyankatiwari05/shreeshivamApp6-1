@@ -1,6 +1,5 @@
 
   [ionIcon]{
-    float: right; 
     font-size: 30px;
     color: #fff;
   }
@@ -10,18 +9,23 @@
   }
 
   [no-border]{
-    top: 14%;
-    padding: unset;
+    top: 15%;
+    padding: 0px;
   }
 
   ion-title{
-    background: #00000054;
+    // background: #00000054;
+    background: #00000070;
     padding: 0px 0px 0px 20px;
     font-weight: 400 !important;
   }
 
   [smallBorder]{
     border-radius: 1rem;
+  }
+
+  ion-row{
+    padding: 0px;
   }
 
   [img_padding]{
@@ -59,6 +63,7 @@
     padding: 0px 3px 7px 3px;
     margin: 2px;
     text-align: center;
+    line-height: 23px;
     display: inline-block;
     //  -webkit-box-shadow: 2px 2px 4px#ececec;
     // box-shadow: 2px 2px 4px#ececec;
@@ -92,9 +97,9 @@
     border-radius: 100%;
     font-size: 5.5rem;
     // margin-bottom: 5px;
-    margin-right: unset !important;
-    width: 79px;
-    padding: 9px 6px 10px 16px;
+    width: 85px;
+    padding: 6.5px;
+    // padding: 9px 6px 10px 16px;
   }
 
   [outerRow]{

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -21,7 +22,7 @@ export class CheckListFormPage implements OnInit {
   myquestions: any=[];
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public storage: Storage,
     public loadingCtrl: LoadingController,
     public authService: AuthService,
@@ -32,12 +33,12 @@ export class CheckListFormPage implements OnInit {
 
   async ionViewWillEnter() {
     console.log('ionViewWillEnter CheckListFormPage');
-    this.checklist_id=this.navParams.get('checklist_id');
+    this.checklist_id=this.route.snapshot.paramMap.get('checklist_id');
     console.log(this.checklist_id)
-    if(this.navParams.get('checklist_for')=='approver')
+    if(this.route.snapshot.paramMap.get('checklist_for')=='approver')
     {
       this.page_for='approver';
-      this.for_emp=this.navParams.get('for_emp');
+      this.for_emp=this.route.snapshot.paramMap.get('for_emp');
     }      
     else
     {
@@ -71,9 +72,7 @@ export class CheckListFormPage implements OnInit {
     console.log(data);
 
     this.authService.postData(data, "fetchCheckListQuestion").then(
-      async result => {
-        let responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           console.log(typeof data["question_details"]);
@@ -138,9 +137,7 @@ export class CheckListFormPage implements OnInit {
     console.log(data);
 
     this.authService.postData(data, "submitCheckListAnswer").then(
-      async result => {
-        let responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
 

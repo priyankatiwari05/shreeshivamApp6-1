@@ -52,11 +52,8 @@ export class TravelDeskPage implements OnInit {
       role_id: this.role_id
     });
 
-    this.authService.postData(data, "get_traveldesk_detail").then(
-      async result => {
+    this.authService.postData(data, "get_traveldesk_detail").then(async data => {
         this.dataload=true;
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
         console.log(data);
         if (data["status"] == "success") {
           this.pending=data['pending'];

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Push, PushObject, PushOptions } from '@awesome-cordova-plugins/push/ngx';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
-import { NavController, MenuController, AlertController, LoadingController } from "@ionic/angular";
+import {  MenuController, AlertController, LoadingController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { AuthService } from '../services/auth/auth.service';
 import { GlobalVarsService } from '../services/global-vars/global-vars.service';
@@ -14,7 +15,6 @@ import { GlobalVarsService } from '../services/global-vars/global-vars.service';
 export class LoginPage implements OnInit {
   public type = "password";
   public showPass = false;
-  responseData: any;
   username: string;
   password: string;
   rememberme: Boolean=false;
@@ -25,24 +25,22 @@ export class LoginPage implements OnInit {
   constructor(
     public push: Push,
     public loadingCtrl: LoadingController,
-    public navCtrl: NavController,
     public menuCtrl: MenuController,
     public statusBar: StatusBar,
     public authService: AuthService,
     public storage: Storage,
     public alertCtrl: AlertController,
+    public router : Router
      ) {
       // this.username = navParams.get('email');
       this.statusBar.backgroundColorByHexString("#e1e1e1");
       this.storage.get("emp_id").then(val => {
-        if (val != null) this.navCtrl.navigateForward(['/home']);
+        if (val != null) this.router.navigate(['/home']);
       });
 
 
 
-      // this.authService.getData('get_latest_version').then((result) =>  {
-      //   this.responseData = result;
-      //   let data = JSON.parse(this.responseData['_body']);
+      // this.authService.getData('get_latest_version').then((data) =>  {
       //   if(data['status']=='success')
       //   {
       //     var appversion = (GlobalVarsProvider.appversion.replace('.','').replace('.',''));
@@ -76,7 +74,7 @@ export class LoginPage implements OnInit {
   }
   async ionViewWillEnter() {
     await this.storage.get("emp_id").then(val => {
-      if (val != null) this.navCtrl.navigateRoot('/home');
+      if (val != null) this.router.navigate(['/home']);
     });
     await this.storage.get('prefill_username').then((val)=>{
       console.log(val+" prefill_username")
@@ -141,6 +139,8 @@ export class LoginPage implements OnInit {
       if(this.rememberme==true)
       {
         console.log("inside true");
+        console.log('username => ',this.username);
+        console.log('password => ',this.password);
         this.storage.set('prefill_username',this.username);
         this.storage.set('prefill_password',this.password);
       }
@@ -149,13 +149,9 @@ export class LoginPage implements OnInit {
       //   this.storage.set('prefill_username',null);
       //   this.storage.set('prefill_password',null);
       // }
-      this.authService.postData(credential, "login2").then(
-        async result => {
-          this.responseData = result;
-          let data = JSON.parse(this.responseData["_body"]);
-          console.log(this.responseData);
-          //console.log(this.password);
-          console.log(data);
+      console.log(credential);
+      this.authService.postData(credential, "login2").then(async data => {
+          console.log('data : ',data);
           if (data["status"] == "success") {
             let date = new Date();
             // let formatedDate = date.toISOString().substring(0, 10);
@@ -170,10 +166,9 @@ export class LoginPage implements OnInit {
                 this.storage.set('active_branch', [data[keys[i]][0]])
               }
             }
-
-            (await loader).dismiss();
            // this.pushSetup();
-           this.navCtrl.navigateRoot('/home');
+           this.router.navigate(['/home']);
+           (await loader).dismiss();
 
           } else {
             const alert = this.alertCtrl.create({
@@ -235,9 +230,7 @@ export class LoginPage implements OnInit {
         registration_id: registration_id,
         email: this.username
       });
-      this.authService.postData(credential, 'update_registration_id').then((result) => {
-        this.responseData = result;
-        let data = JSON.parse(this.responseData['_body']);
+      this.authService.postData(credential, 'update_registration_id').then((data) => {
         console.log(data["msg"]);
       }, async (err) => {
         const alert = this.alertCtrl.create({

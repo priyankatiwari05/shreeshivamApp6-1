@@ -101,8 +101,7 @@ export class WarningPage implements OnInit {
     });
     console.log(data);
 
-    this.authService.postData(data, "warning").then(async result => {
-        let data = result;
+    this.authService.postData(data, "warning").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -147,8 +146,7 @@ export class WarningPage implements OnInit {
     let data = JSON.stringify({
       emp_id:this.emp_id
     });
-    this.authService.postData(data, "get_emp_list").then(async result => {
-        let data = result;
+    this.authService.postData(data, "get_emp_list").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -261,8 +259,7 @@ export class WarningPage implements OnInit {
 
     console.log(data);
 
-    this.authService.postData(data,'insert_warning_n_appreciation').then(async result=>{
-      let data = result;
+    this.authService.postData(data,'insert_warning_n_appreciation').then(async data=>{
       console.log(data);
       
       if(data['status']=='success')

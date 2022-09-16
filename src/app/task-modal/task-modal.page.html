@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Task Details<ion-icon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+    <ion-title>Task Details<ion-icon name="close" addIcon pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,11 +8,11 @@
     <ion-row style="background:transparent; padding: unset; text-align: center; color: rgb(10, 9, 9);">
       <ion-col col-12 *ngIf="task_name!='' && task_name!=null"><b>Task - </b>{{task_name}}</ion-col>
       <ion-col col-12 *ngIf="description!='' && description!=null" style="display: block;"><b>Description - </b>{{description}}</ion-col>
-      <ion-col col-6 *ngIf="start_date!='' && start_date!=null"><b>Start Date - </b>{{start_date}}</ion-col>
-      <ion-col col-6 *ngIf="due_date!='' && due_date!=null"><b>Due Date - </b>{{due_date}}</ion-col>
-      <ion-col col-6 *ngIf="assign_by!='' && assign_by!=null"><b>Assigned By - </b>{{assign_by}}</ion-col>
-      <ion-col col-6 *ngIf="assign_to!='' && assign_to!=null"><b>Assigned To - </b>{{assign_to}}</ion-col>
-      <ion-col col-6 *ngIf="status!=''"><b>Status - </b>
+      <ion-col size="6" *ngIf="start_date!='' && start_date!=null"><b>Start Date - </b>{{start_date}}</ion-col>
+      <ion-col size="6" *ngIf="due_date!='' && due_date!=null"><b>Due Date - </b>{{due_date}}</ion-col>
+      <ion-col size="6" *ngIf="assign_by!='' && assign_by!=null"><b>Assigned By - </b>{{assign_by}}</ion-col>
+      <ion-col size="6" *ngIf="assign_to!='' && assign_to!=null"><b>Assigned To - </b>{{assign_to}}</ion-col>
+      <ion-col size="6" *ngIf="status!=''"><b>Status - </b>
         <span *ngIf="status=='completed'" style="color: green;">{{status|titlecase}}</span>
         <span *ngIf="status=='closed'" style="color: orange;">{{status|titlecase}}</span>
         <span *ngIf="status=='assign'" style="color: orange;">{{status|titlecase}}</span>

@@ -19,10 +19,10 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-grid gridStyle *ngIf="home!=''" [ngSwitch]="home">
+  <ion-grid *ngIf="home!=''" [ngSwitch]="home">
 
     <ion-row *ngSwitchCase="'mychecklist'">
-        <ion-col col-12 *ngIf="mychecklist==[]||mychecklist==''||mychecklist==null ; else show_list">
+        <ion-col col-12 gridStyle *ngIf="mychecklist==[]||mychecklist==''||mychecklist==null ; else show_list" text-center nodatafound>
           You have no Check List.
         </ion-col>
         <ion-col col-12  *ngIf="mychecklist!=[] && mychecklist!='' && mychecklist!=null" #show_list style="border-bottom: 1px solid #ddd; padding: 5px 0px 0px 0px;">

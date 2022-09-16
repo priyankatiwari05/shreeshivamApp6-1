@@ -1,8 +1,9 @@
 .my_item {
-    color: #fff !important;
-    background-color: #38484e !important;
-    padding-left: unset;
-    padding-right: unset;
+  margin: unset;
+  color: #fff;
+  background-color: #38484e !important;
+  padding-left: unset;
+  padding-right: unset;
   }
 
   .list-md .item-block .item-inner {
@@ -15,9 +16,9 @@
 
   .my_col_type2 {
     border: 1px solid white;
-    font-weight: 500;
+    font-weight: normal;
     line-height: 25px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .my_div_hover {
@@ -27,12 +28,11 @@
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
     border-radius: 8px;
     margin: auto;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
-    font-family: sans-serif;
+    font-family: unset;
 
     ion-col{
-      padding: 10px;
       text-align: center;
     }
   }
@@ -46,10 +46,10 @@
   }
 
   .my_photo {
-    font-size: 3rem;
+    font-size: 2.5rem;
     position: relative;
     margin: auto;
-    padding-top: 5px;
+    padding-top: 2px;
     color: #fff;
   }
 
@@ -58,18 +58,20 @@
   }
 
   .my_contact {
-    font-size: 13px;
+    font-size: 15px;
+  }
+  .my_design{
+    font-size: 17px;
   }
 
   .my_col {
     vertical-align: text-bottom;
     position: relative;
     text-align: center;
-
   }
 
   .my_head {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .my_row {
@@ -79,11 +81,12 @@
     padding-right: unset !important;
   }
 
-  .my_row2 {
-    margin-left: unset !important;
-    margin-right: unset !important;
-    padding-left: unset !important;
-    padding-right: unset !important;
+  .my_row2{
+    margin: unset;
+    color: #fff;
+    background-color: #38484e !important;
+    padding-left: unset;
+    padding-right: unset;
   }
 
   .my_row_head {
@@ -131,26 +134,25 @@
     text-align: center;
     font-size: 11px;
     border-radius: 15px;  
-    position: absolute;
-    top: 118px;  
-    text-align:center;
-    width:100%; left: 1%;
+    position: absolute; 
+    width:100%;
     z-index: 10;
   }
   [father_card]{
       font-weight: 400;
       padding: 10px;
       width: 100%;
-      margin-top: 22px;
+      margin: 22px 0px 0px 0px;
 
       [father_card_header]{
         color:#38484e; 
-        font-size:16px;
+        font-size: 18px;
       }
 
       [father_card_content]{
         color: #5a5a5a; 
-        font-size:14px;
+        line-height: 8px;
+        font-size: 15px;
         padding: unset;
       }
   }
@@ -171,10 +173,9 @@
           color: #38484e;
           /* padding-left: unset; */
           border-radius: 6px;
-          padding: 4px;
           font-weight: 500;
           font-family: system-ui;
-          padding: 6px;
+          padding: 3px 7px;
         }
       }
 
@@ -207,6 +208,10 @@
       }
   }
 
+  ion-segment{
+    margin-top: -6px;
+  }
+
   ion-segment-button{
     color: #fff;
 
@@ -216,21 +221,23 @@
   }
   [noticeHead]{
     padding-top: 6px;
-
-    ion-item{
-      padding-bottom: 10%;
-    }
+    background: transparent;
   }
   [acc_details]{
     border-left: solid 1px #38484e;
     border-right: solid 1px #38484e;
-    font-size: 10px;
   }
   [passIcon]{
     margin-right:0px;
   }
 
   [no_pad] {
-    text-align: left;
-    left: 12px;
+    float: left;
+}
+ion-item{
+  margin-top: 10px;
+  font-family: sans-serif;
+  font-size: 16px;
+  --background: transparent;
+  color: #fff;
 }

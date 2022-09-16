@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TaskModalPageRoutingModule } from './task-modal-routing.module';
 
 import { TaskModalPage } from './task-modal.page';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TaskModalPageRoutingModule
+    TaskModalPageRoutingModule,
+    IonicSelectableModule
   ],
   declarations: [TaskModalPage]
 })

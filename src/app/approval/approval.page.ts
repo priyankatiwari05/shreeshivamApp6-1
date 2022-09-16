@@ -26,7 +26,7 @@ export class ApprovalPage implements OnInit {
   }
   open_root(page) {
     console.log(page);
-    if(page==ClaimRequestsPage)
+    if(page=='claim-requests')
       this.navCtrl.navigateRoot([page,{page_type:'approver'}]);
     else
       this.navCtrl.navigateForward(page);

@@ -35,7 +35,6 @@
     "@ionic/angular": "^6.1.9",
     "@ionic/cordova-builders": "^7.0.0",
     "@ionic/storage-angular": "^3.0.6",
-    "cordova-android": "10.1.2",
     "cordova-support-google-services": "^1.4.1",
     "ionic-selectable": "^4.9.0",
     "ionicons": "^6.0.3",
@@ -112,8 +111,6 @@
       "cordova-support-google-services": {},
       "cordova-plugin-whitelist": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

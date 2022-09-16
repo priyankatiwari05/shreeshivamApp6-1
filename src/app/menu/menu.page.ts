@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Push, PushObject, PushOptions } from '@awesome-cordova-plugins/push/ngx';
-import { AlertController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 import { LoginPage } from '../login/login.page';
 import { AuthService } from '../services/auth/auth.service';
@@ -30,6 +30,18 @@ import { TaskPage } from "../task/task.page";
 import { TravelDeskPage } from "../travel-desk/travel-desk.page";
 import { LDPage } from "../l-d/l-d.page";
 import { TravelApprovalPage } from "../travel-approval/travel-approval.page";
+import { Router } from '@angular/router';
+import { OrgChartPage } from '../org-chart/org-chart.page';
+import { CelebrationPage } from '../celebration/celebration.page';
+import { CreateTaskPage } from '../create-task/create-task.page';
+import { BlankPage } from '../blank/blank.page';
+import { LDAdminPage } from '../l-d-admin/l-d-admin.page';
+import { LeaveApprovalPage } from '../leave-approval/leave-approval.page';
+import { LeaveFormPage } from '../leave-form/leave-form.page';
+import { MissPunchApprovalPage } from '../miss-punch-approval/miss-punch-approval.page';
+import { TravelEntitlementPage } from '../travel-entitlement/travel-entitlement.page';
+import { TravelNStayPage } from '../travel-n-stay/travel-n-stay.page';
+import { BusinessPage } from '../business/business.page';
 
 export interface PageInterface {
   title: string;
@@ -45,7 +57,7 @@ export interface PageInterface {
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-  @ViewChild('content') navCtrl: NavController;
+  @ViewChild('content') router: Router;
   // Basic root for our content view
   public rootPage: any = HomePage;
   username: string;
@@ -54,8 +66,43 @@ export class MenuPage implements OnInit {
   // Reference to the app's root nav
   nav: any;
   pages: PageInterface[];
-  responseData: any;
   email:any;
+  my_task = TaskPage;
+  create_task = CreateTaskPage;
+  check_list = CheckListPage;
+  blank = BlankPage;
+  myclaims = ClaimRequestsPage;
+  travel_entitlement = TravelEntitlementPage;
+  business = BusinessPage;
+  travel_approval = TravelApprovalPage;
+  miss_punch_page = MissPunchApprovalPage;
+  claim_approvals = ClaimRequestsPage;
+  leave = MyLeavesPage;
+  leave_approval = LeaveApprovalPage;
+  leave_form = LeaveFormPage;
+  my_leaves = MyLeavesPage;
+  my_calendar = MyCalendarPage;
+  appraisal_page = AppraisalPage;
+  travel_n_stay = TravelNStayPage;
+  attendence = AttendencePage;
+  warning = WarningPage;
+  appreciation = AppreciationPage;
+  raised_request = RaisedRequestPage;
+  l_d = LDPage;
+  l_d_admin = LDAdminPage;
+  ask_hr = AskHRPage;
+  salary_incentive = SalaryIncentivePage;
+  emp_performance = EmpPerformancePage;
+  polls = PollsPage;
+  org_chart = OrgChartPage;
+  events = EventsPage;
+  gallery = GalleryPage;
+  celebration = CelebrationPage;
+  birthday = BirthdayPage;
+  anniversary = AniversaryPage;
+  learning = LearningPage;
+  travel_desk = TravelDeskPage
+
   constructor(
     public push: Push,
     public statusBar: StatusBar,
@@ -70,7 +117,7 @@ export class MenuPage implements OnInit {
     this.todaydate = date.toISOString().substring(0, 10);
     
     this.storage.get("emp_id").then(val => {
-      if (val == null) this.navCtrl.navigateForward([LoginPage]);
+      if (val == null) this.router.navigate([LoginPage]);
       else{
         this.storage.get("storage_date").then(storagedate => {
           console.log('storagedate'+storagedate);
@@ -105,7 +152,7 @@ export class MenuPage implements OnInit {
   }
   ionViewWillEnter() {
     this.storage.get("emp_id").then(val => {
-      if (val == null) this.navCtrl.navigateForward(['/login']);
+      if (val == null) this.router.navigate(['/login']);
       this.storage.get("username").then(val1 => {
         this.username = val1;
         this.storage.get("designation").then(val2 => {
@@ -126,10 +173,10 @@ export class MenuPage implements OnInit {
     } else {
       console.log("here");
       if(page.index==0){
-        this.navCtrl.navigateForward([HomePage]);
+        this.router.navigate([HomePage]);
 
       }else{
-         this.navCtrl.navigateForward(page.pageName, params);
+         this.router.navigate(page.pageName, params);
       }
 
     }
@@ -138,10 +185,7 @@ export class MenuPage implements OnInit {
 
   getemplogindata(emp_id)
   {
-    this.authService.postData(JSON.stringify({emp_id:emp_id}),'getemplogindata').then((result)=>{
-      console.log(result);
-      let data = JSON.parse(result["_body"]);
-        //console.log(this.result);
+    this.authService.postData(JSON.stringify({emp_id:emp_id}),'getemplogindata').then((data)=>{
         console.log(data);
         if (data["status"] == "success") {
           let date = new Date();
@@ -191,7 +235,7 @@ export class MenuPage implements OnInit {
       email = val;
       this.storage.clear();
 
-      this.navCtrl.navigateForward([LoginPage,{
+      this.router.navigate([LoginPage,{
         email:email
       }]);
       this.menuCtrl.close();
@@ -232,7 +276,7 @@ export class MenuPage implements OnInit {
     ];
   }
   dismiss() {
-    this.navCtrl.pop();
+    this.nav.pop();
   }
   pushSetup() {
     const options: PushOptions = {
@@ -282,9 +326,7 @@ export class MenuPage implements OnInit {
         registration_id: registration_id,
         email: this.email
       });
-      this.authService.postData(credential, 'update_registration_id').then((result) => {
-        this.responseData = result;
-        let data = JSON.parse(this.responseData['_body']);
+      this.authService.postData(credential, 'update_registration_id').then((data) => {
         console.log(data["msg"]);
       }, async (err) => {
         const alert = await this.alertCtrl.create({
@@ -302,53 +344,53 @@ export class MenuPage implements OnInit {
   opennotificationpage(pagename)
   {
     if(pagename=='AppraisalPage')
-      this.navCtrl.navigateForward([AppraisalPage]);
+      this.router.navigate(['/appraisal']);
     if(pagename=='AppreciationPage')
-      this.navCtrl.navigateForward([AppreciationPage]);
+      this.router.navigate(['/appreciation']);
     if(pagename=='AskHRPage')
-      this.navCtrl.navigateForward([AskHRPage]);
+      this.router.navigate(['/ask-hr']);
     if(pagename=='AttendencePage')
-      this.navCtrl.navigateForward([AttendencePage]);
+      this.router.navigate(['/attendence']);
     if(pagename=='BirthdayPage')
-      this.navCtrl.navigateForward([BirthdayPage]);
+      this.router.navigate(['/birthday']);
     if(pagename=='AniversaryPage')
-      this.navCtrl.navigateForward([AniversaryPage]);
+      this.router.navigate(['/aniversary']);
     if(pagename=='LearningPage')
-      this.navCtrl.navigateForward([LearningPage]);
+      this.router.navigate(['/learning']);
     if(pagename=='LDPage')
-      this.navCtrl.navigateForward([LDPage]);
+      this.router.navigate(['/l-d']);
     if(pagename=='CheckListPage')
-      this.navCtrl.navigateForward([CheckListPage]);
+      this.router.navigate(['/check-list']);
     if(pagename=='EmpPerformancePage')
-      this.navCtrl.navigateForward([EmpPerformancePage]);
+      this.router.navigate(['/emp-performance']);
     if(pagename=='EventsPage')
-      this.navCtrl.navigateForward([EventsPage]);
+      this.router.navigate(['/events']);
     if(pagename=='ClaimRequestsPage')
-      this.navCtrl.navigateForward([ClaimRequestsPage]);
+      this.router.navigate(['/claim-requests']);
     if(pagename=='GalleryPage')
-      this.navCtrl.navigateForward([GalleryPage]);
+      this.router.navigate(['/gallery']);
     if(pagename=='HomePage')
-      this.navCtrl.navigateRoot([HomePage]);
+      this.router.navigate(['/home']);
     if(pagename=='WarningPage')
-      this.navCtrl.navigateForward([WarningPage]);
+      this.router.navigate(['/warning']);
     if(pagename=='AppreciationPage')
-      this.navCtrl.navigateForward([AppreciationPage]);
+      this.router.navigate(['/appreciation']);
     if(pagename=='RaisedRequestPage')
-      this.navCtrl.navigateForward([RaisedRequestPage]);
+      this.router.navigate(['/raised-request']);
     if(pagename=='MyCalendarPage')
-      this.navCtrl.navigateForward([MyCalendarPage]);
+      this.router.navigate(['/my-calendar']);
     if(pagename=='MyLeavesPage')
-      this.navCtrl.navigateForward([MyLeavesPage]);
+      this.router.navigate(['/my-leaves']);
     if(pagename=='PollsPage')
-      this.navCtrl.navigateForward([PollsPage]);
+      this.router.navigate(['/polls']);
     if(pagename=='SalaryIncentivePage')
-      this.navCtrl.navigateForward([SalaryIncentivePage]);
+      this.router.navigate(['/salary-incentive']);
     if(pagename=='TaskPage')
-      this.navCtrl.navigateForward([TaskPage]);
+      this.router.navigate(['/task']);
     if(pagename=='TravelDeskPage')
-      this.navCtrl.navigateForward([TravelDeskPage]);
+      this.router.navigate(['/travel-desk']);
     if(pagename=='TravelApprovalPage')
-      this.navCtrl.navigateForward([TravelApprovalPage]);
+      this.router.navigate(['/travel-approval']);
     if(pagename=='refreshappdata')
       this.getemplogindata(this.email);
   }

@@ -65,8 +65,7 @@ export class LeaveFormPage implements OnInit {
     });
     (await loader).present();
     let data = JSON.stringify({emp_id:this.emp_id,from:this.from_date,to:this.to_date,leave_type:this.leave_type});
-    this.authService.postData(data,"submit_leave_form").then(async result => {
-        let data = result;
+    this.authService.postData(data,"submit_leave_form").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -108,8 +107,7 @@ export class LeaveFormPage implements OnInit {
     (await loader).present();
     let data=JSON.stringify({emp_id:this.emp_id,designation_id:this.designation_id});
     console.log(data);
-    this.authService.postData(data,"fetch_leave_count").then(async result => {
-        let data = result;
+    this.authService.postData(data,"fetch_leave_count").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -155,8 +153,7 @@ export class LeaveFormPage implements OnInit {
     (await loader).present();
     let data=JSON.stringify({emp_id:this.emp_id,designation_id:this.designation_id,from:this.from_date,to:this.to_date});
     console.log(data);
-    this.authService.postData(data,"fetch_leave_types").then( async result => {
-        let data = result;
+    this.authService.postData(data,"fetch_leave_types").then( async data => {
         console.log(data);
         
         if (data["status"] == "success") {

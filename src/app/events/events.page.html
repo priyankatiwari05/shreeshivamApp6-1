@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
     </ion-buttons>
-      <ion-title>Events  <ion-icon name="add" pull-right (click)="create_event()"></ion-icon>
+      <ion-title>Events  <ion-icon addIcon name="add" pull-right (click)="create_event()"></ion-icon>
         <!-- <ion-icon name="add" pull-right (click)="openAddPage()" *ngIf="role=='admin' || role=='hr' || role=='hr admin' || role=='pch' || role=='manager'"></ion-icon> -->
       </ion-title>
   </ion-toolbar>
@@ -33,10 +33,10 @@
             <ion-card-title>
               {{event['title']}} <br>
               <ion-row>
-                  <ion-col col-6 class="from_to">
+                  <ion-col size="6" class="from_to">
                       FROM : {{event['from_date']}}
                   </ion-col>
-                  <ion-col col-6 class="from_to" text-right>
+                  <ion-col size="6" class="from_to" text-right>
                       TO : {{event['to_date']}}
                   </ion-col>
                 </ion-row>
@@ -47,7 +47,7 @@
           <ion-row no-padding>
             <ion-col text-right col-12>
               <ion-button fill="outline"  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
-                  <ion-icon ios="images-outline" md="images-sharp" ionIcon></ion-icon> Details
+                  <ion-icon name="images" ionIcon></ion-icon> Details
               </ion-button>
             </ion-col>
           </ion-row>
@@ -67,10 +67,10 @@
           <ion-card-title>
             {{event['title']}} <br>
             <ion-row>
-                <ion-col col-6 class="from_to">
+                <ion-col size="6" class="from_to">
                     FROM : {{event['from_date']}}
                 </ion-col>
-                <ion-col col-6 class="from_to" text-right>
+                <ion-col size="6" class="from_to" text-right>
                     TO : {{event['to_date']}}
                 </ion-col>
               </ion-row>
@@ -79,15 +79,15 @@
           </p>
         </ion-card-content>
         <ion-row no-padding>
-          <ion-col text-right col-6>
+          <ion-col text-left size="6">
             <ion-button fill="outline"  icon-start  (click)="upload_pic(event['id'])">
                 <ion-icon ionIcon ios="images-outline" md="images-sharp"></ion-icon>
               Upload Pics
             </ion-button>
           </ion-col>
-          <ion-col text-right col-6>
+          <ion-col text-right size="6">
             <ion-button fill="outline"  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
-                <ion-icon ios="images-outline" md="images-sharp"></ion-icon>
+                <ion-icon name="images" ionIcon></ion-icon>
               Details
             </ion-button>
           </ion-col>

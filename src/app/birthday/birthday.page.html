@@ -15,15 +15,15 @@
 
 <ion-content >
 
-    <ion-list>
-        <ion-item text-center *ngIf="birthdays==[]||birthdays==''||birthdays==null ; else show_list">
-            No Record Found...!
+  <div text-center nodatafound *ngIf="birthdays==[]||birthdays==''||birthdays==null ; else show_list">
+    No Record Found...!
+  </div>
 
-          </ion-item>
+    <ion-list>
           <!-- <ion-item *ngFor="let item of birthdays" #show_list> -->
-            <ion-grid style="background-color: white;">
+            <ion-grid>
               <ion-row *ngFor="let item of birthdays" #show_list style="border-bottom:1px solid #dedede;">
-                <ion-col col-8 style="    font-size: larger;
+                <ion-col size="8" style="    font-size: larger;
                 font-weight: 500;
                 color: #212121;">
                   {{item['first_name']||" " +" "+item['middle_name']||" "+" "+item['last_name']||" "}}
@@ -31,7 +31,7 @@
                   {{item['designation']}} {{item['branch']}}
 
                 </ion-col>
-                <ion-col col-4>
+                <ion-col size="4">
                   {{item['dob']}}
                   <!-- <div *ngIf="item['dob']==today">
                         <br> <br> -->

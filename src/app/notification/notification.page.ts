@@ -45,9 +45,7 @@ export class NotificationPage implements OnInit {
 
   ionViewWillLeave()
   {
-    this.authService.postData(JSON.stringify({emp_id:this.emp_id}), "clear_notifications").then(
-      result => {
-        let data = result;
+    this.authService.postData(JSON.stringify({emp_id:this.emp_id}), "clear_notifications").then(data => {
         console.log(data);
         if (data["status"] == "success") {
 
@@ -143,9 +141,7 @@ export class NotificationPage implements OnInit {
     let data = JSON.stringify({
       emp_id: emp_id
     });
-    this.authService.postData(data, "get_mobile_notifications").then(
-      async result => {
-        let data = result;
+    this.authService.postData(data, "get_mobile_notifications").then( async data => {
         console.log(data);
         if (data["status"] == "success") {
 

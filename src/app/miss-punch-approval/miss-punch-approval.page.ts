@@ -13,7 +13,6 @@ export class MissPunchApprovalPage implements OnInit {
   data_recieved: any;
   raised_data: any;
   newly_raised_ids: any;
-  responseData : any;
   role_id:any;
   emp_id:any;
   branch:any;
@@ -69,13 +68,11 @@ export class MissPunchApprovalPage implements OnInit {
     });
     console.log(data);
 
-    this.authService.postData(data, "get_raised_request_data").then(
-      async result => {
-        let data = result;
+    this.authService.postData(data, "get_raised_request_data").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
-          this.data_recieved = data["data"];
+          this.data_recieved = data;
           console.log(this.data_recieved);
           this.raised_data = this.data_recieved["raised_data"];
 
@@ -184,9 +181,7 @@ export class MissPunchApprovalPage implements OnInit {
         remark: remark,
       });
       console.log(data);
-      this.authService.postData(data, "update_raised_request").then(
-        async result => {
-          let data = result;
+      this.authService.postData(data, "update_raised_request").then( async data => {
           console.log(data);
 
           if (data["status"] == "success") {

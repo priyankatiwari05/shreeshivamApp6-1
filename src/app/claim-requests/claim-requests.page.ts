@@ -4,6 +4,7 @@ import { Storage } from "@ionic/storage";
 import { ClaimsDetailPage } from '../claims-detail/claims-detail.page'; 
 import { AskHrFormPage } from '../ask-hr-form/ask-hr-form.page';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-claim-requests',
@@ -29,12 +30,14 @@ export class ClaimRequestsPage implements OnInit {
     public loadingCtrl: LoadingController,
     public authService: AuthService,
     private modal: ModalController,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    private route: ActivatedRoute) {
   }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter ClaimRequestsPage');
-    this.page_type=this.navParams.get('page_type');
+    this.page_type = this.route.snapshot.paramMap.get('page_type');
+
     console.log('page_type '+this.page_type);
     this.storage.get('designation').then(designation=>{
       this.designation=designation;
@@ -72,8 +75,7 @@ export class ClaimRequestsPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(data, "fetch_claims").then(async result => {
-        let data = result;
+    this.authService.postData(data, "fetch_claims").then(async data => {
         console.log(data);
         if (data["status"] == "success") {
           this.claims=data['claims'];
@@ -305,8 +307,7 @@ export class ClaimRequestsPage implements OnInit {
       message: "Please wait..."
     });
     (await loader).present();
-    this.authService.postData(data, "update_claim_status").then(async result => {
-        let data = result;
+    this.authService.postData(data, "update_claim_status").then(async data => {
         console.log(data);
         if (data["status"] == "success") {
           const toast = this.toastCtrl.create({

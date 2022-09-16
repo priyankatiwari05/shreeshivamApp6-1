@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController, ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController, AlertController, ToastController, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -27,7 +28,7 @@ export class AskHrFormPage implements OnInit {
   page_title:any;
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams, 
+    public route: ActivatedRoute, 
     public storage:Storage, 
     public loadingCtrl:LoadingController,
     public authService: AuthService,
@@ -47,15 +48,15 @@ export class AskHrFormPage implements OnInit {
         this.emp_id=val;
       });
     }
-    this.query_type=this.navParams.get('query_type');
-    this.page_type=this.navParams.get('page_type');
+    this.query_type=this.route.snapshot.paramMap.get('query_type');
+    this.page_type=this.route.snapshot.paramMap.get('page_type');
 
     if(this.page_type=='add_gallery_pic')
-      this.gallery_id=this.navParams.get('gallery_id')
+      this.gallery_id=this.route.snapshot.paramMap.get('gallery_id');
     console.log(this.query_type);
 
     if(this.page_type=='reimbursement')
-    this.page_title=this.navParams.get('page_title')
+    this.page_title=this.route.snapshot.paramMap.get('page_title');
   }
   
   async add_new_request()
@@ -87,9 +88,7 @@ export class AskHrFormPage implements OnInit {
       query_type:this.query_type
     });
     this.authService.postData(data, "add_askhr_request").then(
-      async result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           const alert = this.alertCtrl.create({
             header: "Query Saved",
@@ -198,9 +197,7 @@ export class AskHrFormPage implements OnInit {
       data_list:this.data_list
     });
     this.authService.postData(data, "create_gallery").then(
-      async result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           const toast = this.toastCtrl.create({
             message: "Gallery created successfully",
@@ -246,9 +243,7 @@ export class AskHrFormPage implements OnInit {
     });
     console.log(data)
     this.authService.postData(data, "add_gallery_pic").then(
-      async result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           const toast = this.toastCtrl.create({
             message: "Pictures uploaded successfully",

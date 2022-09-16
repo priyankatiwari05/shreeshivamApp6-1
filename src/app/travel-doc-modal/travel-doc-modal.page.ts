@@ -15,7 +15,6 @@ export class TravelDocModalPage implements OnInit {
   file:File;
   base64data:any;
   order_id:any;
-  responseData:any;
   cgst:any;
   sgst:any;
   igst:any;
@@ -128,10 +127,7 @@ export class TravelDocModalPage implements OnInit {
       request_type:"api"
     });
 
-    this.authService.postData(postdata,'upload_reimbursement_docs/submit').then(async (result) => {
-
-      this.responseData = result;
-      let data = JSON.parse(this.responseData['_body']);
+    this.authService.postData(postdata,'upload_reimbursement_docs/submit').then(async (data) => {
       (await loader).dismiss();
       if(data['status']=='success')
       {

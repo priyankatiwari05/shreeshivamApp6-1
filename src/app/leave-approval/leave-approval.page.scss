@@ -1,41 +1,62 @@
 .toolbar-title-md {
-    padding: 0 12px;
-    font-size: 2rem;
-    font-weight: 500;
-  }
-  .toolbar-title-ios{
-    margin-left: 30px;
-  }
-  .header{
-    top:12%;
+  padding: 0 12px;
+  font-size: 2rem;
+  font-weight: 500;
+}
+.toolbar-title-ios{
+  margin-left: 30px;
+}
+.header{
+  top:12%;
 
-  }
-  .content{
-    top:12%;
-  }
+}
+.content{
+  top:12%;
+}
+[leaveDate]{
+  margin: auto;
+  padding-top: 15px;
+}
+ion-item{
+  margin-right: 12%;
+}
+
+button.button-native{
+  border-radius: 6px;
+  height: 40px;
+}
+
+ion-label{
+  padding-right: 3rem;
+  color: #3880ff;
+}
 
 // ion-grid
 // {
-    // background:white;
-    // padding-top: unset;
-    // color: rgb(10, 9, 9);
+  // background:white;
+  // padding-top: unset;
+  // color: rgb(10, 9, 9);
 // }
+
+ion-grid , ion-col{ 
+text-align: left;
+}
 
 .item-md.item-block .item-inner 
 {
-  border-bottom: none;
+border-bottom: none;
 }
 
 .label-md
 {
-  margin: 0px;
-  overflow: unset;
-  white-space: normal;
-  font-size: 14px;
+margin: 0px;
+overflow: unset;
+white-space: normal;
+font-size: 14px;
 }
 
 .item-block
 {
-  height: auto;
-  min-height: 0px;
+height: auto;
+min-height: 0px;
 }

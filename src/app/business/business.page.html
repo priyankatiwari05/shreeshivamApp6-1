@@ -11,33 +11,32 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-  <ion-grid style="background-color: white !important;">
+  <ion-grid bg-white>
       <ion-row>
-        <ion-col col-12>
-          <ion-label class="dis_label">
+        <ion-col size="12" text-left class="dis_label">
+          <ion-label>
             Upload Files
           </ion-label>
         </ion-col>
-        <ion-row style="border: 1px solid #b8b8b8;
-        border-radius: 8px;">
-          <ion-col col-12>
+        <ion-row class="uploadFile dis_label">
+
+          <ion-col size="12" text-left>
             <ion-input type="text" [(ngModel)]="remark" placeholder="Enter Remark"></ion-input>
           </ion-col>
-          <ion-col col-9>
-  
+          <ion-col size="9" text-left>
             <input ion-input type="file" style="padding-top: 10px;" (change)="changeListener($event)"  [(ngModel)]="file_input" id="file-input" #fileInp
               accept="image/*" />
           </ion-col>
-          <ion-col col-3>
-            <ion-button style="width: 100%;" [disabled]="file_input==null||remark==null||file_input==''||remark==''" (click)="add_to_list()">Add File</ion-button>
-  
+          <ion-col size="3" text-right>
+            <ion-button expand="block" [disabled]="file_input==null||remark==null||file_input==''||remark==''" (click)="add_to_list()">Add File</ion-button>
           </ion-col>
         </ion-row>
       </ion-row>
-      <br>
-      <ion-row  *ngIf="data_list == []||data_list==''||data_list==null ; else show_list" >
-        <ion-col col-12>No file attached</ion-col>
-      </ion-row>
+
+      <ion-row  *ngIf="data_list == []||data_list==''||data_list==null ; else show_list">
+        <ion-col size="12"  text-left nofile>No file attached</ion-col>
+      </ion-row><br>
+      
       <ng-template #show_list>
         <ion-row style="    overflow-x: scroll;">
         <table class="table  table-hover" >
@@ -74,12 +73,12 @@
     </ng-template>
     
     <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+      <ion-col size="4" text-left>
+        <ion-label>
          Month
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8" text-left>
         <ion-select placeholder="Select Month" [(ngModel)]="month"
           style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 10px 5px 10px 5px;">
           <ion-select-option value="1">January</ion-select-option>
@@ -98,25 +97,26 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+      <ion-col size="4" text-left>
+        <ion-label>
           Year
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8" text-left>
         <ion-select placeholder="Select Year" [(ngModel)]="year"
           style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 10px 5px 10px 5px;">
           <ion-select-option *ngFor="let myyear of years">{{myyear}}</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
+
     <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+      <ion-col size="4" text-left>
+        <ion-label>
           Business Place
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8" text-left>
         <ionic-selectable placeholder="Select Business Place" [(ngModel)]="business_place"
           style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 0px 5px 0px 5px;"
           item-content [items]="travel_place" itemValueField="id" itemTextField="name"
@@ -124,97 +124,99 @@
         </ionic-selectable>
       </ion-col>
     </ion-row>
+
     <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+      <ion-col size="4" text-left>
+        <ion-label>
           GSTIN No
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8" text-left>
         <ion-input [(ngModel)]="gst_no" placeholder="GSTIN NO" ></ion-input>
       </ion-col>
     </ion-row>
 
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Mobile Bill','mobile_bill')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Mobile Bill','mobile_bill')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
         <span pull-left>Mobile Bill</span>
         <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Hand Set','hand_set')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Hand Set','hand_set')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
           <span pull-left>Hand Set</span>
           <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Food Allowances','food_allowances')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Food Allowances','food_allowances')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
           <span pull-left>Food Allowances</span>
           <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Conveyance Charges','conveyance_charges')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Conveyance Charges','conveyance_charges')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
           <span pull-left>Conveyance Charges</span>
           <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Postal/Courier','postal_courier')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Postal/Courier','postal_courier')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
         <span pull-left>Postal/Courier</span>
         <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Internet','internet')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Internet','internet')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
         <span pull-left>Internet</span>
         <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Registration','registration')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Registration','registration')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
         <span pull-left>Registration</span>
         <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
       </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Stationary','stationary')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Stationary','stationary')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
           <span pull-left>Stationary</span>
           <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row style="padding:4px;">
-      <ion-col col-12 (click)="openmodal('Incidental Expenses','incidental_expenses')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Incidental Expenses','incidental_expenses')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
           <span pull-left>Incidental Expenses</span>
           <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+
+    <ion-row cardRow>
+      <ion-col size="4" text-left>
+        <ion-label>
           Approver
         </ion-label>
       </ion-col>
-      <ion-col col-8>
-          <ion-label class="dis_label">{{approver}}</ion-label>
+      <ion-col size="8" text-left>
+          <ion-label>{{approver}}</ion-label>
       </ion-col>
     </ion-row>
     
-    <ion-row>
-      <ion-col col-4>
-        <ion-label class="dis_label">
+    <ion-row cardRow>
+      <ion-col size="4" text-left>
+        <ion-label>
           Remark
         </ion-label>
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8" text-left>
         <ion-textarea placeholder="Enter a description" [(ngModel)]="main_remark"></ion-textarea>
       </ion-col>
     </ion-row>
     
     <br><br>
     <ion-row>
-      <ion-col col-8>
-        <ion-button color="secondary" (click)="submitdata()" [disabled]="business_place==[]||business_place==''||business_place==null">Submit</ion-button>
+      <ion-col size="8">
+        <ion-button color="success" (click)="submitdata()" [disabled]="business_place==[]||business_place==''||business_place==null">Submit</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

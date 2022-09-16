@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, IonContent} from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, AlertController, LoadingController, IonContent} from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -19,14 +20,14 @@ export class AskHrQueriesPage implements OnInit {
   public query:any;
   @ViewChild('Content') content: IonContent;
   
-    constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl:LoadingController,
+    constructor(public navCtrl: NavController, public route: ActivatedRoute, public storage:Storage,public loadingCtrl:LoadingController,
       public authService: AuthService,
       public alertCtrl: AlertController) {
 
-        this.status=this.navParams.get('status');
-        this.request_id=this.navParams.get('request_id');
-        this.status_by_userid=this.navParams.get('status_by_userid');
-        this.query_type=this.navParams.get('query_type');
+        this.status=this.route.snapshot.paramMap.get('status');
+        this.request_id=this.route.snapshot.paramMap.get('request_id');
+        this.status_by_userid=this.route.snapshot.paramMap.get('status_by_userid');
+        this.query_type=this.route.snapshot.paramMap.get('query_type');
         if(this.useremail==null)
         {
           this.storage.get('email').then((val1) => {
@@ -53,10 +54,7 @@ export class AskHrQueriesPage implements OnInit {
       (await loader).present();
   
       this.authService.postData(data, "ask_hr_queries").then(
-        async result => {
-        let  responseData = result;
-          let data = JSON.parse(responseData["_body"]);
-         // console.log(responseData);
+        async data => {
           console.log(data);
           if (data["status"] == "success") {
   
@@ -128,9 +126,7 @@ export class AskHrQueriesPage implements OnInit {
       (await loader).present();
   
       this.authService.postData(data, path).then(
-        async result => {
-          let  responseData = result;
-          let data = JSON.parse(responseData["_body"]);
+        async data => {
           if (data["status"] == "success") {
             const alert = this.alertCtrl.create({
               header: "Saved",

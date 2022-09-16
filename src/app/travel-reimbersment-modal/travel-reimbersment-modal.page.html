@@ -27,7 +27,7 @@
         <ion-item *ngFor="let item of travel_docs" #show_list>
             <ion-grid padding-unset>
             <ion-row>
-              <ion-col col-6>
+              <ion-col size="6">
                   <ion-row>
                       <ion-col>Document - {{item['id']}}</ion-col>
                   </ion-row>
@@ -38,7 +38,7 @@
                       <ion-col>{{item['description']}}</ion-col>
                   </ion-row>
               </ion-col>
-              <ion-col col-6>
+              <ion-col size="6">
                   <ion-row>
                       <ion-col><ion-button expand="full"><a href="https://shreeshivam.net/test_hold/{{item['doc_link']}}" style="color: #ffffff;">View</a></ion-button></ion-col>
                   </ion-row>

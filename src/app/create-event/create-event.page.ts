@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -30,15 +31,15 @@ export class CreateEventPage implements OnInit {
   event_id: any;
   page_type:any;
   constructor( public navCtrl: NavController,
-    public navParams: NavParams, 
+    public route: ActivatedRoute, 
     public storage:Storage, 
     public loadingCtrl:LoadingController,
     public authService: AuthService,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,) {
-      this.page_type=this.navParams.get('page_type');
+      this.page_type = this.route.snapshot.paramMap.get('page_type');
       if(this.page_type=='add_pics')
-      this.event_id=this.navParams.get('event_id');
+      this.event_id = this.route.snapshot.paramMap.get('event_id');
       this.today=new Date().toISOString().slice(0, 10);
       let nextyear= new Date().getFullYear()+1;
       this.next_year=nextyear+"-"+this.today.slice(5, 7)+"-"+this.today.slice(8, 10);
@@ -139,8 +140,7 @@ export class CreateEventPage implements OnInit {
       filename:this.filename
     });
 
-    this.authService.postData(data, "create_event").then(async result => {
-        let data = result;
+    this.authService.postData(data, "create_event").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -192,8 +192,7 @@ export class CreateEventPage implements OnInit {
       data_list:this.data_list
     });
 
-    this.authService.postData(data, "add_event_gallery_pic").then(async result => {
-      let data = result;
+    this.authService.postData(data, "add_event_gallery_pic").then(async data => {
       console.log(data);
       
         if (data["status"] == "success") {

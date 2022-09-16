@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -20,7 +20,6 @@ export class LeaveApprovalPage implements OnInit {
   
   today=new Date().toISOString().slice(0, 10);
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public storage: Storage,
     public alertCtrl: AlertController,
@@ -63,8 +62,7 @@ export class LeaveApprovalPage implements OnInit {
     });
 
     this.authService.postData(request_data,'fetch_leave_for_approval').then(
-      async result => {
-        let data = JSON.parse(result["_body"]);
+      async data => {
         if (data["status"] == "success") {
           console.log(data);
           this.leaves=data['leaves'];
@@ -176,9 +174,8 @@ export class LeaveApprovalPage implements OnInit {
     });
     console.log(request_data);
     this.authService.postData(request_data,'update_leave_status').then(
-      async result => {
+      async data => {
         (await loader).dismiss();
-        let data = JSON.parse(result["_body"]);
         if (data["status"] == "success") {
           (await this.toastCtrl.create({
             message: "Your leave application has been approved successfully",
@@ -222,9 +219,8 @@ export class LeaveApprovalPage implements OnInit {
       remark:remark
     });
     this.authService.postData(request_data,'update_leave_status').then(
-      async result => {
+      async data => {
         (await loader).dismiss();
-        let data = JSON.parse(result["_body"]);
         if (data["status"] == "success") {
           (await this.toastCtrl.create({
             message: "Your leave application has been rejected successfully",

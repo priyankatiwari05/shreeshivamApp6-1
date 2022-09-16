@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ModalController } from '@ionic/angular'; 
+import { NavController, LoadingController, AlertController, ModalController } from '@ionic/angular'; 
 import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 import { Storage } from '@ionic/storage';
 import { AskHrFormPage } from '../ask-hr-form/ask-hr-form.page';
 import { GlobalVarsService } from '../services/global-vars/global-vars.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-detail',
@@ -21,20 +22,20 @@ export class EventDetailPage implements OnInit {
   gallery_id: any;
   gallerypics: any;
   constructor(public navCtrl: NavController,  private photoViewer: PhotoViewer,
-    public navParams: NavParams,public storage:Storage,
+    public route: ActivatedRoute,public storage:Storage,
     public loadingCtrl:LoadingController,
     public authService: AuthService,
     public alertCtrl: AlertController,
     private modal: ModalController,
     public mdlCtrl: ModalController) {
 
-      this.title=this.navParams.get('title');
-      this.description=this.navParams.get('description');
-      this.photo=this.navParams.get('photo');
-      this.page_type=this.navParams.get('page_type');
+      this.title=this.route.snapshot.paramMap.get('title');
+      this.description=this.route.snapshot.paramMap.get('description');
+      this.photo=this.route.snapshot.paramMap.get('photo');
+      this.page_type = this.route.snapshot.paramMap.get('page_type');
       if(this.page_type=='show_gallery')
       {
-        this.gallery_id=this.navParams.get('gallery_id');
+        this.gallery_id=this.route.snapshot.paramMap.get('gallery_id');
         this.fetchGalleryPics();
       }
       
@@ -61,8 +62,7 @@ export class EventDetailPage implements OnInit {
     (await loader).present();
     let data = JSON.stringify({id:this.gallery_id});
     console.log(data);
-    this.authService.postData(data,"get_gallery_pics").then(async result => {
-        let data = result;
+    this.authService.postData(data,"get_gallery_pics").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

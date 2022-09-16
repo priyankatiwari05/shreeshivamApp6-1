@@ -19,26 +19,30 @@
 
       <br> <br>
     <ion-item>
-      <ion-label floating>
-        <ion-icon ios="mail-outline" md="mail-sharp"></ion-icon> Email ID
+      <ion-label position="floating">
+        <ion-icon name="mail"></ion-icon> Email ID
       </ion-label>
       <ion-input type="text"  [(ngModel)]="username"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>
-        <ion-icon ios="lock-outline" md="lock-sharp"></ion-icon> Password
+      <ion-label position="floating">
+        <ion-icon name="key"></ion-icon> Password
       </ion-label>
-      <ion-input type="{{type}}"  [(ngModel)]="password"></ion-input><br><br>
-      <ion-button *ngIf="!showPass" fill="clear"  type="button" item-right (click)="showPassword()">  <ion-icon ios="eye-off-outline"  style="    font-size: 3rem;    color: red !important;" md="eye-off-sharp"></ion-icon></ion-button>
-      <ion-button *ngIf="showPass" fill="clear"  type="button" item-right (click)="showPassword()"> <ion-icon ios="eye-outline" md="eye-sharp"  style="    font-size: 3rem;    color: red !important;"></ion-icon></ion-button>
+      <ion-row rowStyle>
+        <ion-col size="11" item-left><ion-input type="{{type}}" text-left [(ngModel)]="password"></ion-input></ion-col>
+        <ion-col size="1"  item-right>
+          <ion-icon eye name="eye-off" *ngIf="!showPass" item-right (click)="showPassword()"></ion-icon>
+          <ion-icon eye name="eye" *ngIf="showPass" item-right (click)="showPassword()"></ion-icon>
+        </ion-col>
+      </ion-row>
     </ion-item>
 
     <ion-item>
+      <ion-checkbox color="danger" [(ngModel)]="rememberme"></ion-checkbox>
       <ion-label>
         Remember Me
       </ion-label>
-      <ion-checkbox color="danger" [(ngModel)]="rememberme"></ion-checkbox>
     </ion-item>
 
     <!-- <ion-item class="noborder">

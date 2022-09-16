@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, AlertController, Platform, LoadingController} from "@ionic/angular";
+import { NavParams, AlertController, Platform, LoadingController} from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { File } from "@awesome-cordova-plugins/file/ngx";
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
@@ -8,6 +8,7 @@ import { DocumentViewer, DocumentViewerOptions } from "@awesome-cordova-plugins/
 import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 import { LDPage } from "../l-d/l-d.page";
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-l-d-admin',
@@ -17,7 +18,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class LDAdminPage implements OnInit {
   l_n_d: any;
   emp_id: any;
-  constructor(public navCtrl: NavController,
+  constructor(public router: Router,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     private fileOpener: FileOpener,
@@ -46,9 +47,7 @@ export class LDAdminPage implements OnInit {
     (await loader).present();
     let data = JSON.stringify({designation:desig,designation_id:desig_id});
     this.authService.postData(data,"get_l_n_d").then(
-      async result => {
-      let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           this.l_n_d=data['all_designation_lnd'];
           console.log(data);
@@ -78,7 +77,7 @@ export class LDAdminPage implements OnInit {
 
   openlndpage(l_n_d)
   {
-    this.navCtrl.navigateRoot([LDPage,{l_n_d:l_n_d}]);
+    this.router.navigate(['/l-d',{l_n_d:l_n_d}]);
   }
 
   doRefresh(refresher){

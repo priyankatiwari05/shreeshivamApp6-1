@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular'
 import { SendWishesPage } from '../send-wishes/send-wishes.page'; 
 
@@ -12,7 +12,7 @@ export class BirthdayPage implements OnInit {
   birthdays:any;
   username:any;
   today:string;
-  constructor(public navCtrl: NavController,
+  constructor(public router: Router,
     public storage:Storage) {
       this.today=new Date().toISOString();
 
@@ -28,7 +28,7 @@ export class BirthdayPage implements OnInit {
 
   send_wish(emp_id,fname,mname,lname)
   {
-    this.navCtrl.navigateRoot([SendWishesPage,{emp_id:emp_id,fname:fname,mname:mname,lname:lname,wish_type:'birthday',page_type:'send_wish'}]);
+    this.router.navigate(['/send-wishes',{emp_id:emp_id,fname:fname,mname:mname,lname:lname,wish_type:'birthday',page_type:'send_wish'}]);
   }
   ngOnInit() {
   }

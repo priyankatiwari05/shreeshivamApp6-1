@@ -17,12 +17,13 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
-    <ion-item text-center *ngIf="raised_requests==[]||raised_requests==''||raised_requests==null ; then show_list">
-      No Record Found...!
 
-    </ion-item>
-    <ion-item *ngFor="let item of raised_requests" #show_list>
+  <div text-center nodatafound *ngIf="raised_requests==[]||raised_requests==''||raised_requests==null ; else show_list">
+    No Record Found...!
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of raised_requests">
       <ion-grid>
         <ion-row>
           <ion-col col-3 class="head_item">
@@ -55,7 +56,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6 class="foot_item" *ngFor="let item2 of item['req_details']" style="white-space: normal;">
+          <ion-col size="6" class="foot_item" *ngFor="let item2 of item['req_details']" style="white-space: normal;">
             {{item2||"NILL"}}
           </ion-col>
 

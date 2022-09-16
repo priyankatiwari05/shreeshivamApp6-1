@@ -320,21 +320,6 @@ ion-segment-button
     background: #ffffff6b!important;
 }
 
-tr:nth-of-type(even) {
-    background: #d2d2d2;
-    color: #333;
-}
-
-th {
-    background: #488aff;
-    color: white;
-    font-weight: bold;
-}
-.dis_label
-{
-    padding: 10px 0px;
-}
-
 ion-datetime {
     border: 1px solid #a6a6a6;
     border-radius: 6px;
@@ -354,11 +339,9 @@ ion-select {
     padding:0px 5px!important;
 }
 
-td
-{
-    white-space: normal;
-    padding: 5px 0px;
-}
 [gridStyle]{
-    margin-top: 30px; color: #fff;
+    padding: 2px;
+    background: #fff;
+    color: #000;
+    font-size: 14px;
 }

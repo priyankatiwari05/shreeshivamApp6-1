@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController, Platform } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, ToastController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
@@ -7,6 +7,7 @@ import { File } from "@awesome-cordova-plugins/file/ngx";
 import { DocumentViewerOptions, DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
 import { GlobalVarsService } from '../services/global-vars/global-vars.service';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 let base_path=GlobalVarsService.base_path;
 
@@ -43,7 +44,7 @@ export class TaskModalPage implements OnInit {
   base64data: string;
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams, 
+    public route: ActivatedRoute, 
     public document: DocumentViewer,
     public storage:Storage, 
     public loadingCtrl:LoadingController,
@@ -76,8 +77,8 @@ export class TaskModalPage implements OnInit {
       });
     }
 
-    this.task=this.navParams.get('task');
-    this.type=this.navParams.get('type');
+    this.task=this.route.snapshot.paramMap.get('task');
+    this.type=this.route.snapshot.paramMap.get('type');
     this.task_name=this.task.task_name;
     this.task_id=this.task.id;
     this.description=this.task.description;
@@ -151,9 +152,7 @@ export class TaskModalPage implements OnInit {
    console.log('inside submit_request function');
    console.log(data);
     this.authService.postData(data, "update_task_status").then(
-      async result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           const toast = this.toastController.create({
             message: "Updated successfully",
@@ -204,9 +203,7 @@ export class TaskModalPage implements OnInit {
       emp_id:this.emp_id
     });
     this.authService.postData(data, "get_reassign_emp").then(
-      async result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           this.emp_list=data['emp_list'];
           this.group_list=data['group_list'];
@@ -243,10 +240,7 @@ export class TaskModalPage implements OnInit {
       task_id: this.task_id     
     });
    
-    this.authService.postData(data, "get_task_history").then(
-      result => {
-        let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+    this.authService.postData(data, "get_task_history").then(data => {
         if (data["status"] == "success") {
           console.log(data);
           this.history=data['history'];

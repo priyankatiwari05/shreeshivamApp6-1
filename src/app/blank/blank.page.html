@@ -14,9 +14,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list text-center>
-    <ion-item notextfound  *ngIf="hr_request==[]||hr_request==''||hr_request==null ; else show_list">
+    <div nodatafound  text-center *ngIf="hr_request==[]||hr_request==''||hr_request==null ; else show_list">
       Page Under Construction
-    </ion-item>
-  </ion-list>
+    </div>
 </ion-content>

@@ -52,7 +52,7 @@ export class AttendencePage implements OnInit {
       shift:shift,
       approver_list:this.approver_list
     };
-    this.navCtrl.navigateRoot([RaiseAttendencePage,data]);
+    this.navCtrl.navigateRoot(['/raise-attendence',data]);
   }
 
    async fetchAttendenceDetails(emp_id){

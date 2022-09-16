@@ -20,21 +20,16 @@
 <ion-content >
   <ion-item >
     <ion-row>
-      <ion-col col-12 class="head_item" style="text-align: left;">
+      <ion-col size="12" class="head_item" text-left>
         Shifts
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6 class="foot_item" style="text-align: left;">
+      <ion-col size="6" class="foot_item" text-left>
         IN TIME : {{shift_in_time||"NaN"}}
       </ion-col>
-      <ion-col col-6 class="foot_item" style="text-align: right;">
+      <ion-col size="6" class="foot_item" text-right>
         OUT TIME : {{shift_out_time||"NaN"}}
       </ion-col>
-
-    </ion-row>
-    <ion-row>
-      <ion-col col-12 class="foot_item">
+      <ion-col size="12" class="foot_item" text-left>
         Approver(s) - {{approver_list}}
       </ion-col>
     </ion-row>
@@ -42,24 +37,24 @@
   </ion-item>
   <ion-item >
 
-    <ion-label style="    margin-top: 70px;" >In Time</ion-label>
-    <ion-datetime style="    margin-top: 70px;"  displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="in_time"></ion-datetime>
+    <ion-label style="    margin-top: 70px;" text-left>In Time</ion-label>
+    <ion-datetime style="    margin-top: 70px;"  displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="in_time" text-right></ion-datetime>
   </ion-item>
   <ion-item >
-    <ion-label>Out Time</ion-label>
-    <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="out_time"></ion-datetime>
+    <ion-label text-left>Out Time</ion-label>
+    <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH:mm:ss" [(ngModel)]="out_time" text-right></ion-datetime>
   </ion-item>
-  <ion-item>
-    <ion-label>OUT PUNCH is of next day</ion-label>
+  <ion-item text-left>
     <ion-checkbox [(ngModel)]="next_day" ></ion-checkbox>
+    <ion-label>OUT PUNCH is of next day</ion-label>
   </ion-item>
 
   <ion-item>
-      <ion-label style=" margin-top: 74px;" >Remark</ion-label>
+      <ion-label style=" margin-top: 74px;">Remark</ion-label>
       <ion-input style=" margin-top: 60px;"  type="text" max="180" [(ngModel)]="remarks"></ion-input>
     </ion-item>
   <ion-item >
-    <ion-button expand="full" size="large" (click)="raise_attendence_confirm()" style="background-color: #303030;">Raise Request</ion-button>
+    <ion-button expand="full" size="large" (click)="raise_attendence_confirm()" color="dark">Raise Request</ion-button>
   </ion-item>
 
 </ion-content>

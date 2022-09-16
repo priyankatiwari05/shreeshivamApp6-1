@@ -11,33 +11,34 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item text-center *ngIf="attendence_report==[]||attendence_report==''||attendence_report==null ; else show_list">
+    <div text-center nodatafound *ngIf="attendence_report==[]||attendence_report==''||attendence_report==null ; else show_list">
       No Record Found...!
-    </ion-item>
+    </div>
     <ion-item *ngFor="let item of attendence_report" #show_list [class.my-class]="item['day_string']=='Sunday'">
-      <ion-grid style=" padding: 5px 0px 5px 0px;">
+      <ion-grid outerStyle>
         <ion-row style=" margin-bottom: 7px;">
-          <ion-col size="3" class="head_item">
+          <ion-col size="8" class="head_item" text-left>
             <span class="date_span">
               {{item["day_string"]}}, {{item["date"]}}
             </span>
           </ion-col>
-          <ion-col size="9" text-right class="head_right_item" *ngIf="today!=item['database_date']">
-            <div style="color:red;" *ngIf='item["day"]=="0" || item["day"]=="" || item["day"]=="null"; else present'>
+          <ion-col size="4" text-right class="head_right_item" *ngIf="today!=item['database_date']">
+            <div style="color:darkred;" *ngIf='item["day"]=="0" || item["day"]=="" || item["day"]=="null"; else present'>
               ABSENT
             </div>
             <ng-template #present>
-              <div style="color:goldenrod;" *ngIf='item["day"]=="0.5" ; else present1'>
+              <div style="color:darkgoldenrod;" *ngIf='item["day"]=="0.5" ; else present1'>
                 HALF DAY
               </div>
             </ng-template>
             <ng-template #present1>
-              <div style="color:green;"  *ngIf='item["day"]=="1"'>
+              <div style="color:darkgreen;"  *ngIf='item["day"]=="1"'>
                 FULL DAY
               </div>
             </ng-template>
           </ion-col>
         </ion-row>
+
         <ion-row *ngIf="item['table_remark']==''">
           <ion-col size="4" class="foot_item" text-left>
             IN : {{item["initial_in"]||"NILL"}}
@@ -84,7 +85,7 @@
             </ng-template>
           </ion-col> -->
         </ion-row>
-        <ion-row *ngIf="item['table_remark']!=''">
+        <ion-row *ngIf="item['table_remark']!=''" text-left>
           <ion-col size="8" class="head_right_item" style="white-space: normal;">
             {{item['table_remark']}}
           </ion-col>

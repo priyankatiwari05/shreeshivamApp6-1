@@ -13,7 +13,7 @@
       <ion-col col-12>
         <span class="myavail_title">Leaves Available</span>
       </ion-col>
-      <ion-col col-6 *ngFor="let leave of myleaves">
+      <ion-col size="6" *ngFor="let leave of myleaves">
         {{leave['type']}} : {{leave['leave_count']}}
       </ion-col>
     </ion-row>
@@ -49,7 +49,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-button expand="full" expanded (click)="checkAndSubmitLeaveForm()">Apply</ion-button>
+      <ion-button expand="full" color="primary" (click)="checkAndSubmitLeaveForm()">Apply</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>

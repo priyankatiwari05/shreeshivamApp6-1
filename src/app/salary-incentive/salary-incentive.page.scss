@@ -18,6 +18,13 @@
     margin: unset;
 
   }
+  ion-grid{
+    background: #fff;
+    padding-top: unset;
+    height: 100%;
+    text-align: center;
+    color: rgb(10, 9, 9);
+  }
 
   .bar-button-menutoggle-md {
     margin: 0 6px;
@@ -387,19 +394,19 @@
   }
 
 
-  // tr:nth-of-type(odd){
-  //     background-color: white;
-  //     color: black;
-  // }
+  tr:nth-of-type(odd){
+      background-color: white;
+      color: black;
+  }
 
-  // tr:nth-of-type(even){
-  //   background-color: lightgrey;
-  //   color: black;
-  // }
+  tr:nth-of-type(even){
+    background-color: lightgrey;
+    color: black;
+  }
 
-  // th
-  // {
-  //     background: grey;
-  //     color: black;
-  //     font-weight: 500;
-  // }
+  th
+  {
+      background: grey;
+      color: black;
+      font-weight: 500;
+  }

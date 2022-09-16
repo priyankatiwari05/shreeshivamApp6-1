@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ModalOptions, ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController, AlertController, ModalOptions, ModalController } from '@ionic/angular';
 import { Storage } from "@ionic/storage";
 import { ChapterDetailPage } from '../chapter-detail/chapter-detail.page';
 import { AuthService } from '../services/auth/auth.service';
@@ -16,7 +17,7 @@ export class ChaptersPage implements OnInit {
   course_name:any;
   
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public loadingCtrl: LoadingController,
     public storage: Storage,
     public alertCtrl: AlertController,
@@ -30,7 +31,7 @@ export class ChaptersPage implements OnInit {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter ChaptersPage');
-    this.course=this.navParams.get('course');
+    this.course=this.route.snapshot.paramMap.get('course');
     console.log(this.course)
     this.course_name=this.course.course_name;
     if(this.emp_id)
@@ -54,9 +55,7 @@ export class ChaptersPage implements OnInit {
     let data = JSON.stringify({emp_id:this.emp_id,course_id:this.course.course_id,assign_id:this.course.id,chapters:this.course.chapters});
     console.log(data)
     this.authService.postData(data,"fetchEmpCourseChapterDetail").then(
-      async result => {
-      let  responseData = result;
-        let data = JSON.parse(responseData["_body"]);
+      async data => {
         if (data["status"] == "success") {
           this.chapterlist=data['chapters'];
           console.log(this.chapterlist);

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { CreateTaskPageRoutingModule } from './create-task-routing.module';
 
@@ -13,7 +14,8 @@ import { CreateTaskPage } from './create-task.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateTaskPageRoutingModule
+    CreateTaskPageRoutingModule,
+    IonicSelectableModule
   ],
   declarations: [CreateTaskPage]
 })

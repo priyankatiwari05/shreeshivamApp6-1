@@ -60,8 +60,7 @@ export class CheckListPage implements OnInit {
     });
     console.log(data);
 
-    this.authService.postData(data, "fetchCheckList").then(async result => {
-        let data = result;
+    this.authService.postData(data, "fetchCheckList").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

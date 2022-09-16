@@ -27,35 +27,33 @@
 <ion-content>
   <div [ngSwitch]="home">
     <ion-list noticeHead *ngSwitchCase="'notice'">
-      <ion-item class="my_item" text-center>
-
-        <ion-icon text-center class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon><br>
-        <span class="my_head" text-center>{{username}}</span> <br>
-        <span class="my_contact" text-center>+91 {{mobile}}</span><br>
-        <span class="my_design" text-center>{{email}}</span>
-
+      <ion-item class="my_item">
+        <ion-row>
+          <ion-icon text-center class="my_photo" name="camera"></ion-icon><br>
+          <ion-col size="12" text-center class="my_head">{{username}}</ion-col>
+          <ion-col size="12" text-center class="my_contact">+91 {{mobile}}</ion-col>
+          <ion-col size="12" text-center class="my_design">{{email}}</ion-col>
+        </ion-row>
 
         <!-- <ion-icon class="my_photo" ios="camera-outline" md="camera-sharp"></ion-icon>
 
             <span>Mr. GAURAV GAYALI</span>
             <span>+91 8521002476</span>
             <span>himaoya.wfeg@gmail.com</span> -->
-
-
       </ion-item>
       <div bank_details>
         <div class="my_div_hover">
           <ion-row class="my_row">
-            <ion-col class="my_col_type" col-4>
+            <ion-col class="my_col_type" size="4">
               {{bank_name||"Not Available"}}<br>
               Bank
             </ion-col>
-            <ion-col acc_details class="my_col_type" col-4>
+            <ion-col acc_details class="my_col_type" size="4">
               {{acc_no||"Not Available"}}<br>
               A/C Number
 
             </ion-col>
-            <ion-col class="my_col_type" col-4>
+            <ion-col class="my_col_type" size="4">
               {{ifsc||"Not Available"}}<br>
               IFSC Code
 
@@ -88,53 +86,52 @@
         </ion-card-header>
         <ion-card-content father_card_content>
           <ion-row>
-            <ion-col col-3 no_pad>
+            <ion-col size="3" no_pad>
               Father
             </ion-col>
-            <ion-col col-1 no_pad>
+            <ion-col size="1" no_pad>
               :
             </ion-col>
-            <ion-col col-8 no_pad>
+            <ion-col size="8" no_pad>
               {{father_name||"Not Available"}}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-3 no_pad>
+            <ion-col size="3" no_pad>
               Mother
             </ion-col>
-            <ion-col col-1 no_pad>
+            <ion-col size="1" no_pad>
               :
             </ion-col>
-            <ion-col col-8 no_pad>
+            <ion-col size="8" no_pad>
               {{mother_name||"Not Available"}}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-3 no_pad>
+            <ion-col size="3" no_pad>
               Spouse
             </ion-col>
-            <ion-col col-1 no_pad>
+            <ion-col size="1" no_pad>
               :
             </ion-col>
-            <ion-col col-8 no_pad>
+            <ion-col size="8" no_pad>
               {{spouse_name||"Not Available"}}
             </ion-col>
           </ion-row>
           <ion-row *ngFor="let child of children">
-            <ion-col col-3 no_pad>
+            <ion-col size="3" no_pad>
               Child
             </ion-col>
-            <ion-col col-1 no_pad>
+            <ion-col size="1" no_pad>
               :
             </ion-col>
-            <ion-col col-8 no_pad>
+            <ion-col size="8" no_pad>
               {{child||"Not Available"}}
             </ion-col>
           </ion-row>
         </ion-card-content>
       </ion-card>
       
-      <ion-item class="my_item">
         <ion-row class="my_row2">
           <ion-col text-center class="my_col_type2" size="12">
             <span > Date Of Birth</span><br>
@@ -171,8 +168,6 @@
             <span>Mr. GAURAV GAYALI</span>
             <span>+91 8521002476</span>
             <span>himaoya.wfeg@gmail.com</span> -->
-
-      </ion-item>
       <ion-card password_card>
         <ion-card-header>
           <div changePass>Change Password 
@@ -212,14 +207,14 @@
     <ion-list docList *ngSwitchCase="'visitors'">
       <ion-item *ngIf="doc1!=[]||doc1!=null||doc1!=''||doc1.length>=1; then elseBlock">
         <ion-row *ngFor="let item of doc1">
-          <ion-col col-2>
-            <ion-icon docIcon ios="paper-outline" md="paper-sharp"></ion-icon>
+          <ion-col size="2">
+            <ion-icon docIcon name="document"></ion-icon>
           </ion-col>
-          <ion-col col-8>
+          <ion-col size="8">
             <p docName>
               {{item['document_name']||"Unknown"}}</p>
           </ion-col>
-          <ion-col col-2>
+          <ion-col size="2">
             <ion-button viewBtn *ngIf="item['path']!=''||item['path']!=null" class="bg-blue">
               <a (click)="openfile(item['path'])">View</a>
             </ion-button>
@@ -228,9 +223,9 @@
       </ion-item>
 
       <ng-template #elseBlock>
-        <ion-item notextfound text-center> 
+        <div nodatafound  text-center>
           No Documents Available
-        </ion-item>
+        </div>
       </ng-template>
 
       <!-- <ion-grid>

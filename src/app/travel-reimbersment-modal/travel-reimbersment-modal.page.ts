@@ -12,7 +12,6 @@ import { TravelDocModalPage } from '../travel-doc-modal/travel-doc-modal.page';
 export class TravelReimbersmentModalPage implements OnInit {
   order_id:any;
   travel_docs: any;
-  responseData:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,12 +52,7 @@ export class TravelReimbersmentModalPage implements OnInit {
     });
     (await loader).present();
     this.authService.postData(data, "delete_reimbursement_doc").then(
-      async result => {
-        this.responseData = result;
-        console.log(this.responseData);
-        let data = JSON.parse(this.responseData["_body"]);
-
-
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           const alert = this.alertCtrl.create({
@@ -107,10 +101,7 @@ export class TravelReimbersmentModalPage implements OnInit {
     console.log(data);
 
     this.authService.postData(data, "upload_reimbursement_docs").then(
-      async result => {
-        let responseData = result;
-        let data = JSON.parse(responseData["_body"]);
-        /// console.log(responseData);
+      async data => {
         console.log(data);
         if (data["status"] == "success") {
           this.travel_docs = data["msg"];

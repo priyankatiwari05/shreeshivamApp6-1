@@ -1,9 +1,9 @@
-<ion-header>on-button
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>Ask HR <ion-icon name="add" pull-right (click)="openModal()"></ion-icon></ion-title>
+    <ion-title>Ask HR <ion-icon name="add" addIcon pull-right (click)="openModal()"></ion-icon></ion-title>
   </ion-toolbar>
 
   <ion-segment [(ngModel)]="home">
@@ -124,10 +124,8 @@
     </ion-col>
   </ion-row>
 
-  <ion-list>
-    <ion-item text-center *ngIf="hr_request==[]||hr_request==''||hr_request==null ; else show_list">
-      No Record Found...!
-    </ion-item>
-  </ion-list>
+  <div text-center nodatafound *ngIf="hr_request==[]||hr_request==''||hr_request==null ; else show_list">
+    No Record Found...!
+  </div>
   </ion-grid>
 </ion-content>

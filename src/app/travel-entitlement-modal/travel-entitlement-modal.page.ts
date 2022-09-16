@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ModalController} from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, ModalController} from '@ionic/angular';
 import { TravelReimbersmentModalPage } from '../travel-reimbersment-modal/travel-reimbersment-modal.page';
 
 @Component({
@@ -28,23 +29,24 @@ export class TravelEntitlementModalPage implements OnInit {
   base64data: any;
   file: File;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modal:ModalController, public mdlCtrl:ModalController) {}
+  constructor(public navCtrl: NavController, public route: ActivatedRoute, public modal:ModalController, public mdlCtrl:ModalController) {}
 
   ionViewWillEnter()
   {
-    this.variablename=this.navParams.get('variablename');
-    this.page_type=this.navParams.get('page_type');
+    this.page_type = this.route.snapshot.paramMap.get('page_type');
+    this.variablename=this.route.snapshot.paramMap.get('variablename');
+    this.page_type = this.route.snapshot.paramMap.get('page_type');
      
     if(this.page_type=='main')
     {
-      if(this.navParams.get('mainvalue')!=null && this.navParams.get('mainvalue')!='')
-        this.mainvalue=JSON.parse(this.navParams.get('mainvalue'));
+      if(this.route.snapshot.paramMap.get('mainvalue')!=null && this.route.snapshot.paramMap.get('mainvalue')!='')
+        this.mainvalue=JSON.parse(this.route.snapshot.paramMap.get('mainvalue'));
     }
     else
     {
-      if(this.navParams.get('jsonvalue')!='' && this.navParams.get('jsonvalue')!=null)
+      if(this.route.snapshot.paramMap.get('jsonvalue')!='' && this.route.snapshot.paramMap.get('jsonvalue')!=null)
       {
-        this.jsonvalue=JSON.parse(this.navParams.get('jsonvalue'));
+        this.jsonvalue=JSON.parse(this.route.snapshot.paramMap.get('jsonvalue'));
       
         console.log('inside if condition')
         this.date=this.jsonvalue.date;

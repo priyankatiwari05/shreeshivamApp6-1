@@ -19,8 +19,7 @@ let base_path = GlobalVarsService.base_path;
 export class InfoPage implements OnInit {
   home = "notice";
   hideme= true;
-  pass_icon="chevron-down-outline";
-  responseData: any;
+  pass_icon="add";
   acc_no: any;
   bank_name: any;
   ifsc: any;
@@ -321,10 +320,7 @@ export class InfoPage implements OnInit {
       });
 
       this.authService.postData(data, "reset_pass_mobile").then(
-        async result => {
-        let  responseData = result;
-          let data = JSON.parse(responseData["_body"]);
-         /// console.log(responseData);
+        async data => {
           console.log(data);
           if (data["status"] == "success") {
             const alert = this.alertCtrl.create({
@@ -364,12 +360,10 @@ export class InfoPage implements OnInit {
   show_me(){
     if(this.hideme==false){
       this.hideme=true;
-      // this.pass_icon="remove";
-      this.pass_icon="chevron-down-outline";
+      this.pass_icon="remove";
     }else{
       this.hideme=false;
-      // this.pass_icon="add";
-      this.pass_icon="chevron-up-outline";
+      this.pass_icon="add";
     }
 
   }

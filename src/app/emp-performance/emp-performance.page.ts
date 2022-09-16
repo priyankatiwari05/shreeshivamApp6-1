@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController} from "@ionic/angular";
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController, AlertController} from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { AuthService } from '../services/auth/auth.service';
 
@@ -92,7 +93,7 @@ export class EmpPerformancePage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
+    public route: ActivatedRoute,
     public storage: Storage,
     public loadingCtrl: LoadingController,
     public authService: AuthService,
@@ -114,14 +115,14 @@ export class EmpPerformancePage implements OnInit {
 
   async ionViewWillEnter()
   {
-    console.log(this.navParams.get('page'))
+    console.log(this.route.snapshot.paramMap.get('page'))
     
-    if(this.navParams.get('page')=='showgraph')
+    if(this.route.snapshot.paramMap.get('page')=='showgraph')
     {
-      this.page=this.navParams.get('page');
-      this.emp_id=this.navParams.get('emp_id');
-      this.start_date=this.navParams.get('start_date');
-      this.end_date=this.navParams.get('end_date');
+      this.page=this.route.snapshot.paramMap.get('page');
+      this.emp_id=this.route.snapshot.paramMap.get('emp_id');
+      this.start_date=this.route.snapshot.paramMap.get('start_date');
+      this.end_date=this.route.snapshot.paramMap.get('end_date');
       await this.fetch_performance();
     }
   }
@@ -130,10 +131,7 @@ export class EmpPerformancePage implements OnInit {
   {
     console.log('fetch emp list')
     this.authService.getData("fetch_emp_list").then(
-      result => {
-        let responseData = result;
-        let data = JSON.parse(responseData["_body"]);
-
+      data => {
         console.log(data);
         if (data["status"] == "success") {
           this.emp_list=data['emp_list'];
@@ -171,10 +169,7 @@ export class EmpPerformancePage implements OnInit {
       });
 
       this.authService.postData(data, "fetch_emp_performance").then(
-        async result => {
-          let responseData = result;
-          let data = JSON.parse(responseData["_body"]);
-
+        async data => {
           console.log(data);
           if (data["status"] == "success") {
             this.page='showgraph';

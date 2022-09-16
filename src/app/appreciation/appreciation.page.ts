@@ -103,8 +103,7 @@ export class AppreciationPage implements OnInit {
     });
     console.log(data);
 
-    this.authService.postData(data, "appreciation").then(async (result) => {
-        let data = result;
+    this.authService.postData(data, "appreciation").then(async (data) => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -158,8 +157,7 @@ export class AppreciationPage implements OnInit {
     let data = JSON.stringify({
       emp_id:this.emp_id
     });
-    this.authService.postData(data, "get_emp_list").then(async (result) => {
-        let data = result;
+    this.authService.postData(data, "get_emp_list").then(async (data) => {
         console.log(data);
 
         if (data["status"] == "success") {
@@ -172,7 +170,6 @@ export class AppreciationPage implements OnInit {
             buttons: ["OK"]
           });
           (await alert).present();
-          // console.log(data["msg"]);
         }
     },
     async err => {
@@ -272,8 +269,7 @@ export class AppreciationPage implements OnInit {
 
     console.log(data);
 
-    this.authService.postData(data,'insert_warning_n_appreciation').then(async result=>{
-      let data = result;
+    this.authService.postData(data,'insert_warning_n_appreciation').then(async data=>{
       console.log(data);
       
       if(data['status']=='success')

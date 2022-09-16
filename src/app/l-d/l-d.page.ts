@@ -138,8 +138,7 @@ export class LDPage implements OnInit {
     });
     (await loader).present();
     let data = JSON.stringify({designation:desig,designation_id:desig_id});
-    this.authService.postData(data,"get_l_n_d").then(async result => {
-        let data = result;
+    this.authService.postData(data,"get_l_n_d").then(async data => {
         console.log(data);
 
         if (data["status"] == "success") {

@@ -23,9 +23,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid style="background:transparent; padding-top: unset; height: 100%;  text-align: center;
-    color: rgb(10, 9, 9);" *ngSwitchCase="'running'">
-    <ion-row style="background-color: #fff; margin-top:10px" *ngFor="let poll of running_poll; let i = index">
+  <ion-grid *ngSwitchCase="'running'">
+    <ion-row rowStyle *ngFor="let poll of running_poll; let i = index">
       <ion-list radio-group [(ngModel)]="poll['emp_answer']" *ngIf="poll['poll_type']=='option'" ngDefaultControl>
         <ion-list-header>
           <span [innerHTML]="poll['question']"></span>
@@ -59,25 +58,25 @@
         </ion-item>
       </ion-list>
 
-      <ion-col col-12 *ngIf="poll['poll_type']=='custom'">
-      <ion-row>
-        <ion-col col-12 class="list-header-md"><span [innerHTML]="poll['question']"></span>
-          <ion-button size="xs" pull-right *ngIf="poll['new_answer']==null && poll['emp_answer']!=null"
-            (click)="save_poll(i)">save</ion-button>
-        </ion-col>
-        <ion-col col-12>
-          <textarea enable_copy_paste rows="5" [(ngModel)]="poll['emp_answer']" *ngIf="poll['new_answer']==null" placeholder="Write your answer here" ngDefaultControl></textarea>
-          <p style="text-align: left;" *ngIf="poll['new_answer']!=null">{{poll['new_answer']}}</p>
-          <a pull-right *ngIf="poll['new_answer']!=null" (click)="show_all_answers(i,'running')">All answers</a>
-        </ion-col>
-      </ion-row>
+      <ion-col size="12" *ngIf="poll['poll_type']=='custom'">
+        <ion-row>
+          <ion-col size="12" class="list-header-md"><span [innerHTML]="poll['question']"></span>
+            <ion-button size="xs" pull-right *ngIf="poll['new_answer']==null && poll['emp_answer']!=null"
+              (click)="save_poll(i)">save</ion-button>
+          </ion-col>
+          <ion-col size="12">
+            <textarea enable_copy_paste rows="5" [(ngModel)]="poll['emp_answer']" *ngIf="poll['new_answer']==null" placeholder="Write your answer here" ngDefaultControl></textarea>
+            <p style="text-align: left;" *ngIf="poll['new_answer']!=null">{{poll['new_answer']}}</p>
+            <a pull-right *ngIf="poll['new_answer']!=null" (click)="show_all_answers(i,'running')">All answers</a>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
 
 
     <ng-template #norecord>
       <ion-row>
-        <ion-col col-12>
+        <ion-col size="12">
           No Record Found
         </ion-col>
       </ion-row>
@@ -85,7 +84,7 @@
   </ion-grid>
 
   <ion-grid *ngSwitchCase="'closed'">
-    <ion-row style="background-color: #fff; margin-top:10px" *ngFor="let poll of closed_poll; let i = index">
+    <ion-row rowStyle *ngFor="let poll of closed_poll; let i = index">
       <ion-list radio-group [(ngModel)]="poll['emp_answer']" *ngIf="poll['poll_type']=='option'" ngDefaultControl>
         <ion-list-header [innerHTML]="poll['question'] | sanitizeHtml">
 
@@ -142,11 +141,11 @@
 
       </ion-list>
 
-      <ion-col col-12 *ngIf="poll['poll_type']=='custom'">
+      <ion-col size="12" *ngIf="poll['poll_type']=='custom'">
       <ion-row>
-        <ion-col col-12 class="list-header-md"><span [innerHTML]="poll['question']"></span>
+        <ion-col size="12" class="list-header-md"><span [innerHTML]="poll['question']"></span>
         </ion-col>
-        <ion-col col-12>
+        <ion-col size="12">
         {{poll['emp_answer']}}
         <a pull-right (click)="show_all_answers(i,'closed')">All answers</a>
         </ion-col>
@@ -162,7 +161,7 @@
         </ion-card-title>
       </ion-card-content>
       <ion-row no-padding>
-        <ion-col text-right col-12>
+        <ion-col text-right size="12">
           <ion-button fill="outline" icon-start (click)="openModal(event['title'],event['description'],event['photo'])">
             <ion-icon ios="ios-images" md="md-images" style=" margin-right: unset; color:#fff !important;"></ion-icon>
             Details

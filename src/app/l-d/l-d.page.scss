@@ -18,6 +18,13 @@
     padding: 0 0;
   }
 
+  ion-item{
+    margin-top: 0px;
+    border-bottom: solid 1px #dadada;
+    color: #000;
+    background-color: #fafafa !important; 
+    height: 100% !important;
+  }
 
   .chart-container {
     position: relative;
@@ -71,10 +78,6 @@
   //     border-radius: 0px 15px 25px 15px!important;
   //     padding: 20px 20px!important;
   // }
-  ion-item {
-    height: 35px !important;
-    min-height: 35px !important;
-  }
 
   ion-label {
     margin: 0px 8px 0px 0 !important;
