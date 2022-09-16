@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'; 
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -10,11 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { DocumentViewer } from '@awesome-cordova-plugins/document-viewer/ngx';
-import { Push } from '@awesome-cordova-plugins/push/ngx';
 import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
-import { AuthService } from './services/auth/auth.service'; 
+import { AuthService } from './services/auth/auth.service';
 import { GlobalVarsService } from './services/global-vars/global-vars.service';
 import { AppVersion } from '@awesome-cordova-plugins/app-version/ngx';
 import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
@@ -25,8 +24,8 @@ import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
   declarations: [AppComponent],
   entryComponents: [
   ],
-  imports: [BrowserModule, 
-    IonicModule.forRoot(), 
+  imports: [BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
@@ -46,8 +45,7 @@ import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
       File,
       PhotoViewer,
       StatusBar,
-      SplashScreen,
-      Push
+      SplashScreen
     ],
   bootstrap: [AppComponent],
 })

@@ -5,27 +5,27 @@ import { AuthService } from '../services/auth/auth.service';
 import { Storage } from "@ionic/storage";
 import { AttendencePage } from '../attendence/attendence.page';
 import { BlankPage } from '../blank/blank.page';
-import { SalaryPage } from '../salary/salary.page'; 
-import { InfoPage } from '../info/info.page'; 
-import { FinancePage } from '../finance/finance.page'; 
-import { HrAdminPage } from '../hr-admin/hr-admin.page'; 
-import { LDPage } from '../l-d/l-d.page'; 
-import { SalaryIncentivePage } from '../salary-incentive/salary-incentive.page'; 
-import { TaskPage } from '../task/task.page'; 
-import { ApprovalPage } from '../approval/approval.page'; 
-import { CelebrationPage } from '../celebration/celebration.page'; 
-import { NotificationPage } from '../notification/notification.page'; 
+import { SalaryPage } from '../salary/salary.page';
+import { InfoPage } from '../info/info.page';
+import { FinancePage } from '../finance/finance.page';
+import { HrAdminPage } from '../hr-admin/hr-admin.page';
+import { LDPage } from '../l-d/l-d.page';
+import { SalaryIncentivePage } from '../salary-incentive/salary-incentive.page';
+import { TaskPage } from '../task/task.page';
+import { ApprovalPage } from '../approval/approval.page';
+import { CelebrationPage } from '../celebration/celebration.page';
+import { NotificationPage } from '../notification/notification.page';
 import { AskHRPage } from '../ask-hr/ask-hr.page';
-import { PollsPage } from '../polls/polls.page'; 
-import { OrgChartPage } from '../org-chart/org-chart.page'; 
-import { EventsPage } from '../events/events.page'; 
-import { TaskMasterPage } from '../task-master/task-master.page'; 
-import { GalleryPage } from '../gallery/gallery.page'; 
-import { TravelDeskPage } from '../travel-desk/travel-desk.page'; 
+import { PollsPage } from '../polls/polls.page';
+import { OrgChartPage } from '../org-chart/org-chart.page';
+import { EventsPage } from '../events/events.page';
+import { TaskMasterPage } from '../task-master/task-master.page';
+import { GalleryPage } from '../gallery/gallery.page';
+import { TravelDeskPage } from '../travel-desk/travel-desk.page';
 import { LDAdminPage } from '../l-d-admin/l-d-admin.page';
-import { EmpPerformancePage } from '../emp-performance/emp-performance.page'; 
+import { EmpPerformancePage } from '../emp-performance/emp-performance.page';
 import { LearningPage } from '../learning/learning.page';
-import { Push, PushObject, PushOptions } from '@awesome-cordova-plugins/push/ngx';
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic";
 
 @Component({
   selector: 'app-home',
@@ -72,8 +72,7 @@ export class HomePage {
     public authService: AuthService,
     public alertCtrl: AlertController,
     public toastController: ToastController,
-    public loadingCtrl:LoadingController,
-    public push: Push,
+    public loadingCtrl:LoadingController
   ) {
     console.log('Home Page executed!!');
     this.storage.get("emp_id").then(val => {
@@ -154,7 +153,7 @@ export class HomePage {
       message: msg,
       duration: 2000
     });
-    
+
     let username=null; let password=null;
     this.storage.get("prefill_username").then(val => {
       username = val;
@@ -203,40 +202,28 @@ export class HomePage {
   }
 
   pushSetup() {
-    const options: PushOptions = {
-      android: {
-        senderID: '707140899880',
-        forceShow: true,
-        sound: true,
-        vibrate: true
-      },
-      ios: {
-        alert: 'true',
-        badge: true,
-        sound: 'true'
-      }
-    };
+    FCM.getToken().then(token => {
+      this.registerFireBaseToken(token)
+    });
 
-    const pushObject: PushObject = this.push.init(options);
-
-    pushObject.on('notification').subscribe(async (notification: any) => {
-      console.log('Received a notification', notification);
-      if (notification.additionalData.coldstart)
+    FCM.onNotification().subscribe(async (data) => {
+      console.log('Received a notification', data);
+      if (data.notification.additionalData.coldstart)
       {
-        this.opennotificationpage(notification.additionalData.click_action);
+        this.opennotificationpage(data.notification.additionalData.click_action);
       }
-      else if(notification.additionalData.foreground)
+      else if(data.notification.additionalData.foreground)
       {
         let confirmAlert =await  this.alertCtrl.create({
-          header: notification.title,
-          message: notification.message,
+          header: data.notification.title,
+          message: data.notification.message,
           buttons: [{
             text: 'Cancel',
             role: 'cancel'
           }, {
             text: 'Open',
             handler: () => {
-              this.opennotificationpage(notification.additionalData.click_action)
+              this.opennotificationpage(data.notification.additionalData.click_action)
             }
           }]
         });
@@ -244,25 +231,26 @@ export class HomePage {
       }
     });
 
-    pushObject.on('registration').subscribe((registration: any) => {
-      let registration_id = registration.registrationId;
-      let credential = JSON.stringify({
-        registration_id: registration_id,
-        emp_id: this.emp_id
-      });
-      this.authService.postData(credential, 'update_registration_id').then((data) => {
-        console.log(data["msg"]);
-      }, async (err) => {
-        const alert =await this.alertCtrl.create({
-          header: 'Error',
-          subHeader: 'Something went wrong. Try again later',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      });
+    FCM.onTokenRefresh().subscribe(token => {
+      this.registerFireBaseToken(token)
     });
+  }
 
-    pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  registerFireBaseToken(token){
+    let credential = JSON.stringify({
+      registration_id: token,
+      emp_id: this.emp_id
+    });
+    this.authService.postData(credential, 'update_registration_id').then((data) => {
+      console.log(data["msg"]);
+    }, async (err) => {
+      const alert =await this.alertCtrl.create({
+        header: 'Error',
+        subHeader: 'Something went wrong. Try again later',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    });
   }
 
   opennotificationpage(pagename)

@@ -24,18 +24,16 @@
     "@awesome-cordova-plugins/call-number": "^5.45.0",
     "@awesome-cordova-plugins/core": "^5.44.0",
     "@awesome-cordova-plugins/document-viewer": "^5.44.0",
+    "@awesome-cordova-plugins/fcm": "^5.45.0",
     "@awesome-cordova-plugins/file": "^5.44.0",
     "@awesome-cordova-plugins/file-opener": "^5.44.0",
     "@awesome-cordova-plugins/file-transfer": "^5.44.0",
     "@awesome-cordova-plugins/photo-viewer": "^5.44.0",
-    "@awesome-cordova-plugins/push": "^5.44.0",
     "@awesome-cordova-plugins/splash-screen": "^5.44.0",
     "@awesome-cordova-plugins/status-bar": "^5.44.0",
-    "@awesome-cordova-plugins/streaming-media": "^5.44.0",
     "@ionic/angular": "^6.1.9",
     "@ionic/cordova-builders": "^7.0.0",
     "@ionic/storage-angular": "^3.0.6",
-    "cordova-support-google-services": "^1.4.1",
     "ionic-selectable": "^4.9.0",
     "ionicons": "^6.0.3",
     "localforage": "^1.10.0",
@@ -65,13 +63,20 @@
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "com-badrit-base64": "^0.2.0",
+    "com-sarriaroman-photoviewer": "^1.2.5",
+    "cordova-android": "^10.1.2",
     "cordova-plugin-advanced-http": "^3.3.1",
+    "cordova-plugin-app-version": "^0.1.14",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-document-viewer": "^1.0.0",
+    "cordova-plugin-fcm-with-dependecy-updated": "^7.8.0",
     "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-file-opener2": "^3.0.5",
+    "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-streaming-media": "^2.3.0",
-    "cordova-plugin-whitelist": "^1.3.5",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -84,7 +89,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "phonegap-plugin-multidex": "~1.0.0",
+    "mx.ferreyra.callnumber": "^0.0.2",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.7.3"
@@ -95,22 +100,34 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-app-version": {},
-      "cordova-plugin-file": {},
-      "cordova-plugin-file-opener2": {},
+      "cordova-plugin-file": {
+        "ANDROIDX_WEBKIT_VERSION": "1.4.0"
+      },
+      "cordova-plugin-file-opener2": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-document-viewer": {},
-      "phonegap-plugin-push": {},
       "com-sarriaroman-photoviewer": {},
-      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-advanced-http": {
+        "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
+      },
       "cordova-plugin-device": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-streaming-media": {},
       "com-badrit-base64": {},
       "mx.ferreyra.callnumber": {},
-      "cordova-support-google-services": {},
-      "cordova-plugin-whitelist": {}
+      "call-number": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher",
+        "ANDROID_FCM_VERSION": "21.0.0",
+        "ANDROID_FIREBASE_BOM_VERSION": "26.0.0",
+        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.4",
+        "ANDROID_GRADLE_TOOLS_VERSION": "4.1.0"
+      }
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }
