@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Approval</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid text-center>
+    <ion-row bgRadius text-center>
+      <ion-col size="6" (click)="open_root('travel-approval')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/travel_approval.png"
+            style=" padding: 9px 6px 6px 9px;   border: 4px solid #1a6af7;">
+          <br>
+          <span style="   font-size: 100%">Travel Approvals </span>
+        </div>
+      </ion-col>
+      <ion-col size="6" (click)="open_root('leave-approval')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/leave_approvals.png"
+            style="    border: 4px solid #1a6af7;padding: 9px 6px 6px 9px;">
+          <br>
+          <span style="   font-size: 100%">Leave Approvals</span>
+        </div>
+      </ion-col>
+      <ion-col size="6" (click)="open_root('miss-punch-approval')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/sad_face.png" style="    border: 4px solid #1a6af7;padding: 9px 6px 6px 9px;">
+          <br>
+          <span style="   font-size: 100%">Misspunch Approvals</span>
+        </div>
+      </ion-col>
+      <ion-col size="6" (click)="open_root('blank')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/overtime.png" style="    border: 4px solid #1a6af7;padding: 9px 6px 6px 9px;">
+          <br>
+          <span style="   font-size: 100%">Overtime Approvals</span>
+        </div>
+      </ion-col>
+      <ion-col size="6" (click)="open_root('claim-requests')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/claimss.png" style="    border: 4px solid #1a6af7;padding: 9px 6px 6px 9px;">
+          <br>
+          <span style="   font-size: 100%">Claim Approvals</span>
+        </div>
+      </ion-col>
+      <ion-col size="6" (click)="open_root('blank')">
+        <div center class="mybox2">
+          <img src="../../assets/imgs/document_approval.png" style="    border: 4px solid #1a6af7;padding: 9px 6px 6px 9px;">
+          <br>
+          <span style="   font-size: 100%">Personal Document Approvals</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

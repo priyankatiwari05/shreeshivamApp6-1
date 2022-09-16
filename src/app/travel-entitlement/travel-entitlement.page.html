@@ -1,0 +1,278 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>travel-entitlement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Travel Entitlement</ion-title>
+  </ion-toolbar>
+  <!-- <ion-segment [(ngModel)]="page">
+    <ion-segment-button value="new" style="color: white;">
+      <span>New</span>
+    </ion-segment-button>
+
+    <ion-segment-button value="existing"  style="color: white;">
+      <span>Existing</span>
+    </ion-segment-button>
+  </ion-segment> -->
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <ion-grid bg-white>
+  <!-- <ion-grid style="background-color: white !important;" *ngSwitchCase="'new'"> -->
+      <ion-row>
+        <ion-col size="12" text-left class="dis_label">
+          <ion-label>
+            Upload Files
+          </ion-label>
+        </ion-col>
+        <ion-row class="uploadFile dis_label">
+          <ion-col size="12" text-left>
+            <ion-input type="text" [(ngModel)]="remark" placeholder="Enter Remark"></ion-input>
+          </ion-col>
+          <ion-col size="9" text-left>
+            <input ion-input type="file" style="padding-top: 10px;" (change)="changeListener($event)"  [(ngModel)]="file_input" id="file-input" #fileInp
+              accept="image/*" />
+          </ion-col>
+          <ion-col size="3" text-right>
+            <ion-button expand="block" [disabled]="file_input==null||remark==null||file_input==''||remark==''" (click)="add_to_list()">Add File</ion-button>
+
+          </ion-col>
+        </ion-row>
+      </ion-row>
+
+      <ion-row  *ngIf="data_list == []||data_list==''||data_list==null ; else show_list">
+        <ion-col size="12"  text-left nofile>No file attached</ion-col>
+      </ion-row><br>
+
+      <ng-template #show_list>
+        <ion-row style=" overflow-x: scroll;">
+        <table class="table  table-hover" >
+          <thead>
+            <tr>
+              <th style=" width: 7%; ">Sr</th>
+              <th style=" width: 40%; ">File</th>
+              <th style=" width: 40%; ">Remark</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data_list; index as k">
+              <td>
+                  {{k+1}}
+              </td>
+              <td>
+                {{item['filename']}}
+              </td>
+              <td>
+                {{item['remark']}}
+              </td>
+              <td>
+                <ion-button soize="small" (click)="delete_id_list(k)" >
+                  <ion-icon style="margin:unset; " name="trash"></ion-icon>
+                </ion-button>
+  
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </ion-row>
+    </ng-template>
+        
+    <!-- <ion-row radio-group [(ngModel)]="travel_type_snd">
+      <ion-col size="6">
+        <ion-radio id="domestic_radio_id" checked value="domestic">Domestic</ion-radio>
+        <ion-label for="domestic_radio_id" class="radio_label">Domestic</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-radio id="international_radio_id" value="international"></ion-radio>
+        <ion-label for="international_radio_id" class="radio_label">International</ion-label>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col size="4" text-left>
+        <ion-label>
+          Business Place
+        </ion-label>
+      </ion-col>
+      <ion-col size="8" text-left>
+        <ionic-selectable placeholder="Select Business Place" [(ngModel)]="business_place"
+          style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 0px 5px 0px 5px;"
+          item-content [items]="travel_place" itemValueField="id" itemTextField="name"
+          [canSearch]="true">
+        </ionic-selectable>
+        <!-- <ion-select multiple="false" placeholder="Select Business Place" [(ngModel)]="business_place">
+          <ion-select-option [value]="" selected>Select Business Place</ion-select-option>
+          <ion-select-option *ngFor="let item of trip_type;" [value]="item['id']">{{item['trip_type']}}</ion-select-option>
+          <ion-select-option [value]="other">Other</ion-select-option>
+        </ion-select> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" text-left>
+        <ion-label>
+          GSTIN No
+        </ion-label>
+      </ion-col>
+      <ion-col size="8" text-left>
+        <ion-input [(ngModel)]="gst_no" placeholder="GSTIN NO" ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Fare','fare')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+        <span pull-left>Fare</span>
+        <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Accomodation','accomodation')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+          <span pull-left>Accomodation</span>
+          <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Food Allowances','food_allowances')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+          <span pull-left>Food Allowances</span>
+          <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Conveyance Charges','conveyance_charges')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+          <span pull-left>Conveyance Charges</span>
+          <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Stationary','stationary')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+          <span pull-left>Stationary</span>
+          <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <ion-row cardRow>
+      <ion-col size="12" (click)="openmodal('Incidental Expenses','incidental_expenses')" style="background: #eee; border: 1px solid #ccc; border-radius: 5px;">
+          <span pull-left>Incidental Expenses</span>
+          <span pull-right><ion-icon ios="add-circle-outline" md="add-circle-sharp" style="font-size:18px;"></ion-icon></span>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="4">
+        <ion-label class="dis_label">
+          Origin
+        </ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ionic-selectable
+          style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 10px 8px 10px 16px;"
+          item-content [(ngModel)]="origin_snd" [items]="travel_place" itemValueField="id" itemTextField="name"
+          [canSearch]="true">
+        </ionic-selectable>
+       
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label class="dis_label">
+          Destination
+        </ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ionic-selectable
+          style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 100%; padding: 10px 8px 10px 16px;"
+          item-content [(ngModel)]="destination_snd" [items]="travel_place" itemValueField="id" itemTextField="name"
+          [canSearch]="true">
+        </ionic-selectable>
+       
+      </ion-col>
+    </ion-row> -->
+    <ion-row cardRow>
+      <ion-col size="4" text-left>
+        <ion-label>
+          Approver
+        </ion-label>
+      </ion-col>
+      <ion-col size="8" text-left>
+          <ion-label>{{approver}}</ion-label>
+        <!-- <ion-input type="text" [(ngModel)]="booking_for" placeholder="Please Enter"></ion-input> -->
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="4">
+        <ion-label class="dis_label">
+          Mode
+        </ion-label>
+      </ion-col>
+      <ion-col size="8" radio-group [(ngModel)]="mode_snd">
+        <ion-col size="4">
+          <ion-radio id="road_radio_id" checked value="road"></ion-radio>
+          <ion-label for="road_radio_id" class="radio_label">Road</ion-label>
+        </ion-col>
+        <ion-col size="4">
+          <ion-radio id="train_radio_id" value="train"></ion-radio>
+          <ion-label for="train_radio_id" class="radio_label">Train</ion-label>
+        </ion-col>
+        <ion-col size="4">
+          <ion-radio id="air_radio_id" value="air"></ion-radio>
+          <ion-label for="air_radio_id" class="radio_label">Air</ion-label>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label class="dis_label">
+          Prefer Time
+        </ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-datetime [(ngModel)]="prefer_time_snd" displayFormat="HH:mm" placeholder="Select Time"
+          pickerFormat="HH:mm"></ion-datetime>
+      </ion-col>
+    </ion-row> -->
+    <ion-row cardRow>
+      <ion-col size="4" text-left>
+        <ion-label>
+          Remark
+        </ion-label>
+      </ion-col>
+      <ion-col size="8" text-left>
+        <ion-textarea placeholder="Enter a description" [(ngModel)]="main_remark"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    
+    <br><br>
+    <ion-row>
+      <ion-col size="8">
+        <ion-button color="success" (click)="submitdata()" [disabled]="business_place==[]||business_place==''||business_place==null">Submit</ion-button>
+        <!-- <ion-button color="secondary" (click)="submitdata()"
+
+        [disabled]="data_list==[]||data_list==''||data_list==null
+        ||fare==[]||fare==''||fare==null
+        ||accomodation==[]||accomodation==''||accomodation==null
+        ||food_allowances==[]||food_allowances==''||food_allowances==null
+        ||conveyance_charges==[]||conveyance_charges==''||conveyance_charges==null
+        ||stationary==[]||stationary==''||stationary==null
+        ||incidental_expenses==[]||incidental_expenses==''||incidental_expenses==null
+        ||gst_no==[]||gst_no==''||gst_no==null
+        ||business_place==[]||business_place==''||business_place==null
+        "
+        >Submit</ion-button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gallery  <ion-icon name="add" addIcon pull-right (click)="openModal()"></ion-icon></ion-title>
+  </ion-toolbar>
+  <!-- <ion-segment [(ngModel)]="home">
+      <ion-segment-button value="upcoming" style="color: white;">
+        <span>Upcomings</span>
+      </ion-segment-button>
+
+      <ion-segment-button value="closed"  style="color: white;">
+        <span>Events</span>
+      </ion-segment-button>
+    </ion-segment> -->
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- style="background:linear-gradient(135deg, #00803b  0%,#0014ff 100%);
+  border-radius:10px; color: white;" -->
+  <ion-grid text-center>
+    <ion-row>
+      <ion-col size="6" *ngFor="let event of gallery; let i = index"
+        (click)="showgallery(event['id'],event['title'],event['description'],event['from_date'],event['to_date'])">
+          <ion-card-content galleryCard>
+            <ion-card-title>
+              <ion-row>
+                <ion-col col-8 imageCard>{{event['title']}}<br>{{event['created_at']}}</ion-col>
+                <ion-col col-4 *ngIf="event['image_link']!='' && event['image_link']!=null"><img src="{{base_path}}{{event['image_link']}}" imageStyle/></ion-col>
+              </ion-row>
+              <!-- <ion-row> -->
+                <!-- <ion-col col-12 class="from_to">
+                  {{event['updated_at']}}
+                </ion-col> -->
+                <!-- <ion-col size="6" class="from_to" style="text-align: right;">
+                  TO : {{event['to_date']}}
+                </ion-col> -->
+              <!-- </ion-row> -->
+            </ion-card-title>
+            <!-- <p [innerHTML]="event['description']">
+            </p> -->
+          </ion-card-content>
+          <!-- <ion-row no-padding>
+            <ion-col text-right col-12>
+              <ion-button outline  icon-start  (click)="openModal(event['title'],event['description'],event['photo'],event['type'])">
+                  <ion-icon ios="ios-images" md="md-images"style=" margin-right: unset; color:#fff !important;"></ion-icon>
+                Details
+              </ion-button>
+            </ion-col>
+          </ion-row> -->
+      </ion-col>
+    </ion-row>
+    
+    <ng-template *ngIf="gallery== null || gallery== []">
+      <ion-row>
+        <ion-col size="12" nodatafound text-center>
+          No Record Found
+        </ion-col>
+      </ion-row>
+    </ng-template>
+
+    <!-- <ion-fab bottom right edge>
+      <ion-fab-button size="small" (click)="upload_doc_modal()"><ion-icon name="add"></ion-icon></ion-fab-button>
+    </ion-fab> -->
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,30 @@
+.header{
+    top:12%;
+
+  }
+  .content{
+    top:12%;
+    height: 88%;
+  }
+  .foot_item {
+    font-size: 16px;
+    font-weight: 500;
+    color: #909090;
+    text-transform: capitalize;
+  }
+  .head_item {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+
+    span{
+      border-radius: 4px;
+      color: #fff;
+      background-color:  #2b93df;
+      padding: 3px 6px 3px 6px;
+    }
+  }
+  .col{
+    padding: 5px 5px 1px 5px;
+  }

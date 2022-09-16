@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Task Details<ion-icon name="close" addIcon pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row style="background:transparent; padding: unset; text-align: center; color: rgb(10, 9, 9);">
+      <ion-col col-12 *ngIf="task_name!='' && task_name!=null"><b>Task - </b>{{task_name}}</ion-col>
+      <ion-col col-12 *ngIf="description!='' && description!=null" style="display: block;"><b>Description - </b>{{description}}</ion-col>
+      <ion-col size="6" *ngIf="start_date!='' && start_date!=null"><b>Start Date - </b>{{start_date}}</ion-col>
+      <ion-col size="6" *ngIf="due_date!='' && due_date!=null"><b>Due Date - </b>{{due_date}}</ion-col>
+      <ion-col size="6" *ngIf="assign_by!='' && assign_by!=null"><b>Assigned By - </b>{{assign_by}}</ion-col>
+      <ion-col size="6" *ngIf="assign_to!='' && assign_to!=null"><b>Assigned To - </b>{{assign_to}}</ion-col>
+      <ion-col size="6" *ngIf="status!=''"><b>Status - </b>
+        <span *ngIf="status=='completed'" style="color: green;">{{status|titlecase}}</span>
+        <span *ngIf="status=='closed'" style="color: orange;">{{status|titlecase}}</span>
+        <span *ngIf="status=='assign'" style="color: orange;">{{status|titlecase}}</span>
+        <span *ngIf="status=='inprogress'" style="color: yellowgreen;">{{status|titlecase}}</span>
+        <span *ngIf="status=='rejected'" style="color: red;">{{status|titlecase}}</span>
+      </ion-col>
+      <ion-col col-12 *ngIf="group_name!='' && group_name!=null"><b>Group - </b>{{group_name}}</ion-col>      
+      <ion-col col-12 *ngIf="history!=null && history!=''"><b>History - </b><br>
+
+        <ion-row style="border-bottom: 1px solid lightgrey;" *ngFor="let item of history">
+          <ion-col col-4>
+            {{item['time']}}
+          </ion-col>
+          <ion-col col-3>
+            <span *ngIf="item['status']=='completed'" style="color: green;">{{item['status']|titlecase}}</span>
+            <span *ngIf="item['status']=='closed'" style="color: orange;">{{item['status']|titlecase}}</span>
+            <span *ngIf="item['status']=='assign'" style="color: orange;">{{item['status']|titlecase}}</span>
+            <span *ngIf="item['status']=='inprogress'" style="color: yellowgreen;">{{item['status']|titlecase}}</span>
+            <span *ngIf="item['status']=='rejected'" style="color: red;">{{item['status']|titlecase}}</span>
+            <!-- {{item['status']|titlecase}} -->
+          </ion-col>
+          <ion-col col-5>
+            {{item['first_name']||''}} {{item['last_name']||''}}
+          </ion-col>
+          <ion-col col-12 style="color:grey;">
+            ({{item['remark']}})
+          </ion-col>
+          <ion-col col-12 *ngIf="item['file_link']!='' && item['file_link']!=null" style="color: rgb(2, 128, 245); text-decoration: underline;" (click)="open_document(item['file_link'])"><ion-icon ios="ios-attach" md="md-attach"></ion-icon> {{item['file_link']}}</ion-col>
+        </ion-row>
+
+        <!-- <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+          <thead>
+            <th>Date</th>
+            <th>User</th>
+            <th>Remark</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of history">
+              <td style="white-space: normal;">
+                {{item['time']}}
+              </td>
+              <td>
+                {{item['first_name']||''}} {{item['middle_name']||''}} {{item['last_name']||''}}
+              </td>
+              <td>
+                {{item['remark']}}
+              </td>
+              <td>
+                {{item['status']|titlecase}}
+              </td>
+            </tr>          
+          </tbody>
+        </table> -->
+      </ion-col>
+    </ion-row>
+
+  <ion-row *ngIf="status!='completed' && status!='rejected' && status!='reassign'  && status!='reassigned' &&( type=='today' || type=='assignedbyme')">
+      <!-- <ion-col col-12 *ngIf="reassignButton==true"> -->
+          <ion-row radio-group *ngIf="reassignButton==true && group_id!=null" [(ngModel)]="reassign_type">
+            <ion-col col-12>
+              Reassign
+            </ion-col>
+            <ion-col col-12>
+              <ion-label>within Group</ion-label>
+              <ion-radio value="group"></ion-radio>
+            </ion-col>
+          
+            <ion-col col-12>
+              <ion-label>Other</ion-label>
+              <ion-radio value="emp"></ion-radio>
+            </ion-col >
+          </ion-row>
+      <ion-col col-12 style="margin-bottom: 10px; height:50px!important;">
+        <ion-label *ngIf="reassign_type=='emp' && reassignButton==true">Re-assign To</ion-label>
+          <ionic-selectable *ngIf="reassign_type=='group' && reassignButton==true" style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 70%; width: 100%; padding: 0px 5px"
+            item-content="Employee"
+            [items]="group_list"
+            [(ngModel)]="reassign_emp"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true">
+          </ionic-selectable>
+          <ionic-selectable *ngIf="reassign_type=='emp' && reassignButton==true" style="border: 1px solid #a6a6a6; border-radius: 6px; max-width: 70%; width: 100%; padding: 0px 5px"
+            item-content="employee"
+            [items]="emp_list"
+            [(ngModel)]="reassign_emp"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true">
+          </ionic-selectable>
+      </ion-col>
+      <ion-col col-12>
+          <input type="file" (change)="changeListener($event)" id="file-input" style="opacity: 0" #fileInp accept="image/xlsx/xls/pdf/*" />
+          <span style="width : 30% ; background-color: white; color: rgb(0, 89, 255); font-size: 20px; font-weight:500; white-space: normal;">
+            <ion-icon ios="ios-document" md="md-document"></ion-icon> Attach<br>Document</span>
+          <span pull-right>{{filename}}</span>
+      </ion-col>
+      <ion-col col-12>
+          <ion-textarea [(ngModel)]="remark" placeholder="Write your remark here" rows="6" style="width:100%; max-height: 100%!important;"></ion-textarea>
+      </ion-col>
+
+      <ion-col col-12 style="margin-bottom: 10px; height:50px!important;">
+          <ion-button sm-btn-red pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="update('rejected')">Reject</ion-button>
+          <ion-button sm-btn-green pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="update('completed')">Complete</ion-button>
+          <ion-button sm-btn-blue pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="update(status)">Update</ion-button>
+          <!-- <ion-button ion-button sm-btn-orange pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="reassign()">Re-Assign</ion-button> -->
+          <ion-button sm-btn-orange pull-right style="float: right!important" *ngIf="reassignButton==true" (click)="submit_reassign()">Submit</ion-button>
+      </ion-col>
+      
+    </ion-row>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Apply For Leave</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="avail_leave_box" *ngIf="myleaves.length>0">
+      <ion-col col-12>
+        <span class="myavail_title">Leaves Available</span>
+      </ion-col>
+      <ion-col size="6" *ngFor="let leave of myleaves">
+        {{leave['type']}} : {{leave['leave_count']}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4>
+        <ion-label>Start Date</ion-label>
+      </ion-col>
+      <ion-col col-8>
+        <ion-datetime [(ngModel)]="from_date" displayFormat="YYYY-MM-DD" max="{{maxdate}}" min="{{today}}" (ionChange)="callto_getLeaveTypes()" placeholder="Select Start Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <ion-label>End Date</ion-label>
+      </ion-col>
+      <ion-col col-8>
+        <ion-datetime [(ngModel)]="to_date" displayFormat="YYYY-MM-DD" max="{{maxdate}}" min="{{today}}" (ionChange)="callto_getLeaveTypes()" placeholder="Select End Date" pickerFormat="YYYY-MM-DD"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <ion-label>Leave Type</ion-label>
+      </ion-col>
+      <ion-col col-8>
+        <ion-select [(ngModel)]="leave_type" placeholder="Select Leave Type">
+          <ion-select-option *ngFor="let type of leave_type_master" value="{{type.id}}">{{type.type}}</ion-select-option>
+          <!-- <ion-select-option value="EL">Earned Leave</ion-select-option>
+          <ion-select-option value="CL">Casual Leave</ion-select-option>
+          <ion-select-option value="SL">Sick Leave</ion-select-option>
+          <ion-select-option value="Comp OFF">Compulsory OFF</ion-select-option> -->
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-button expand="full" color="primary" (click)="checkAndSubmitLeaveForm()">Apply</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

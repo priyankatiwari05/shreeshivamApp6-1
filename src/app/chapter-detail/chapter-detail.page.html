@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>chapter {{chapter_name}} <ion-icon ios="ios-close" md="md-close" pull-right (click)="viewCtrl.dismiss()"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe *ngIf="start_exam==false" width="100%" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(youtubevideolink)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <!-- <ion-grid>
+    <ion-row *ngFor="let que of questionlist"> -->
+      <ion-col col-12 *ngIf="start_exam==false">
+        <ion-button pull-right sm-btn-orange (click)="attend_exam()">Attend Exam</ion-button>
+      </ion-col>
+    <!-- </ion-row>
+  </ion-grid> -->
+
+  <ion-grid *ngIf="start_exam==true">
+    <ion-row *ngFor="let que of questionlist; let i=index;" myquestion>
+      <ion-col col-9>
+        <b>{{i+1}}. {{que['question']}}</b>
+      </ion-col>
+      <ion-col col-3>
+        <ion-button *ngIf="questionlist[i].selected_answer_status==null" pull-right small sm-btn-orange (click)="unset(i)">unset</ion-button>
+        <span *ngIf="questionlist[i].selected_answer_status=='right'">
+          <ion-icon ios="ios-checkmark" md="md-checkmark" style="font-size: 18px; color:green;"></ion-icon>          
+        </span>
+        <span *ngIf="questionlist[i].selected_answer_status=='wrong'">
+          <ion-icon ios="ios-close" md="md-close" style="font-size: 18px; color:red;"></ion-icon>
+        </span>
+        <!-- <span *ngIf="questionlist[i].answer_status=='right'">
+          <ion-icon ios="ios-checkmark" md="md-checkmark" style="font-size: 18px; color:green;"></ion-icon>          
+        </span>
+        <span *ngIf="questionlist[i].answer_status!='right'">
+          <ion-icon ios="ios-close" md="md-close" style="font-size: 18px; color:red;"></ion-icon>
+        </span> -->
+      </ion-col>
+      <ion-col col-12>
+        <ion-row radio-group [(ngModel)]="questionlist[i]['selected_answer']" name="questionlist[i]['selected_answer']">
+          <ion-col size="6" *ngIf="que['questionType']=='mcq'">
+            <ion-radio [disabled]="exam_status!=null" value="option1"></ion-radio>
+            <ion-label optionlabel>{{que['option1']}}</ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="que['questionType']=='mcq'">
+            <ion-radio [disabled]="exam_status!=null" value="option2"></ion-radio>
+            <ion-label optionlabel>{{que['option2']}}</ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="que['questionType']=='mcq'">
+            <ion-radio [disabled]="exam_status!=null" value="option3"></ion-radio>
+            <ion-label optionlabel>{{que['option3']}}</ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="que['questionType']=='mcq'">
+            <ion-radio [disabled]="exam_status!=null" value="option4"></ion-radio>
+            <ion-label optionlabel>{{que['option4']}}</ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="que['questionType']=='tf'">
+            <ion-radio [disabled]="exam_status!=null" value="true"></ion-radio>
+            <ion-label optionlabel>True</ion-label>
+          </ion-col>
+          <ion-col size="6" *ngIf="que['questionType']=='tf'">
+            <ion-radio [disabled]="exam_status!=null" value="false"></ion-radio>
+            <ion-label optionlabel>False</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-col>      
+    </ion-row>
+    <ion-row *ngIf="exam_status==null">
+      <ion-col size="6">
+        <ion-button pull-right lg-btn-orange (click)="unset_all()">Unset All</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button pull-right lg-btn-green (click)="submit_exam()">Submit</ion-button>
+      </ion-col>        
+    </ion-row>
+
+    <ion-row *ngIf="exam_status!=null && exam_status=='fail'">
+      <ion-col size="6">
+        <ion-button pull-right lg-btn-orange (click)="attend_again()">Attend Exam Again</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button pull-right lg-btn-blue (click)="watch_again()">Watch Video Again</ion-button>
+      </ion-col>        
+    </ion-row>
+    <ion-row *ngIf="exam_status!=null && exam_status=='pass'">
+      <ion-col col-12 bg-green>
+        <h3>Congratulations you have passed the exam</h3>
+      </ion-col>
+      <ion-col col-12>
+        <ion-button pull-right ion-button lg-btn-blue (click)="viewCtrl.dismiss()">Go back to chapters</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

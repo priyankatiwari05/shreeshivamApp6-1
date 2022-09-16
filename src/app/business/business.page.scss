@@ -1,0 +1,99 @@
+.header {
+    top: 12%;
+
+}
+
+.content {
+top: 12%;
+height: 88%;
+}
+
+.radio_label {
+display: inline-block;
+}
+
+.label-md {
+margin: unset;
+}
+
+ion-input {
+border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+
+ion-datetime {
+border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+
+ion-textarea {
+border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+
+ion-select {
+border: 1px solid #a6a6a6;
+border-radius: 6px;
+max-width: 100%;
+}
+
+.dis_label {
+padding: 10px 0px;
+}
+ion-segment-button
+{
+color:white;
+background: #ffffff6b!important;
+}
+
+[pull-right]
+{
+float: right;
+}
+
+[pull-left]
+{
+float: left;
+}
+
+.dis_label {
+    margin: 4px 6px;
+    text-align: left;
+  }
+  .uploadFile{
+    border: 1px solid #b8b8b8;
+    border-radius: 8px;
+  }
+  ion-segment-button
+  {
+    color:white;
+    background: #ffffff6b!important;
+  }
+
+  [cardRow]{
+    padding: 6px;
+  }
+
+  ion-row{
+    text-align: left;
+  }
+
+  [nofile]{
+    margin: 6px 0px 10px 3px;
+  }
+
+  [pull-right]
+  {
+    float: right;
+  }
+
+  [pull-left]
+  {
+    float: left;
+  }
+
+  tr:nth-of-type(even)
+  {
+      background: #ccc!important;
+      color: #333;
+  }

@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+      <ion-title>Events  <ion-icon addIcon name="add" pull-right (click)="create_event()"></ion-icon>
+        <!-- <ion-icon name="add" pull-right (click)="openAddPage()" *ngIf="role=='admin' || role=='hr' || role=='hr admin' || role=='pch' || role=='manager'"></ion-icon> -->
+      </ion-title>
+  </ion-toolbar>
+
+  <ion-segment [(ngModel)]="home">
+      <ion-segment-button value="upcoming" class="segmenttitle">
+        <!-- <ion-icon ios="ios-stats" md="md-stats" style="vertical-align: middle; "></ion-icon> -->
+        <span>Upcomings</span>
+      </ion-segment-button>
+
+      <ion-segment-button value="closed"  class="segmenttitle">
+        <!-- <ion-icon ios="ios-document" md="md-document" style="vertical-align: middle;"></ion-icon>  -->
+        <span>Events</span>
+      </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [ngSwitch]="home">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid text-center *ngSwitchCase="'upcoming'">
+
+      <ion-card *ngFor="let event of upcoming_event; let i = index" eventCard>
+          <ion-card-content text-left>
+            <ion-card-title>
+              {{event['title']}} <br>
+              <ion-row>
+                  <ion-col size="6" class="from_to">
+                      FROM : {{event['from_date']}}
+                  </ion-col>
+                  <ion-col size="6" class="from_to" text-right>
+                      TO : {{event['to_date']}}
+                  </ion-col>
+                </ion-row>
+            </ion-card-title>
+            <p [innerHTML]="event['description']">
+            </p>
+          </ion-card-content>
+          <ion-row no-padding>
+            <ion-col text-right col-12>
+              <ion-button fill="outline"  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
+                  <ion-icon name="images" ionIcon></ion-icon> Details
+              </ion-button>
+            </ion-col>
+          </ion-row>
+      </ion-card>
+      <ng-template #norecord>
+        <ion-row>
+          <ion-col col-12>
+            No Record Found
+          </ion-col>
+        </ion-row>
+      </ng-template>
+  </ion-grid>
+
+  <ion-grid  *ngSwitchCase="'closed'">
+    <ion-card *ngFor="let event of closed_event; let i = index" eventCard>
+        <ion-card-content text-left>
+          <ion-card-title>
+            {{event['title']}} <br>
+            <ion-row>
+                <ion-col size="6" class="from_to">
+                    FROM : {{event['from_date']}}
+                </ion-col>
+                <ion-col size="6" class="from_to" text-right>
+                    TO : {{event['to_date']}}
+                </ion-col>
+              </ion-row>
+          </ion-card-title>
+          <p [innerHTML]="event['description']">
+          </p>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col text-left size="6">
+            <ion-button fill="outline"  icon-start  (click)="upload_pic(event['id'])">
+                <ion-icon ionIcon ios="images-outline" md="images-sharp"></ion-icon>
+              Upload Pics
+            </ion-button>
+          </ion-col>
+          <ion-col text-right size="6">
+            <ion-button fill="outline"  icon-start  (click)="openModal(event['title'],event['description'],event['photo'])">
+                <ion-icon name="images" ionIcon></ion-icon>
+              Details
+            </ion-button>
+          </ion-col>
+        </ion-row>
+    </ion-card>
+
+    <ng-template #norecord>
+      <ion-row>
+        <ion-col col-12>
+          No Record Found
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+</ion-content>

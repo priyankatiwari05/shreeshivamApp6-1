@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Event <ion-icon addIcon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <ion-grid>
+      <!-- <ion-item>
+          <ion-select width_100 type="text" [(ngModel)]="query_type" placeholder="Select Query Type" style="max-width: 100%!important; width: 100%;">
+              <ion-select-option value="suggestion">Suggestion</ion-select-option>
+              <ion-select-option value="doubt">Doubt</ion-select-option>
+              <ion-select-option value="complaint">Complaint</ion-select-option>
+            </ion-select>
+      </ion-item> -->
+      <ion-row>
+          <ion-col col-12>
+              <ion-input [(ngModel)]="title" placeholder="Title" style="width:100%; max-height: 100%!important;"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+              <ion-input [(ngModel)]="from_date" placeholder="From Date" style="width:100%; max-height: 100%!important;"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+              <ion-input [(ngModel)]="to_date" placeholder="To date" style="width:100%; max-height: 100%!important;"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+              <ion-datetime [(ngModel)]="from_time" displayFormat="HH:mm" placeholder="From Time" pickerFormat="HH:mm"></ion-datetime>
+          </ion-col>
+          <ion-col size="6">
+              <ion-datetime [(ngModel)]="to_time" displayFormat="HH:mm" placeholder="To Time" pickerFormat="HH:mm"></ion-datetime>
+          </ion-col>
+          <ion-col col-12 radio-group [(ngModel)]="select_radio">
+            <ion-row>
+              <ion-col size="6">
+                <ion-label size="6">Description</ion-label>
+                <ion-radio col-2 value="desc"></ion-radio>
+              </ion-col>
+              <ion-col size="6">
+                <ion-label size="6">Photo</ion-label>
+                <ion-radio col-2 value="photo"></ion-radio>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-12>
+              <ion-textarea [(ngModel)]="description" placeholder="Description" rows="6" CommonCSS style="width:100%; max-height: 100%!important;"></ion-textarea>
+          </ion-col>
+          <ion-col col-12>
+              <ion-button pull-right  (click)="add_events()">Submit</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

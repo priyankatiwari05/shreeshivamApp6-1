@@ -1,0 +1,233 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="type=='emp_page'">Travel Booking Detail<ion-icon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+    <ion-title *ngIf="type!='emp_page'">Travel Desk Detail<ion-icon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list outer_div>
+      <ion-item *ngIf="task_name!='' && task_name!=null"><b>Task - </b>{{task_name}}</ion-item>
+      <!-- <ion-item *ngIf="booking_for!='' && booking_for!=null"><b>booking For - </b>{{booking_for}}</ion-item> -->
+      <ion-item *ngIf="booking_for!='' && booking_for!=null && type!='emp_page'"><b>Booking for - </b>{{booking_for}}</ion-item>
+      <ion-item *ngIf="origin!='' && origin!=null && destination!='' && destination!=null && type=='emp_page'"><b>{{origin_city}}</b> to <b>{{destination_city}}</b></ion-item>
+      <ion-item *ngIf="origin!='' && origin!=null && type!='emp_page'"><b>Origin - </b>{{origin}}</ion-item>
+      <ion-item *ngIf="destination!='' && destination!=null && type!='emp_page'"><b>Destination - </b>{{destination}}</ion-item>
+      <ion-item *ngIf="mode!='' || prefer_time!=''">
+        <ion-row>
+          <span style="width: 50%;" *ngIf="mode!=''"><b>Travel Mode - </b>{{mode}}</span>
+          <span style="width: 50%;" *ngIf="prefer_time!=''"><b>Prefer Time - </b>{{prefer_time}}</span>        
+        </ion-row>
+      </ion-item>
+      <ion-item *ngIf="(start_date!='' && start_date!=null) || (end_date!='' && end_date!=null)">
+        <ion-row>
+          <span style="width: 50%;" *ngIf="start_date!='' && start_date!=null"><b>From </b>{{start_date}}</span> 
+          <span style="width: 50%;" *ngIf="end_date!='' && end_date!=null"><b> To </b>{{end_date}}</span>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngIf="trip_type!='' || travel_type!=''">
+        <ion-row>
+          <span style="width: 50%;" *ngIf="trip_type!=''"><b>Trip Type - </b>{{trip_type|titlecase}}</span>
+          <span style="width: 50%;" *ngIf="travel_type!=''"><b>Travel Type - </b>{{travel_type|titlecase}}</span>        
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+            <span style="width: 50%;" *ngIf="express_Booking=='1'"><b>Express Booking - </b>Yes</span> 
+            <span style="width: 50%;" *ngIf="express_Booking!='1'"><b>Express Booking - </b>No</span>
+            <span style="width: 50%;" *ngIf="hotel_planning=='1'"><b>Hotel Planning - </b>Yes</span>
+            <span style="width: 50%;" *ngIf="hotel_planning!='1'"><b>Hotel Planning - </b>No</span>
+        </ion-row>
+      </ion-item>
+
+      <ion-item *ngIf="hotel_planning=='1' && hotel_preferred!=null"><b>Hotel Preferred - </b>{{hotel_preferred}}</ion-item>
+      <ion-item *ngIf="hotel_planning=='1' && occupancy!=null"><b>Occupancy - </b>{{occupancy}}</ion-item>
+
+      <ion-item *ngIf="approval_status!='' && approval_status!=null && type=='emp_page'"><b>Travel Approval Status - </b>{{approval_status|titlecase}}</ion-item>
+      <ion-item *ngIf="reimbursement_status!='' && reimbursement_status!=null"><b>Reimbursement Status - </b>{{reimbursement_status|titlecase}}</ion-item>
+
+      <ion-item *ngIf="status!='' &&status!=null"><b>Booking Status - </b>{{status|titlecase}}</ion-item>
+      <ion-item *ngIf="remark!='' && remark!=null"><b>remark - </b>{{remark}}</ion-item>
+    </ion-list>
+    
+    <ion-row *ngIf="org_data_list.length>0">
+      <ion-col><b>Travel Bookings</b></ion-col>
+        <table class="table  table-hover" >
+            <thead>
+              <tr>
+                <th style=" width: 40%; ">File</th>
+                <th style=" width: 40%; ">Remark</th>
+                <!-- <th *ngIf="type=='emp_page'">Download</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let docs of org_data_list">
+                <td (click)="downloadopenfile(docs['doc_link'])" style="color:green; white-space: normal;">{{docs['doc_link'].split("/")[1]}}</td>
+                <td style="white-space: normal;">{{docs['description']}}</td>
+                <!-- <td (click)="downloadfile(docs['doc_link'])" *ngIf="type=='emp_page'">
+                  <ion-icon ios="ios-cloud-download" md="md-cloud-download" style="color: blue; font-size: 20px; margin:2px 5px;"></ion-icon>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+      <!-- <ion-col size="6" (click)="openfile(docs['doc_link'])">{{docs['doc_link'].split("/")[1]}}</ion-col>
+      <ion-col size="6" (click)="openfile(docs['doc_link'])">{{docs['description']}}</ion-col> -->
+    </ion-row>
+    <br *ngIf="type=='emp_page'"><br *ngIf="type=='emp_page'">
+    <ion-row *ngIf="status=='pending' && type=='emp_page'">
+      
+      <ion-col col-12>
+        <ion-textarea [(ngModel)]="empremark" placeholder="Remark Here  (Optional in case of accept & close)"></ion-textarea>
+      </ion-col>
+      <ion-col col-12>
+          <ion-button pull-right style="float: right!important; background: red;" (click)="updatestatus('rejected')">Reject</ion-button>
+          <ion-button pull-right style="float: right!important; background: green;" (click)="updatestatus('closed')">Accept & Close</ion-button>
+      </ion-col>
+       
+    </ion-row>
+
+    <ion-row *ngIf="(status=='pending' || status=='rejected') && type!='emp_page'">
+      <ion-row>
+          <ion-col col-12>
+            <ion-label class="dis_label">
+              Upload Files
+            </ion-label>
+          </ion-col>
+          <ion-row style="border: 1px solid #b8b8b8;
+          border-radius: 8px;">
+            <ion-col col-12>
+              <ion-input type="text" [(ngModel)]="file_remark" placeholder="Enter Remark"></ion-input>
+            </ion-col>
+            <ion-col col-9>
+    
+              <input ion-input type="file" style="padding-top: 10px;" (change)="changeListener($event)"  [(ngModel)]="file_input" id="file-input" #fileInp
+                accept="image/*" />
+            </ion-col>
+            <ion-col col-3>
+              <ion-button style="width: 100%;" [disabled]="file_input==null||file_remark==null||file_input==''||file_remark==''" (click)="add_to_list()">Add File</ion-button>
+    
+            </ion-col>
+          </ion-row>
+        </ion-row>
+        <ion-row  *ngIf="data_list == []||data_list==''||data_list==null ; then show_list" >
+          <ion-col col-12>No file attached</ion-col>
+        </ion-row>
+        <ng-template #show_list>
+          <ion-col col-12 style="    overflow-x: scroll;">
+          <table class="table  table-hover" >
+            <thead>
+              <tr>
+                <th style=" width: 7%; ">Sr</th>
+                <th style=" width: 40%; ">File</th>
+                <th style=" width: 40%; ">Remark</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data_list; index as k">
+                <td>
+                    {{k+1}}
+                </td>
+                <td>
+                  {{item['filename']}}
+                </td>
+                <td>
+                  {{item['remark']}}
+                </td>
+                <td>
+                  <ion-button size="small" (click)="delete_id_list(k)" >
+                    <ion-icon style="margin:unset; " name="trash"></ion-icon>
+                  </ion-button>
+    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    
+        </ion-col>
+      </ng-template>
+
+    <ion-col col-12>
+        <!-- <ion-button btn-red pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="update('rejected')">Reject</ion-button> -->
+        
+        <ion-button btn-green pull-right style="float: right!important; background-color:green" [disabled]="data_list.length==0" (click)="submit_request('completed')">Submit</ion-button>
+        <!-- <ion-button btn-blue pull-right style="float: right!important" (click)="update(status)">Update</ion-button> -->
+        
+        <!-- <ion-button btn-orange pull-right style="float: right!important" *ngIf="reassignButton==false" (click)="reassign()">Re-Assign</ion-button> -->
+        <!-- <ion-button btn-orange pull-right style="float: right!important" *ngIf="reassignButton==true" (click)="submit_reassign()">Submit</ion-button> -->
+    </ion-col>
+      
+    </ion-row>
+
+    <ion-row *ngIf="type=='emp_page'">
+      <ion-row *ngIf="travel_docs!=null && travel_docs!='' && travel_docs!=[]">
+        <ion-col><B>Reimbursement Docs</B></ion-col>
+      </ion-row>
+      <ion-col col-12 style="overflow-x: scroll;">
+        <table class="table  table-hover" *ngIf="travel_docs!=null && travel_docs!='' && travel_docs!=[]">
+            <thead>
+              <tr>
+                <th>Amount</th>
+                <th>Reimbursement Docs</th>
+                <!-- <th>Description</th> -->
+                <!-- <th style=" width: 7%; ">Delete</th> -->
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of travel_docs; index as k">
+                <td (click)="show_detail(k)" style="color:blue;">
+                    {{item['amount']}}
+                </td>
+                <td style="color:green; white-space: normal;" (click)="downloadopenfile(item['doc_link'])">
+                    {{item['doc_link'].split('/')[1]}}
+                </td>
+                <!-- <td style="white-space: normal;">
+                    {{item['description']}}
+                </td> -->
+                <td>
+                  <ion-button size="small" (click)="delete(item['id'],item['doc_link'])">
+                    <ion-icon style="margin:unset; " name="trash"></ion-icon>
+                  </ion-button>
+    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-col>
+        <!-- <ion-item *ngFor="let item of travel_docs" #show_list>
+            <ion-grid padding-unset>
+            <ion-row>
+              <ion-col><B>Reimbursement Docs</B></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6" (click)="downloadopenfile(item['doc_link'])">
+                  <ion-row>
+                      <ion-col>Document - {{item['id']}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Amount - {{item['amount']}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>{{item['description']}}</ion-col>
+                  </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                  <ion-row>
+                      <ion-col><ion-button ion-button full ><a href="{{base_path}}{{item['doc_link']}}" style="color: #ffffff;">View</a></ion-button></ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col><ion-button ion-button full color="danger" (click)="delete(item['id'],item['doc_link'])" >Delete</ion-button></ion-col>
+                  </ion-row>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+        </ion-item> -->
+    </ion-row>
+    <ion-row *ngIf="type=='emp_page'" pull-right>
+      <ion-button icon-only class="up_btn" (click)="upload_doc_modal()" style="background:blueviolet"
+        *ngIf="reimbursement_status=='processing' || reimbursement_status=='rejected'; then show_disabled">
+        <span class="up_span" style="padding: 0px 5px;">Upload Documents</span>
+      </ion-button>
+    </ion-row>
+</ion-content>

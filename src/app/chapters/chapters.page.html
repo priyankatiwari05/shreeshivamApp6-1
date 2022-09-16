@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{course_name}} chapters</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngFor="let chapter of chapterlist; let i=index;">
+    <ion-col col-1 class="timeline-col">
+      <div class="timeline">
+        <div class="links"></div>
+        <div class="circle"></div>
+        <!-- <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon> -->
+      </div>
+    </ion-col>
+    <ion-col col-11>
+      <ion-card (click)="showchapter(i)">
+        <ion-card-title>
+          {{chapter.chapter_title}}
+        </ion-card-title>
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-12>
+              {{chapter.chapter_dscription}}
+              <br>
+              {{chapter.created_at}}
+            </ion-col>
+            <ion-col size="6" *ngIf="chapter.exam_status!=null">
+              {{chapter.exam_status}}
+            </ion-col>
+            <ion-col size="6" *ngIf="chapter.status_date!=null">
+              {{chapter.status_date}}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  
+</ion-content>

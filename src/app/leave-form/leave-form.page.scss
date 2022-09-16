@@ -1,0 +1,57 @@
+.toolbar-title-md {
+  font-weight: lighter;
+  font-size: 16px;
+  padding: 0px 0px 0px 0px;
+}
+.toolbar-title-ios{
+  margin-left: 30px;
+}
+.header{
+  top:12%;
+
+}
+.content{
+  top:12%;
+}
+
+ion-button{
+  width: 100%;
+}
+
+ion-grid{
+  background:white;
+  padding-top: unset;
+  color: rgb(10, 9, 9);
+}
+
+.dis_label{
+padding: 14px 4px;
+}
+
+ion-col{
+text-align: left;
+}
+
+ion-datetime,ion-select
+{
+width: 100%;
+border: 1px solid #ddd;
+padding: 10px;
+border-radius: 5px;
+max-width: 100%;
+}
+
+.avail_leave_box
+{
+border:1px solid #eee;
+border-radius: 5px;
+background: yellowgreen;
+margin-bottom: 25px;
+color:black;
+font-weight: 500;
+}
+
+.myavail_title
+{
+font-size: 18px;
+}

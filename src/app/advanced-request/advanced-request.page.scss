@@ -1,0 +1,49 @@
+.header{
+  top:12%;
+
+}
+.content{
+  top:12%;
+  height: 88%;
+}
+ion-content{
+  background-color: #fff;
+}
+.radio_label{
+  display:inline-block;
+}
+.label-md {
+  margin: unset;
+}
+ion-input{
+  border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+ion-datetime{
+  border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+ion-textarea{
+  border: 1px solid #a6a6a6;
+border-radius: 6px;
+}
+ion-select{
+  border: 1px solid #a6a6a6;
+  border-radius: 6px;
+  max-width: 100%;
+}
+.dis_label{
+  padding: 14px 4px;
+}
+ion-grid ion-row{
+  background: #fff;
+  color: #000;
+  text-align: left;
+}
+ion-radio{
+  margin-right: 8px;
+  top: 3px;
+}
+[padding]{
+  padding-top: 14px;
+}

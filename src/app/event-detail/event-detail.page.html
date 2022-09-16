@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="page_type=='events'">Event Detail <ion-icon addIcon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+    <ion-title *ngIf="page_type=='show_gallery'">{{title}} <ion-icon addIcon name="close" pull-right (click)="mdlCtrl.dismiss()"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-fab top right edge  *ngIf="page_type=='show_gallery'" style="top: -8px; right: -8px;">
+    <ion-fab-button size="small" (click)="addnew()"><ion-icon name="add"></ion-icon></ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <!-- <ion-item><b>Title : </b>{{title}}</ion-item>
+    <ion-item *ngIf="description!=null"><b>Description : </b> <span [innerHTML]="description"></span></ion-item> -->
+    <ion-item>
+      <!-- <b>Gallery : </b> <br> <br> -->
+      <ion-row *ngIf="page_type=='events'">
+        <ion-col size="6" *ngFor="let item of photo">
+          <img src="{{base_path}}{{item}}" (click)="open_img(base_path+item)"
+            style="border: 1px solid orange;  width: 145px; height: 145px;">
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="page_type=='show_gallery'">
+        <ion-col size="6" *ngFor="let item of gallerypics">
+          <img src="{{base_path}}{{item['image_link']}}" (click)="open_img_1(base_path+item['image_link'],item['image_link'])"
+            style="border: 1px solid orange; border-radius:5px; width: 145px; height: 145px;">
+            <ion-label style="font-size: 12px; margin:unset;">{{item['created_at']}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

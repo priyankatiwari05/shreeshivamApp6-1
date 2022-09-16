@@ -1,0 +1,296 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Task</ion-title>
+  </ion-toolbar>
+
+  <ion-segment [(ngModel)]="home">
+    <ion-segment-button value="today" class="segmenttitle">
+      <span>Todays</span>
+    </ion-segment-button>
+    <ion-segment-button value="upcoming" class="segmenttitle">
+      <span>Upcoming</span>
+    </ion-segment-button>
+    <ion-segment-button value="closed" class="segmenttitle">
+      <span>Closed</span>
+    </ion-segment-button>
+    <ion-segment-button value="assignedbyme" class="segmenttitle" style=" width: 30%;;">
+      <span>Created</span>
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>'
+  
+  <ion-grid style="background:transparent; padding-top: unset;    text-align: center;
+  color: rgb(10, 9, 9);" [ngSwitch]="home">
+  <!-- <ion-fab>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab> -->
+
+  <ion-row *ngSwitchCase="'today'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="todaytasks.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of todaytasks" (click)="openModal(item,'today')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>          
+        </tbody>
+      </table>
+    </ion-col>
+    <ion-col style="padding: unset;" *ngIf="todaygrouptasks.length>0">
+      <span class="tasktabtitle">Group Tasks</span>
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of todaygrouptasks" (click)="openModal(item,'today')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'upcoming'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="upcomingtasks.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of upcomingtasks" (click)="openModal(item,'upcoming')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    <ion-col style="padding: unset;" *ngIf="upcominggrouptasks.length>0">
+      <span class="tasktabtitle">Group Tasks</span>
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of upcominggrouptasks" (click)="openModal(item,'upcoming')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'closed'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="closedtasks.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of closedtasks" (click)="openModal(item,'closed')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    <ion-col style="padding: unset;" *ngIf="closedgrouptasks.length>0">
+      <span class="tasktabtitle">Group Tasks</span>
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of closedgrouptasks" (click)="openModal(item,'closed')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+
+  <ion-row *ngSwitchCase="'assignedbyme'">
+    <span style="width: 100%; margin: 0px; padding: 0px;" *ngIf="dataload==true">
+    <ion-col style="padding: unset;" *ngIf="assignedbyme.length>0">
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of assignedbyme" (click)="openModal(item,'assignedbyme')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+            <td>
+              {{item['status']|titlecase}}
+            </td>
+          </tr>          
+        </tbody>
+      </table>
+    </ion-col>
+    <ion-col style="padding: unset;" *ngIf="group_assignedbyme.length>0">
+      <span class="tasktabtitle">Group Tasks</span>
+      <table style=" max-height: 32rem; width: 100%; overflow-y: scroll;">
+        <thead>
+          <!-- <th>ID</th> -->
+          <th>Task</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of group_assignedbyme" (click)="openModal(item,'assignedbyme')">
+            <td style="white-space: normal;">
+              {{item['task_name']}}
+            </td>
+            <td>
+              {{item['start_date']}}
+            </td>
+            <td>
+              {{item['due_date_time']}}
+            </td>
+            <td>
+              {{item['priority']|titlecase}}
+            </td>
+            <td>
+              {{item['status']|titlecase}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+    </span>
+  </ion-row>
+
+  <ng-template *ngIf="dataload == false">
+    <ion-row>
+      <ion-col col-12 nodatafound text-center>
+        No Record Found
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  </ion-grid>
+</ion-content>
